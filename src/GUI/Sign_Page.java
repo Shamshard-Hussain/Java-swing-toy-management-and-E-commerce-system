@@ -362,12 +362,12 @@ if (!match.matches()) {
             String lastNamePattern = "^[a-zA-Z]+$";
             String lastName = txtLast_Name.getText();
 
-            if (!lastName.matches(firstNamePattern)) {
+            if (!firstName.matches(firstNamePattern)) {
                 JOptionPane:
                 JOptionPane.showMessageDialog(null, "Invalid First Name", "Register Form", JOptionPane.ERROR_MESSAGE);
                 valid = false;
             }
-            else if (!lastName.matches(firstNamePattern)) {
+            else if (!lastName.matches(lastNamePattern)) {
             JOptionPane:
                 JOptionPane.showMessageDialog(null, "Invalid Last Name", "Register Form", JOptionPane.ERROR_MESSAGE);
                 valid = false;
@@ -463,9 +463,9 @@ if (!match.matches()) {
             if (userid.equals("admin") && pass.equals("1234")) {
                 JOptionPane:
                 JOptionPane.showMessageDialog(null, "Sign in as Admin", "Sign in", JOptionPane.INFORMATION_MESSAGE);
-//                Admin_Page ap = new Admin_Page();
-//                ap.setVisible(true);
-//                this.dispose();
+                Administrator_Panel ap = new Administrator_Panel();
+                ap.setVisible(true);
+                this.dispose();
             } else if (user.login(userid, pass)) {
                 // Login successful
                

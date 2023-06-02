@@ -1,0 +1,12 @@
+BATTERY_OPERATED_TOYS
+Action_Figures
+Dolls_and_Accessories
+Building_Blocks
+Board_Games
+Arts_and_Crafts
+Outdoor_Toys
+Puzzles
+Remote_Control_Toys
+Educational_Toys
+Sports_Toys
+Toys_for_girls

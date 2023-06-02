@@ -83,7 +83,20 @@ public class FileSystem
         return null;
     }
     
-
+public List<String> readFileData() {
+    List<String> records = new ArrayList<>();
+    try {
+        BufferedReader reader = new BufferedReader(new FileReader("PRODUCTS.txt"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            records.add(line);
+        }
+        reader.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return records;
+}
     
     public List<String> readuserFileData(String filePath) {
         List<String> records = new ArrayList<>();
@@ -100,7 +113,7 @@ public class FileSystem
         return records;
     }
 
-   
+
 
 }
         
