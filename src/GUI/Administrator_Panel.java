@@ -6,6 +6,7 @@ package GUI;
 
 import Classes.Category;
 import Classes.Product;
+import Classes.UserAccounts;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
@@ -38,12 +39,16 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private Timer timer;
     private int position = 0;
     private int delay = 2000; // Adjust the delay (in milliseconds) between slides
-
+    UserAccounts newuser = new UserAccounts();
+    
+    
     public Administrator_Panel() {
         initComponents();
-        show(position);
+        
         category = new Category();
+       
 
+        show(position);
         // Start the timer for auto sliding
         timer = new Timer(delay, new ActionListener() {
             @Override
@@ -133,6 +138,10 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtDescription = new javax.swing.JTextArea();
         imgProduct = new javax.swing.JLabel();
+        View_Customer_details = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        UserTable = new javax.swing.JTable();
+        jLabel23 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -176,6 +185,11 @@ public class Administrator_Panel extends javax.swing.JFrame {
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 btnAdmin_CustomersMouseReleased(evt);
+            }
+        });
+        btnAdmin_Customers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdmin_CustomersActionPerformed(evt);
             }
         });
         Admin_menu_panel.add(btnAdmin_Customers, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 160, 110));
@@ -561,6 +575,44 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
         Admin_body_panel.add(Add_Products_Panel, "card5");
 
+        View_Customer_details.setBackground(new java.awt.Color(255, 255, 255));
+        View_Customer_details.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        UserTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        UserTable.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        UserTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "First Name", "Last Name", "User Email"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        UserTable.setToolTipText("");
+        UserTable.setEnabled(false);
+        UserTable.setGridColor(new java.awt.Color(0, 0, 0));
+        UserTable.setRowSelectionAllowed(false);
+        UserTable.setShowGrid(true);
+        UserTable.setUpdateSelectionOnSort(false);
+        jScrollPane4.setViewportView(UserTable);
+
+        View_Customer_details.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 820, 430));
+
+        jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel23.setText("View Customer Details");
+        jLabel23.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        View_Customer_details.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, -1));
+
+        Admin_body_panel.add(View_Customer_details, "card5");
+
         jPanel1.add(Admin_body_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 1000, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -853,6 +905,24 @@ public class Administrator_Panel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_imgProductMouseClicked
 
+    private void btnAdmin_CustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin_CustomersActionPerformed
+       Admin_body_panel.removeAll();
+        Admin_body_panel.add(View_Customer_details);
+        Admin_body_panel.repaint();
+        Admin_body_panel.revalidate();
+        
+        DefaultTableModel model = (DefaultTableModel) UserTable.getModel();
+        model.setRowCount(0);
+        String allUser = newuser.viewAllUser();
+        String[] pro = allUser.split("/");
+
+        for (int i = 0; i < pro.length; i++) {
+            String line = pro[i].toString().trim();
+            String[] dataRow = line.split(" ");
+            model.addRow(dataRow);
+        }
+    }//GEN-LAST:event_btnAdmin_CustomersActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -896,6 +966,8 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private javax.swing.JPanel Admin_menu_panel;
     private javax.swing.JPanel Admin_nav_bar;
     private javax.swing.JPanel Manage_categoryes;
+    private javax.swing.JTable UserTable;
+    private javax.swing.JPanel View_Customer_details;
     private javax.swing.JPanel View_Products;
     private javax.swing.JLabel admin_slider;
     private javax.swing.JButton btnAdmin_Categories;
@@ -922,6 +994,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -936,6 +1009,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable tbl_Category;
     private javax.swing.JTextField txtAge_Group;
