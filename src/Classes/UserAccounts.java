@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,6 +67,23 @@ public class UserAccounts {
 
     public void setUsersCount(int UsersCount) {
         this.UsersCount = UsersCount;
+    }
+    
+    public int getCustomerCount() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Customer.txt"))) {
+            String line;
+            int count = 0;
+
+            while ((line = reader.readLine()) != null) {
+                count++;
+            }
+
+            return count;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
     
     public boolean addUser(){
