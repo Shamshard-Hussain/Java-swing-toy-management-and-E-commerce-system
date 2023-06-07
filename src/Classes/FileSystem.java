@@ -22,8 +22,27 @@ public class FileSystem
     public FileSystem(String fileName) {
         this.fileName = fileName;
         createANewFile();
+        createProductFolder();
     }
 
+    private void createProductFolder() {
+    String folderPath = "src/Products"; // Specify the folder path
+
+    File folder = new File(folderPath);
+
+    // Create the folder if it doesn't exist
+    if (!folder.exists()) {
+        boolean created = folder.mkdirs();
+        if (created) {
+            System.out.println("Product folder created successfully.");
+        } else {
+            System.out.println("Failed to create the product folder.");
+        }
+    } else {
+        System.out.println("Product folder already exists.");
+    }
+}
+    
     public boolean createANewFile() {
         try {
             file = new File(FILE_PATH + fileName);

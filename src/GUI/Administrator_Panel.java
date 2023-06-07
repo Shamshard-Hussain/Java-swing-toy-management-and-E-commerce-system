@@ -109,13 +109,15 @@ public class Administrator_Panel extends javax.swing.JFrame {
         btnAdmin_product = new javax.swing.JButton();
         btnAdmin_Home = new javax.swing.JButton();
         Admin_nav_bar = new javax.swing.JPanel();
+        jLabel35 = new javax.swing.JLabel();
         Admin_body_panel = new javax.swing.JPanel();
         View_Products = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        btn_add_category1 = new javax.swing.JButton();
+        btn_add_Products = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         Product_Table = new javax.swing.JTable();
+        btn_search_products = new javax.swing.JButton();
         Admin_home_page = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -181,6 +183,13 @@ public class Administrator_Panel extends javax.swing.JFrame {
         txtProduct_Description = new javax.swing.JTextArea();
         imgProduct1 = new javax.swing.JLabel();
         btn_update = new javax.swing.JButton();
+        Search_Product_Panel = new javax.swing.JPanel();
+        jLabel33 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        Search_Product_Table = new javax.swing.JTable();
+        jLabel34 = new javax.swing.JLabel();
+        btn_search = new javax.swing.JButton();
+        txt_search_bar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -339,6 +348,16 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
         Admin_nav_bar.setBackground(new java.awt.Color(102, 102, 102));
         Admin_nav_bar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-login-25.png"))); // NOI18N
+        jLabel35.setToolTipText("Logout");
+        jLabel35.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel35MouseClicked(evt);
+            }
+        });
+        Admin_nav_bar.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 30, 40));
+
         jPanel1.add(Admin_nav_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 1000, 60));
 
         Admin_body_panel.setLayout(new java.awt.CardLayout());
@@ -355,16 +374,16 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         View_Products.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, -1));
 
-        btn_add_category1.setBackground(new java.awt.Color(0, 204, 153));
-        btn_add_category1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_add_category1.setText("Add New Products");
-        btn_add_category1.setBorderPainted(false);
-        btn_add_category1.addActionListener(new java.awt.event.ActionListener() {
+        btn_add_Products.setBackground(new java.awt.Color(0, 204, 153));
+        btn_add_Products.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_add_Products.setText("Add New Products");
+        btn_add_Products.setBorderPainted(false);
+        btn_add_Products.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_add_category1ActionPerformed(evt);
+                btn_add_ProductsActionPerformed(evt);
             }
         });
-        View_Products.add(btn_add_category1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
+        View_Products.add(btn_add_Products, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
 
         Product_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -385,6 +404,17 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jScrollPane5.setViewportView(Product_Table);
 
         View_Products.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 850, 360));
+
+        btn_search_products.setBackground(new java.awt.Color(0, 204, 153));
+        btn_search_products.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_search_products.setText("Search Products");
+        btn_search_products.setBorderPainted(false);
+        btn_search_products.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_search_productsActionPerformed(evt);
+            }
+        });
+        View_Products.add(btn_search_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 180, -1, -1));
 
         Admin_body_panel.add(View_Products, "card4");
 
@@ -774,6 +804,58 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
         Admin_body_panel.add(Update_Products_Panel, "card5");
 
+        Search_Product_Panel.setBackground(new java.awt.Color(255, 255, 255));
+        Search_Product_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel33.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel33.setText("Search Products");
+        jLabel33.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Search_Product_Panel.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, -1));
+
+        Search_Product_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        Search_Product_Table.setToolTipText("");
+        Search_Product_Table.setFillsViewportHeight(true);
+        Search_Product_Table.setRowHeight(20);
+        Search_Product_Table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Search_Product_TableMouseClicked(evt);
+            }
+        });
+        jScrollPane7.setViewportView(Search_Product_Table);
+
+        Search_Product_Panel.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 850, 360));
+
+        jLabel34.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        jLabel34.setText("To access additional options for a particular product, simply click on the corresponding row of the product.");
+        Search_Product_Panel.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 620, 850, -1));
+
+        btn_search.setBackground(new java.awt.Color(0, 204, 153));
+        btn_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-search-25.png"))); // NOI18N
+        btn_search.setToolTipText("Search");
+        btn_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btn_search.setBorderPainted(false);
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
+        Search_Product_Panel.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 180, 40, 40));
+
+        txt_search_bar.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
+        txt_search_bar.setForeground(new java.awt.Color(0, 77, 64));
+        txt_search_bar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
+        Search_Product_Panel.add(txt_search_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 400, 40));
+
+        Admin_body_panel.add(Search_Product_Panel, "card8");
+
         jPanel1.add(Admin_body_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 1000, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -847,10 +929,8 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) Product_Table.getModel();
         model.setRowCount(0);
-
+        
         toy.displayProductData(Product_Table);
-
-
     }//GEN-LAST:event_btnAdmin_productActionPerformed
 
     private void btnAdmin_HomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdmin_HomeMouseExited
@@ -907,7 +987,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
         String Name = txt_newCategoryname.getText();
         boolean CategoryExists = category.isCategoryExist(txt_newCategoryname.getText());
 
-        if (txt_newCategoryname.getText().isEmpty()) {
+        if (txt_newCategoryname.getText().trim().isEmpty()) {
             JOptionPane:
             JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Add New Category", JOptionPane.ERROR_MESSAGE);
             valid = false;
@@ -921,7 +1001,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
         }
 
         if (valid) {
-            String CName = txt_newCategoryname.getText().replace(" ", "_");
+            String CName = txt_newCategoryname.getText().trim().replace(" ", "_");
 
             // Set the name of the category
             category.setName(CName);
@@ -950,27 +1030,27 @@ public class Administrator_Panel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_newCategorynameKeyReleased
 
-    private void btn_add_category1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_category1ActionPerformed
+    private void btn_add_ProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_ProductsActionPerformed
         Admin_body_panel.removeAll();
         Admin_body_panel.add(Add_Products_Panel);
         Admin_body_panel.repaint();
         Admin_body_panel.revalidate();
 
         category.populateCategoryComboBox(cmbCategory);
-    }//GEN-LAST:event_btn_add_category1ActionPerformed
+    }//GEN-LAST:event_btn_add_ProductsActionPerformed
 
     private void btn_add_new_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_new_productActionPerformed
         boolean valid = true;
 
         boolean tidExists = toy.isPIDExist(txtToy_ID.getText());
 
-        if (txtToy_ID.getText().isEmpty()
-                || txtModel_Name.getText().isEmpty()
-                || txtPrice.getText().isEmpty()
-                || txtAge_Group.getText().isEmpty()
-                || txtQty.getText().isEmpty()
+        if (txtToy_ID.getText().trim().isEmpty()
+                || txtModel_Name.getText().trim().isEmpty()
+                || txtPrice.getText().trim().isEmpty()
+                || txtAge_Group.getText().trim().isEmpty()
+                || txtQty.getText().trim().isEmpty()
                 || cmbCategory.getSelectedItem().toString().isEmpty()
-                || txtDescription.getText().isEmpty()) {
+                || txtDescription.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Field can't be Empty", "Add New Product", JOptionPane.ERROR_MESSAGE);
             valid = false;
         } else if (tidExists) {
@@ -1019,13 +1099,13 @@ public class Administrator_Panel extends javax.swing.JFrame {
         }
 
         if (valid) {
-            String Tid = txtToy_ID.getText();
-            String MName = txtModel_Name.getText().replace(" ", "_");
-            String Price = txtPrice.getText();
-            String qty = txtQty.getText();
-            String age = txtAge_Group.getText();
+            String Tid = txtToy_ID.getText().trim();
+            String MName = txtModel_Name.getText().trim().replace(" ", "_");
+            String Price = txtPrice.getText().trim();
+            String qty = txtQty.getText().trim();
+            String age = txtAge_Group.getText().trim();
             String Category = cmbCategory.getSelectedItem().toString();
-            String Description = txtDescription.getText().replace(" ", "_");
+            String Description = txtDescription.getText().trim().replace(" ", "_");
 
             Product newToys = new Product(Tid, MName, Price, qty, age, Category, Description, newFileName);
             if (newToys.addPRODUCTS()) {
@@ -1225,12 +1305,12 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         boolean valid = true;
 
-        if (txtModel_Name1.getText().isEmpty()
-                || txtPrice1.getText().isEmpty()
-                || txtProduct_Age_Group.getText().isEmpty()
-                || txtProduct_Qty.getText().isEmpty()
+        if (txtModel_Name1.getText().trim().isEmpty()
+                || txtPrice1.getText().trim().isEmpty()
+                || txtProduct_Age_Group.getText().trim().isEmpty()
+                || txtProduct_Qty.getText().trim().isEmpty()
                 || cmbProduct_Category.getSelectedItem().toString().isEmpty()
-                || txtProduct_Description.getText().isEmpty()) {
+                || txtProduct_Description.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Field can't be Empty", "Update Product", JOptionPane.ERROR_MESSAGE);
             valid = false;
         } else {
@@ -1245,13 +1325,13 @@ public class Administrator_Panel extends javax.swing.JFrame {
         }
 
         if (valid) {
-            String Tid = txtToy_ID1.getText();
-            String MName = txtModel_Name1.getText().replace(" ", "_");
-            String Price = txtPrice1.getText();
-            String qty = txtProduct_Qty.getText();
-            String age = txtProduct_Age_Group.getText();
+            String Tid = txtToy_ID1.getText().trim();
+            String MName = txtModel_Name1.getText().trim().replace(" ", "_");
+            String Price = txtPrice1.getText().trim();
+            String qty = txtProduct_Qty.getText().trim();
+            String age = txtProduct_Age_Group.getText().trim();
             String Category = cmbProduct_Category.getSelectedItem().toString();
-            String Description = txtProduct_Description.getText().replace(" ", "_");
+            String Description = txtProduct_Description.getText().trim().replace(" ", "_");
             
 
             String imageName = null;
@@ -1319,6 +1399,89 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_updateActionPerformed
 
+    private void btn_search_productsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_search_productsActionPerformed
+        Admin_body_panel.removeAll();
+            Admin_body_panel.add(Search_Product_Panel);
+            Admin_body_panel.repaint();
+            Admin_body_panel.revalidate();
+    }//GEN-LAST:event_btn_search_productsActionPerformed
+
+    private void Search_Product_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Search_Product_TableMouseClicked
+       int selectedRow = Search_Product_Table.getSelectedRow();
+        if (selectedRow != -1) {
+            String productId = Search_Product_Table.getValueAt(selectedRow, 0).toString();
+            toy.setId(productId);
+            txtToy_ID1.setText(toy.getId());
+
+            // toy.retrieveToyById(productId);
+            if (toy.searchTOYS(toy.getId())) {
+
+                category.populateCategoryComboBox(cmbProduct_Category);
+
+                // Set the values in the other fields based on the toy object
+                txtModel_Name1.setText(toy.getName().replace("_", " "));
+                txtPrice1.setText(toy.getPrice());
+                txtProduct_Qty.setText(toy.getQty());
+                txtProduct_Age_Group.setText(toy.getAgeGroup());
+                cmbProduct_Category.setSelectedItem(toy.getCategory());
+                txtProduct_Description.setText(toy.getDescription().replace("_", " "));
+                imgProduct1.setText(toy.getImageName());
+            }
+
+            String imagePath = toy.getImageName(); // Get the file path from getImageName()
+
+            if (imagePath != null && !imagePath.isEmpty()) {
+                String filePath = "src/Products/" + imagePath; // Construct the complete file path
+
+                // Create an ImageIcon from the file path
+                ImageIcon imageIcon = new ImageIcon(filePath);
+
+                // Scale the image to fit the label size
+                Image image = imageIcon.getImage().getScaledInstance(imgProduct1.getWidth(), imgProduct1.getHeight(), Image.SCALE_SMOOTH);
+
+                // Create a new ImageIcon with the scaled image
+                ImageIcon scaledImageIcon = new ImageIcon(image);
+
+                // Set the scaled image icon as the label's icon
+                imgProduct1.setIcon(scaledImageIcon);
+            } else {
+                // Set a placeholder or default image if the file path is empty or null
+                imgProduct1.setIcon(new ImageIcon("src/Images/icons8-add-image-48.png"));
+            }
+
+            // Switch to the Update_Products_Panel
+            Admin_body_panel.removeAll();
+            Admin_body_panel.add(Update_Products_Panel);
+            Admin_body_panel.repaint();
+            Admin_body_panel.revalidate();
+
+        }
+    }//GEN-LAST:event_Search_Product_TableMouseClicked
+
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        DefaultTableModel model = (DefaultTableModel) Search_Product_Table.getModel();
+        model.setRowCount(0); // Remove all rows from the table
+        
+        String searchQuery = txt_search_bar.getText().trim().replace(" ", "_");
+        boolean productsFound = toy.searchProductData(Search_Product_Table, searchQuery);
+        if (!productsFound) {
+            JOptionPane.showMessageDialog(this, "No products found.", "Product Search", JOptionPane.INFORMATION_MESSAGE);
+            
+            model.setRowCount(0); // Remove all rows from the table
+        }
+    }//GEN-LAST:event_btn_searchActionPerformed
+
+    private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
+      int i = JOptionPane.showConfirmDialog(null, "Do you want to logout?", "Logout?", JOptionPane.YES_NO_OPTION);
+        if (i == 1) {/* do nothing*/
+        }
+        if (i == 0) {
+            Sign_Page sp = new Sign_Page();
+            sp.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jLabel35MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1363,6 +1526,8 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private javax.swing.JPanel Admin_nav_bar;
     private javax.swing.JPanel Manage_categoryes;
     private javax.swing.JTable Product_Table;
+    private javax.swing.JPanel Search_Product_Panel;
+    private javax.swing.JTable Search_Product_Table;
     private javax.swing.JPanel Update_Products_Panel;
     private javax.swing.JTable UserTable;
     private javax.swing.JPanel View_Customer_details;
@@ -1372,10 +1537,12 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private javax.swing.JButton btnAdmin_Customers;
     private javax.swing.JButton btnAdmin_Home;
     private javax.swing.JButton btnAdmin_product;
+    private javax.swing.JButton btn_add_Products;
     private javax.swing.JButton btn_add_category;
-    private javax.swing.JButton btn_add_category1;
     private javax.swing.JButton btn_add_new_product;
     private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_search;
+    private javax.swing.JButton btn_search_products;
     private javax.swing.JButton btn_update;
     private javax.swing.JComboBox<String> cmbCategory;
     private javax.swing.JComboBox<String> cmbProduct_Category;
@@ -1407,6 +1574,9 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1422,6 +1592,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable tbl_Category;
     private javax.swing.JTextField txtAge_Group;
     private javax.swing.JTextArea txtDescription;
@@ -1436,5 +1607,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private javax.swing.JTextField txtToy_ID;
     private javax.swing.JTextField txtToy_ID1;
     private javax.swing.JTextField txt_newCategoryname;
+    private javax.swing.JTextField txt_search_bar;
     // End of variables declaration//GEN-END:variables
 }

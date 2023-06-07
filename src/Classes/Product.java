@@ -44,7 +44,6 @@ public class Product {
     private String Description;
     private String imageName;
     private int ProductCount;
-       
 
     public Product() {
 
@@ -128,9 +127,8 @@ public class Product {
         this.imageName = imageName;
     }
 
-
     public int getProductCount() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("PRODUCTS.txt"))) {
+        try ( BufferedReader reader = new BufferedReader(new FileReader("PRODUCTS.txt"))) {
             String line;
             int count = 0;
 
@@ -145,7 +143,6 @@ public class Product {
 
         return 0;
     }
-    
 
     public boolean addPRODUCTS() {
         if (!fs.createANewFile()) {
@@ -238,6 +235,90 @@ public class Product {
         productTable.setDefaultEditor(Object.class, null);
     }
 
+    public boolean searchProductData(JTable productTable, String searchQuery) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Name");
+        model.addColumn("Price");
+        model.addColumn("Quantity");
+        model.addColumn("Age Group");
+        model.addColumn("Category");
+
+        productTable.setModel(model);
+
+        File file = new File("PRODUCTS.txt");
+        boolean found = false; // Flag to track if any matching products were found
+
+        try ( BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] dataRow = line.split(" ");
+
+                // Check if any column in the data row contains the search query
+                boolean matchFound = false; // Flag to track if a match is found in any column
+                for (int i = 0; i < dataRow.length; i++) {
+                    String columnValue = dataRow[i].replace("_", " ");
+                    if (columnValue.toLowerCase().contains(searchQuery.toLowerCase())) {
+                        matchFound = true;
+                        break;
+                    }
+                }
+
+                if (matchFound) {
+                    model.addRow(dataRow);
+                    found = true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Hide the "Description" and "Image Name" columns
+        TableColumnModel columnModel = productTable.getColumnModel();
+        int descriptionColumnIndex = -1;
+        int imageNameColumnIndex = -1;
+
+        columnModel.getColumn(0).setPreferredWidth(50); // ID column width
+        columnModel.getColumn(1).setPreferredWidth(80); // Name column width
+        columnModel.getColumn(2).setPreferredWidth(30); // Price column width
+        columnModel.getColumn(3).setPreferredWidth(30); // Quantity column width
+        columnModel.getColumn(4).setPreferredWidth(30); // Age Group column width
+        columnModel.getColumn(5).setPreferredWidth(100); // Category column width
+
+        // Disable column width resizing
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            columnModel.getColumn(i).setResizable(false);
+        }
+
+        // Find the column indexes of "Description" and "Image Name"
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            TableColumn column = columnModel.getColumn(i);
+            String columnName = column.getHeaderValue().toString();
+
+            if (columnName.equals("Description")) {
+                descriptionColumnIndex = i;
+            } else if (columnName.equals("Image Name")) {
+                imageNameColumnIndex = i;
+            }
+        }
+
+        // Remove the "Description" and "Image Name" columns if found
+        if (descriptionColumnIndex != -1) {
+            TableColumn descriptionColumn = columnModel.getColumn(descriptionColumnIndex);
+            columnModel.removeColumn(descriptionColumn);
+        }
+
+        if (imageNameColumnIndex != -1) {
+            TableColumn imageNameColumn = columnModel.getColumn(imageNameColumnIndex);
+            columnModel.removeColumn(imageNameColumn);
+        }
+
+        // Disable row editing
+        productTable.setDefaultEditor(Object.class, null);
+
+        return found; // Return the flag indicating if any matching products were found
+    }
+
     public boolean searchTOYS(String MName) {
         boolean isFound = false;
         BufferedReader gt = null;
@@ -278,46 +359,6 @@ public class Product {
             }
         }
         return isFound;
-    }
-
-    public List<Product> searchAllTOYS(String MName) {
-        List<Product> matches = new ArrayList<>();
-        try {
-            String[] words = null;
-            BufferedReader gt = fs.readFile();
-
-            String TOYS;
-            while ((TOYS = gt.readLine()) != null) {
-                words = TOYS.split(" ");
-                if (words[0].contains(MName) || words[1].contains(MName)
-                        || words[2].contains(MName) || words[3].contains(MName)
-                        || words[4].contains(MName) || words[5].contains(MName)
-                        || words[6].contains(MName)) {
-                    Product toy = new Product();
-                    toy.setId(words[0]);
-                    toy.setName(words[1]);
-                    toy.setPrice(words[2]);
-                    toy.setQty(words[3]);
-                    toy.setAgeGroup(words[4]);
-                    toy.setCategory(words[5]);
-                    toy.setDescription(words[6]);
-
-                    // check if toy with same ID already exists in matches
-                    boolean duplicate = false;
-                    for (Product match : matches) {
-                        if (match.getId().equals(toy.getId())) {
-                            duplicate = true;
-                            break;
-                        }
-                    }
-                    if (!duplicate) {
-                        matches.add(toy);
-                    }
-                }
-            }
-        } catch (Exception e) {
-        }
-        return matches;
     }
 
     public boolean updatePRODUCTS(String productCode, String updatedRecord, File newImageFile) {
