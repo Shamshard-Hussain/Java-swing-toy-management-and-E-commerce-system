@@ -4,7 +4,7 @@
  */
 package Classes;
 
-import java.awt.Component;
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -15,15 +15,9 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.AbstractCellEditor;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -44,10 +38,24 @@ public class Product {
     private String Description;
     private String imageName;
     private int ProductCount;
+    private ImageIcon imageIcon;
 
-    public Product() {
-
+    public ImageIcon getImageIcon() {
+        return imageIcon;
     }
+
+    public void setImageIcon(ImageIcon imageIcon) {
+       Image image = imageIcon.getImage();
+        Image resizedImage = image.getScaledInstance(265, 173, Image.SCALE_SMOOTH);
+        
+        // Create a new ImageIcon with the resized image
+        this.imageIcon = new ImageIcon(resizedImage);
+    }
+
+   
+
+
+    public Product() {}
 
     public Product(String Id, String Name, String Price, String Qty, String AgeGroup, String Category, String Description, String imageName) {
         this.Id = Id;

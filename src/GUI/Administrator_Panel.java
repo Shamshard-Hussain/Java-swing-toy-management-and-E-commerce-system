@@ -984,8 +984,8 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private void btn_add_categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_categoryActionPerformed
         boolean valid = true;
         String CategoryNamePattern = "^[a-zA-Z]+$";
-        String Name = txt_newCategoryname.getText();
-        boolean CategoryExists = category.isCategoryExist(txt_newCategoryname.getText());
+        String Name = txt_newCategoryname.getText().trim();
+        boolean CategoryExists = category.isCategoryExist(txt_newCategoryname.getText().trim());
 
         if (txt_newCategoryname.getText().trim().isEmpty()) {
             JOptionPane:
@@ -1021,7 +1021,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
     private void txt_newCategorynameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_newCategorynameKeyReleased
         String NamePattern = "^[a-zA-Z]+$";
-        String CategoryName = txt_newCategoryname.getText();
+        String CategoryName = txt_newCategoryname.getText().trim();
 
         if (!CategoryName.matches(NamePattern)) {
             txt_newCategoryname.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -1083,7 +1083,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
                     }
 
                     // Construct the new file name with the Toy ID and the original extension
-                    newFileName = txtToy_ID.getText().replace(" ", "_") + "." + originalExtension;
+                    newFileName = txtToy_ID.getText().trim().replace(" ", "_") + "." + originalExtension;
                     Path sourcePath = selectedFile.toPath();
                     Path destinationPath = Path.of("src/Products", newFileName);
 

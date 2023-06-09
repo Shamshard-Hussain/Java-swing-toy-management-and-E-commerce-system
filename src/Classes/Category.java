@@ -129,4 +129,18 @@ public class Category {
         }
     }  
     
+  public void populateAllCategoryComboBox(JComboBox<String> cmbCategory) {
+    cmbCategory.removeAllItems();
+    cmbCategory.addItem("All"); // Add default category "All"
+
+    try (BufferedReader reader = new BufferedReader(new FileReader("Category.txt"))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            cmbCategory.addItem(line.trim());
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+  
 }

@@ -3,10 +3,7 @@ which utilizes text file handling to store toy data.
 
 
 
-The full project will be available soon. Currently, 
-only the registration and login GUI are available here.
-
-
+The full project will be available soon. 
 
 Users need to enter valid data for registration:
 

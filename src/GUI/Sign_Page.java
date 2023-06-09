@@ -87,7 +87,7 @@ public class Sign_Page extends javax.swing.JFrame {
         Left_Panel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 130, 110, -1));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        jLabel1.setText("User Name or Email");
+        jLabel1.setText("Email");
         Left_Panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 150, -1));
 
         txtEmail.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
@@ -284,7 +284,7 @@ public class Sign_Page extends javax.swing.JFrame {
         Right_Panel.add(jLabel3);
         jLabel3.setBounds(209, 118, 138, 48);
 
-        Main.add(Right_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 1, 580, 726));
+        Main.add(Right_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 1, 580, 730));
 
         Right_Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Right_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
@@ -308,7 +308,7 @@ public class Sign_Page extends javax.swing.JFrame {
     private void txtNewEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewEmailKeyReleased
 String PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
 Pattern patt = Pattern.compile(PATTERN);
-Matcher match = patt.matcher(txtNewEmail.getText());
+Matcher match = patt.matcher(txtNewEmail.getText().trim());
 
 if (!match.matches()) {
     txtNewEmail.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -337,13 +337,13 @@ if (!match.matches()) {
         boolean valid = true;
 
         UserAccounts user = new UserAccounts();
-        boolean userExists = user.isUserExist(txtNewEmail.getText());
+        boolean userExists = user.isUserExist(txtNewEmail.getText().trim());
 
-        if (txtFirst_Name.getText().isEmpty()
-                || txtLast_Name.getText().isEmpty()
-                || txtNewEmail.getText().isEmpty()
-                || txtNew_Password.getText().isEmpty()
-                || txtConfirm_Password.getText().isEmpty()) {
+        if (txtFirst_Name.getText().trim().isEmpty()
+                || txtLast_Name.getText().trim().isEmpty()
+                || txtNewEmail.getText().trim().isEmpty()
+                || txtNew_Password.getText().trim().isEmpty()
+                || txtConfirm_Password.getText().trim().isEmpty()) {
             JOptionPane:
             JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Register Form", JOptionPane.ERROR_MESSAGE);
             valid = false;
@@ -354,13 +354,13 @@ if (!match.matches()) {
             
             String PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
             Pattern patt = Pattern.compile(PATTERN);
-            Matcher match = patt.matcher(txtNewEmail.getText());
+            Matcher match = patt.matcher(txtNewEmail.getText().trim());
             
             String firstNamePattern = "^[a-zA-Z]+$";
-            String firstName = txtLast_Name.getText();
+            String firstName = txtLast_Name.getText().trim();
             
             String lastNamePattern = "^[a-zA-Z]+$";
-            String lastName = txtLast_Name.getText();
+            String lastName = txtLast_Name.getText().trim();
 
             if (!firstName.matches(firstNamePattern)) {
                 JOptionPane:
@@ -377,10 +377,10 @@ if (!match.matches()) {
                 valid = false;
 
             }
-            else if (txtNew_Password.getText().length() < 8) {
+            else if (txtNew_Password.getText().trim().length() < 8) {
                 JOptionPane.showMessageDialog(null, "Password must have 8 characters", "Register form", JOptionPane.ERROR_MESSAGE);
                 valid = false;
-            } else if (!txtNew_Password.getText().equals(txtConfirm_Password.getText())) {
+            } else if (!txtNew_Password.getText().trim().equals(txtConfirm_Password.getText().trim())) {
                 JOptionPane.showMessageDialog(null, "Password and Cinfirm Password should match", "Register form", JOptionPane.ERROR_MESSAGE);
                 valid = false;
             }
@@ -388,10 +388,10 @@ if (!match.matches()) {
 
         if (valid) {
 
-            String FName = txtFirst_Name.getText().replace(" ", "_");
-            String LName = txtLast_Name.getText().replace(" ", "_");
-            String Email = txtNewEmail.getText();
-            String Pass = txtNew_Password.getText();
+            String FName = txtFirst_Name.getText().trim().replace(" ", "_");
+            String LName = txtLast_Name.getText().trim().replace(" ", "_");
+            String Email = txtNewEmail.getText().trim();
+            String Pass = txtNew_Password.getText().trim();
 
             UserAccounts newUser = new UserAccounts(FName, LName, Email, Pass);
 
@@ -448,11 +448,11 @@ if (!match.matches()) {
     private void btnSign_inActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSign_inActionPerformed
  boolean valid = true;
       UserAccounts user = new UserAccounts();
-        String userid = txtEmail.getText();
-        String pass = txtPassword.getText();
+        String userid = txtEmail.getText().trim();
+        String pass = txtPassword.getText().trim();
         
         
-        if (txtEmail.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+        if (txtEmail.getText().trim().isEmpty() || txtPassword.getText().trim().isEmpty()) {
             JOptionPane:
             JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Signin", JOptionPane.ERROR_MESSAGE);
             valid = false;
@@ -470,13 +470,13 @@ if (!match.matches()) {
                 // Login successful
                
                 JOptionPane.showMessageDialog(null, "Login successful");
-//                                HomePage home = new HomePage();
-//                                home.setVisible(true);
-//                                this.dispose();
+                                Index home = new Index();
+                                home.setVisible(true);
+                                this.dispose();
                                 
             }else {
                 // Login failed
-                System.out.println("Login failed");
+               // System.out.println("Login failed");
                  JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
         }
@@ -496,7 +496,7 @@ ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
 
     private void txtFirst_NameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirst_NameKeyReleased
        String firstNamePattern = "^[a-zA-Z]+$";
-String firstName = txtFirst_Name.getText();
+String firstName = txtFirst_Name.getText().trim();
 
 if (!firstName.matches(firstNamePattern)) {
     txtFirst_Name.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -508,7 +508,7 @@ if (!firstName.matches(firstNamePattern)) {
 
     private void txtLast_NameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLast_NameKeyReleased
               String firstNamePattern = "^[a-zA-Z]+$";
-String lastName = txtLast_Name.getText();
+String lastName = txtLast_Name.getText().trim();
 
 if (!lastName.matches(firstNamePattern)) {
     txtLast_Name.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -518,7 +518,7 @@ if (!lastName.matches(firstNamePattern)) {
     }//GEN-LAST:event_txtLast_NameKeyReleased
 
     private void txtNew_PasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNew_PasswordKeyReleased
-     if(txtNew_Password.getText().length()<8){
+     if(txtNew_Password.getText().trim().length()<8){
       txtNew_Password.setBorder(BorderFactory.createLineBorder(Color.RED));
      }else{
      txtNew_Password.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
@@ -526,7 +526,7 @@ if (!lastName.matches(firstNamePattern)) {
     }//GEN-LAST:event_txtNew_PasswordKeyReleased
 
     private void txtConfirm_PasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirm_PasswordKeyReleased
-      if(!txtNew_Password.getText().equals(txtConfirm_Password.getText())){
+      if(!txtNew_Password.getText().trim().equals(txtConfirm_Password.getText())){
        txtConfirm_Password.setBorder(BorderFactory.createLineBorder(Color.RED));
       }else{
      txtConfirm_Password.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
