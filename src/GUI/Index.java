@@ -4,11 +4,13 @@
  */
 package GUI;
 
+
 import Classes.Category;
 import Classes.CustomDialog;
 import Classes.Product;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -23,14 +25,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
+import javax.swing.JTable;
 import javax.swing.Timer;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -45,6 +54,10 @@ public class Index extends javax.swing.JFrame {
 
     Product toy = new Product();
     private List<Product> productsList;
+    private DefaultListModel<String> cartListModel;
+    private JList<String> cartList;
+    private DefaultTableModel cartTableModel;
+    private JTable cartTable;
 
     public Index() {
         initComponents();
@@ -133,7 +146,7 @@ public class Index extends javax.swing.JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.insets = new Insets(10, 10, 10, 10); // Adjust the spacing as needed
+        gbc.insets = new Insets(15, 15, 15, 15); // Adjust the spacing as needed
 
         for (Product product : productsList) {
             JPanel productCardPanel = new JPanel(new BorderLayout());
@@ -206,7 +219,49 @@ public class Index extends javax.swing.JFrame {
             addToCartButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    // Retrieve the quantity of the selected product (you need to implement the logic for quantity)
+                    
+                    // Calculate the total price for the selected product
+               //     double price = Double.parseDouble(product.getPrice());
+                //    double totalPrice = price * quantity;
 
+                            // Add a row to the cart table with the product details
+            int i = JOptionPane.showConfirmDialog(null, "Please Confirm", "Add to Cart", JOptionPane.YES_NO_OPTION);
+            if (i == 1) {
+                /* do nothing*/
+            }
+            if (i == 0) {
+                String Id = product.getId();
+                String name = product.getName().replace("_", " ");
+                int quantity = 1;
+
+                String Pprice = product.getPrice();
+                int sum = Integer.parseInt(Pprice) * quantity;
+                String tot = Integer.toString(sum);
+
+                DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+
+                // Check if the product with the same ID is already in the table
+                boolean productExists = false;
+                for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                    if (dt.getValueAt(rowIndex, 0).equals(Id)) { // Assuming the ID is in the first column
+                        productExists = true;
+                        break;
+                    }
+                }
+
+                if (productExists) {
+                    // Show a message here, for example:
+                    JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    Object[] toadd = {name, quantity, tot+".00/="};
+                    dt.addRow(toadd);
+                }
+
+
+            }
+                        
+                    
                 }
             });
             productDetailsPanel.add(addToCartButton, BorderLayout.SOUTH);
@@ -230,6 +285,8 @@ public class Index extends javax.swing.JFrame {
         Product_card_Panel.add(jScrollPane, BorderLayout.CENTER);
     }
 
+ 
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -292,6 +349,11 @@ public class Index extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         Cart_panel = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btnRemove = new javax.swing.JButton();
+        btnPrint = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -309,7 +371,7 @@ public class Index extends javax.swing.JFrame {
                 jLabel35MouseClicked(evt);
             }
         });
-        nav_bar.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 10, 30, 40));
+        nav_bar.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 10, 30, 40));
 
         lbl_home.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl_home.setForeground(new java.awt.Color(255, 255, 255));
@@ -319,7 +381,7 @@ public class Index extends javax.swing.JFrame {
                 lbl_homeMouseClicked(evt);
             }
         });
-        nav_bar.add(lbl_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, 50, 20));
+        nav_bar.add(lbl_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 50, 20));
 
         lbl_aboutUs.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl_aboutUs.setForeground(new java.awt.Color(255, 255, 255));
@@ -329,7 +391,7 @@ public class Index extends javax.swing.JFrame {
                 lbl_aboutUsMouseClicked(evt);
             }
         });
-        nav_bar.add(lbl_aboutUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 20, 80, 20));
+        nav_bar.add(lbl_aboutUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 80, 20));
 
         lbl_products.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl_products.setForeground(new java.awt.Color(255, 255, 255));
@@ -339,7 +401,7 @@ public class Index extends javax.swing.JFrame {
                 lbl_productsMouseClicked(evt);
             }
         });
-        nav_bar.add(lbl_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 90, 20));
+        nav_bar.add(lbl_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 90, 20));
 
         lbl_cart.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl_cart.setForeground(new java.awt.Color(255, 255, 255));
@@ -349,7 +411,7 @@ public class Index extends javax.swing.JFrame {
                 lbl_cartMouseClicked(evt);
             }
         });
-        nav_bar.add(lbl_cart, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 20, 50, 20));
+        nav_bar.add(lbl_cart, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, 50, 20));
 
         jLabel13.setFont(new java.awt.Font("Trebuchet MS", 3, 36)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -371,42 +433,42 @@ public class Index extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setText("Children ");
-        Home_Panel_Canteiner.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, -1, 45));
+        Home_Panel_Canteiner.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 230, 45));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel2.setText("Toys.....");
-        Home_Panel_Canteiner.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 220, 70));
+        Home_Panel_Canteiner.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, 180, 70));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/PngItem_46837.png"))); // NOI18N
-        Home_Panel_Canteiner.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, 570, 360));
+        Home_Panel_Canteiner.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 430, 330));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel5.setText("Welcome to our toy shop website! ");
-        Home_Panel_Canteiner.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 420, 30));
+        jLabel5.setText("Welcome to our toy shop! ");
+        Home_Panel_Canteiner.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 380, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("we strive to offer something for everyone.");
-        Home_Panel_Canteiner.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 550, 30));
+        Home_Panel_Canteiner.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, 470, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("We are dedicated to bringing joy and ");
-        Home_Panel_Canteiner.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 460, -1));
+        Home_Panel_Canteiner.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, 420, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("excitement to children of all ages with our wide ");
-        Home_Panel_Canteiner.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 510, -1));
+        Home_Panel_Canteiner.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, 470, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setText("selection of toys. At our toy shop, you'll find a diverse");
-        Home_Panel_Canteiner.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 640, -1));
+        Home_Panel_Canteiner.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 470, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setText("range of toys that cater to various interests and ");
-        Home_Panel_Canteiner.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 590, -1));
+        Home_Panel_Canteiner.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, 470, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setText("preferences. From classic favorites to the latest trends, ");
-        Home_Panel_Canteiner.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 550, 30));
+        Home_Panel_Canteiner.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 390, 470, 30));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel12.setText(" Explore More");
@@ -416,15 +478,15 @@ public class Index extends javax.swing.JFrame {
                 jLabel12MouseClicked(evt);
             }
         });
-        Home_Panel_Canteiner.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 530, 170, 50));
+        Home_Panel_Canteiner.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 490, 170, 50));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/2.jpg"))); // NOI18N
         jLabel3.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
-        Home_Panel_Canteiner.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 670));
+        Home_Panel_Canteiner.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1020, 640));
 
         jScrollPane1.setViewportView(Home_Panel_Canteiner);
 
-        Home.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 670));
+        Home.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 630));
 
         Body_Panel.add(Home, "card5");
 
@@ -434,11 +496,11 @@ public class Index extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel15.setText("Products");
         jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        Product_page.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, -1, -1));
+        Product_page.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
         Product_card_Panel.setBackground(new java.awt.Color(255, 255, 255));
         Product_card_Panel.setLayout(new java.awt.GridLayout(1, 0));
-        Product_page.add(Product_card_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 1170, 520));
+        Product_page.add(Product_card_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1020, 460));
 
         jButton1.setBackground(new java.awt.Color(0, 204, 153));
         jButton1.setForeground(new java.awt.Color(0, 204, 153));
@@ -450,12 +512,12 @@ public class Index extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        Product_page.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 120, 50, 30));
+        Product_page.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 120, 50, 30));
 
         txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txtSearch.setToolTipText("");
         txtSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        Product_page.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 120, 340, 30));
+        Product_page.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 120, 280, 30));
 
         Body_Panel.add(Product_page, "card2");
 
@@ -464,12 +526,12 @@ public class Index extends javax.swing.JFrame {
 
         Product_card_Panel1.setBackground(new java.awt.Color(255, 255, 255));
         Product_card_Panel1.setLayout(new java.awt.GridLayout(1, 0));
-        Product_search_panel.add(Product_card_Panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 1170, 520));
+        Product_search_panel.add(Product_card_Panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1020, 460));
 
         txtSearch1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txtSearch1.setToolTipText("");
         txtSearch1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        Product_search_panel.add(txtSearch1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 120, 340, 30));
+        Product_search_panel.add(txtSearch1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 120, 280, 30));
 
         jButton2.setBackground(new java.awt.Color(0, 204, 153));
         jButton2.setForeground(new java.awt.Color(0, 204, 153));
@@ -481,12 +543,12 @@ public class Index extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        Product_search_panel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 120, 50, 30));
+        Product_search_panel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 120, 50, 30));
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel16.setText("Products");
         jLabel16.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        Product_search_panel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, -1, -1));
+        Product_search_panel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
         Body_Panel.add(Product_search_panel, "card3");
 
@@ -496,27 +558,27 @@ public class Index extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel17.setText("Product Discription");
         jLabel17.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        Product_DiscriptionPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, -1, -1));
+        Product_DiscriptionPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, -1));
 
         jLabel27.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jLabel27.setText("Model Name:");
-        Product_DiscriptionPanel.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 160, -1));
+        Product_DiscriptionPanel.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 160, -1));
 
         jLabel28.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jLabel28.setText("Price:");
-        Product_DiscriptionPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 160, -1));
+        Product_DiscriptionPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 160, -1));
 
         jLabel30.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jLabel30.setText("Age Group:");
-        Product_DiscriptionPanel.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 160, -1));
+        Product_DiscriptionPanel.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 160, -1));
 
         jLabel31.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jLabel31.setText("Category:");
-        Product_DiscriptionPanel.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 160, -1));
+        Product_DiscriptionPanel.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 160, -1));
 
         jLabel32.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jLabel32.setText("Product Description:");
-        Product_DiscriptionPanel.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 170, -1));
+        Product_DiscriptionPanel.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 170, -1));
 
         img_Product.setBackground(new java.awt.Color(204, 204, 204));
         img_Product.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -526,33 +588,33 @@ public class Index extends javax.swing.JFrame {
         img_Product.setMaximumSize(new java.awt.Dimension(100, 100));
         img_Product.setMinimumSize(new java.awt.Dimension(100, 100));
         img_Product.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        Product_DiscriptionPanel.add(img_Product, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 180, 340, 300));
+        Product_DiscriptionPanel.add(img_Product, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, 340, 300));
 
         txtProduct_Description.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         txtProduct_Description.setText("Description");
-        Product_DiscriptionPanel.add(txtProduct_Description, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 280, -1));
+        Product_DiscriptionPanel.add(txtProduct_Description, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 280, -1));
 
         txtProduct_Name.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         txtProduct_Name.setText("Name");
-        Product_DiscriptionPanel.add(txtProduct_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 280, -1));
+        Product_DiscriptionPanel.add(txtProduct_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 280, -1));
 
         txtProduct_Price.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         txtProduct_Price.setText("Price");
-        Product_DiscriptionPanel.add(txtProduct_Price, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 280, -1));
+        Product_DiscriptionPanel.add(txtProduct_Price, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 280, -1));
 
         txtProduct__Agegroup.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         txtProduct__Agegroup.setText("Age Group");
-        Product_DiscriptionPanel.add(txtProduct__Agegroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 280, -1));
+        Product_DiscriptionPanel.add(txtProduct__Agegroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 280, -1));
 
         txtProduct_Category.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         txtProduct_Category.setText("Category");
-        Product_DiscriptionPanel.add(txtProduct_Category, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 350, 280, -1));
+        Product_DiscriptionPanel.add(txtProduct_Category, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 280, -1));
 
         btn_addtocart.setBackground(new java.awt.Color(0, 204, 153));
         btn_addtocart.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_addtocart.setText("Add to Cart");
         btn_addtocart.setBorderPainted(false);
-        Product_DiscriptionPanel.add(btn_addtocart, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 540, 610, -1));
+        Product_DiscriptionPanel.add(btn_addtocart, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 610, -1));
 
         Body_Panel.add(Product_DiscriptionPanel, "card4");
 
@@ -560,32 +622,79 @@ public class Index extends javax.swing.JFrame {
         About_Us_Page.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
-        About_Us_Page.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 510, 480));
+        About_Us_Page.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 430, 440));
 
         jLabel18.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel18.setText("About Us");
         jLabel18.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        About_Us_Page.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 110, -1, -1));
+        About_Us_Page.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 110, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("<html><div style='text-align: center;'>Welcome to our toy shop website!<br>We offer a wide range of high-quality toys for children of all ages.\nFrom educational toys to playsets and popular characters, we have something for everyone.\nBrowse our categories, view detailed product descriptions, and enjoy a seamless online shopping experience.\nWe prioritize safety, quality, and excellent customer service.\nExplore our website and bring joy to your little ones with our fantastic selection of toys.\n<br>Happy shopping!</div></html>");
         jLabel19.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel19.setIconTextGap(3);
-        About_Us_Page.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 470, 330));
+        About_Us_Page.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 470, 330));
 
         Body_Panel.add(About_Us_Page, "card6");
 
-        javax.swing.GroupLayout Cart_panelLayout = new javax.swing.GroupLayout(Cart_panel);
-        Cart_panel.setLayout(Cart_panelLayout);
-        Cart_panelLayout.setHorizontalGroup(
-            Cart_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1170, Short.MAX_VALUE)
-        );
-        Cart_panelLayout.setVerticalGroup(
-            Cart_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
-        );
+        Cart_panel.setBackground(new java.awt.Color(255, 255, 255));
+        Cart_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel20.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel20.setText("Shopping Cart");
+        jLabel20.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Cart_panel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
+
+        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(0, 77, 64));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Model Name", "Quantity", "Price"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setShowGrid(true);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(jTable1);
+
+        Cart_panel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 162, 880, 300));
+
+        btnRemove.setBackground(new java.awt.Color(255, 51, 51));
+        btnRemove.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnRemove.setText("Remove Item");
+        btnRemove.setBorderPainted(false);
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
+        Cart_panel.add(btnRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, -1, 40));
+
+        btnPrint.setBackground(new java.awt.Color(51, 153, 0));
+        btnPrint.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnPrint.setText("Print Bill");
+        btnPrint.setBorderPainted(false);
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
+        Cart_panel.add(btnPrint, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 530, 150, 40));
 
         Body_Panel.add(Cart_panel, "card7");
 
@@ -595,11 +704,11 @@ public class Index extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1018, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -653,7 +762,7 @@ public class Index extends javax.swing.JFrame {
                         GridBagConstraints gbc = new GridBagConstraints();
                         gbc.gridx = 0;
                         gbc.gridy = 0;
-                        gbc.insets = new Insets(10, 10, 10, 10); // Adjust the spacing as needed
+                        gbc.insets = new Insets(15, 15, 15, 15); // Adjust the spacing as needed
 
                         for (Product product : productsList) {
                             JPanel productCardPanel = new JPanel(new BorderLayout());
@@ -815,7 +924,7 @@ public class Index extends javax.swing.JFrame {
                         GridBagConstraints gbc = new GridBagConstraints();
                         gbc.gridx = 0;
                         gbc.gridy = 0;
-                        gbc.insets = new Insets(10, 10, 10, 10); // Adjust the spacing as needed
+                        gbc.insets = new Insets(15, 15, 15, 15); // Adjust the spacing as needed
 
                         for (Product product : productsList) {
                             JPanel productCardPanel = new JPanel(new BorderLayout());
@@ -976,6 +1085,74 @@ public class Index extends javax.swing.JFrame {
         Body_Panel.revalidate();
     }//GEN-LAST:event_jLabel12MouseClicked
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        DefaultTableModel dt=(DefaultTableModel)jTable1.getModel();
+        try{   if (jTable1.getRowCount() >= 0){
+            int index=jTable1.getSelectedRow();
+            dt.removeRow(index);
+            JOptionPane.showMessageDialog(this, "Removed Successfull " );}
+        }
+
+        catch (Exception e){JOptionPane.showMessageDialog
+            (null, "Please Select a Row to Remove", "Check Again", JOptionPane.ERROR_MESSAGE);}
+
+    }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+
+        //   DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+        // int RowCount = jTable1.getRowCount();
+        //  int Total = 0;
+
+        if (jTable1.getRowCount() <= 0) {
+            JOptionPane:
+            JOptionPane.showMessageDialog(null, "Please Check the Cart", "Cart is Empty", JOptionPane.ERROR_MESSAGE);
+
+        }
+//        else if (jTable1.getRowCount() >= 0) {
+//            Main.removeAll();
+//            Main.add(Bill_Panel);
+//            Main.repaint();
+//            Main.revalidate();
+//            jTextArea1.setText("");
+//
+//            //   for (int j = 0; j < RowCount; j++) {
+//                //        Total = Total + Integer.parseInt(jTable1.getValueAt(j, 3).toString());}
+//
+//            jTextArea1.setText(jTextArea1.getText() + "====================================================================\n");
+//            jTextArea1.setText(jTextArea1.getText() + "\t\t\t Toy Mart \n");
+//            jTextArea1.setText(jTextArea1.getText() + "====================================================================\n\n\n");
+//            jTextArea1.setText(jTextArea1.getText() + "______________________________________________________________________________________________________________________________");
+//            jTextArea1.setText(jTextArea1.getText() + "\n Toy Id" + "\t\t Toy Name" + "\t\t Qty" + "\t\t            Price\n ");
+//            jTextArea1.setText(jTextArea1.getText() + "-----------------------------------------------------------------------------------------------------------------------------\n ");
+//            for (int i = 0; i < jTable1.getRowCount(); i++) {
+//                String id = jTable1.getValueAt(i, 0).toString();
+//                String name = jTable1.getValueAt(i, 1).toString();
+//                String qty = jTable1.getValueAt(i, 2).toString();
+//                String price = jTable1.getValueAt(i, 3).toString();
+//                jTextArea1.setText(jTextArea1.getText() + id + "\t\t" + name + "\t" + "\t" + qty + "\t\t           " + price + "\n");
+//                int sum = Integer.parseInt(qty) * Integer.parseInt(price);
+//                String tot = Integer.toString(sum);
+//
+//            }
+//            //jTextArea1.setText(jTextArea1.getText()+"\n\n====================================================================\n");
+//            //jTextArea1.setText(jTextArea1.getText()+"\t\t\t Total Price- Rs:"+""+"\n");
+//            //jTextArea1.setText(jTextArea1.getText()+"====================================================================\n");
+//            //   jTextArea1.setText(Integer.toString(Total));
+//            jTextArea1.setText(jTextArea1.getText() + "\n\n\n====================================================================\n");
+//            jTextArea1.setText(jTextArea1.getText() + "\t\t\t Thank Yoy");
+//            jTextArea1.setText(jTextArea1.getText() + "\n====================================================================\n");
+//            //jTextArea1.setText(jTextArea1.getText()+"\t\t\t ");
+
+//        }
+
+        // jTextArea1.setText(Integer.toString(Total));
+    }//GEN-LAST:event_btnPrintActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1022,6 +1199,8 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JPanel Product_card_Panel1;
     private javax.swing.JPanel Product_page;
     private javax.swing.JPanel Product_search_panel;
+    private javax.swing.JButton btnPrint;
+    private javax.swing.JButton btnRemove;
     private javax.swing.JButton btn_addtocart;
     private javax.swing.JLabel img_Product;
     private javax.swing.JButton jButton1;
@@ -1038,6 +1217,7 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
@@ -1053,6 +1233,8 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_aboutUs;
     private javax.swing.JLabel lbl_cart;
     private javax.swing.JLabel lbl_home;
@@ -1067,3 +1249,4 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JTextField txtSearch1;
     // End of variables declaration//GEN-END:variables
 }
+

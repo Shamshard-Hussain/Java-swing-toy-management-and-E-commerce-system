@@ -84,7 +84,7 @@ public class Sign_Page extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel9.setText("Sign In");
-        Left_Panel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 130, 110, -1));
+        Left_Panel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 110, -1));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel1.setText("Email");
@@ -92,7 +92,7 @@ public class Sign_Page extends javax.swing.JFrame {
 
         txtEmail.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
         txtEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
-        Left_Panel.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 260, 40));
+        Left_Panel.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 260, 40));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel2.setText("Password");
@@ -100,7 +100,7 @@ public class Sign_Page extends javax.swing.JFrame {
 
         txtPassword.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
         txtPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
-        Left_Panel.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 260, 40));
+        Left_Panel.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 260, 40));
 
         jToggleButton1.setBackground(new java.awt.Color(238, 232, 232));
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-hide-15.png"))); // NOI18N
@@ -111,7 +111,7 @@ public class Sign_Page extends javax.swing.JFrame {
                 jToggleButton1MouseClicked(evt);
             }
         });
-        Left_Panel.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 30, 40));
+        Left_Panel.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 30, 40));
 
         btnSign_in.setBackground(new java.awt.Color(255, 102, 51));
         btnSign_in.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -138,7 +138,7 @@ public class Sign_Page extends javax.swing.JFrame {
                 btnSign_inActionPerformed(evt);
             }
         });
-        Left_Panel.add(btnSign_in, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 260, 40));
+        Left_Panel.add(btnSign_in, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, 260, 40));
 
         btnCreat_User.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
         btnCreat_User.setText("Create New User Account");
@@ -153,13 +153,13 @@ public class Sign_Page extends javax.swing.JFrame {
                 btnCreat_UserActionPerformed(evt);
             }
         });
-        Left_Panel.add(btnCreat_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, -1, 30));
+        Left_Panel.add(btnCreat_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, -1, 30));
 
-        Main.add(Left_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 730));
+        Main.add(Left_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 630));
 
         Left_Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Left_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
-        Main.add(Left_Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 730));
+        Main.add(Left_Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 630));
 
         Right_Panel.setBackground(new java.awt.Color(255, 255, 255));
         Right_Panel.setLayout(null);
@@ -167,12 +167,12 @@ public class Sign_Page extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("First Name");
         Right_Panel.add(jLabel4);
-        jLabel4.setBounds(123, 205, 90, 20);
+        jLabel4.setBounds(110, 200, 90, 20);
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Last Name");
         Right_Panel.add(jLabel5);
-        jLabel5.setBounds(293, 205, 90, 20);
+        jLabel5.setBounds(280, 200, 90, 20);
 
         txtFirst_Name.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
         txtFirst_Name.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
@@ -182,7 +182,7 @@ public class Sign_Page extends javax.swing.JFrame {
             }
         });
         Right_Panel.add(txtFirst_Name);
-        txtFirst_Name.setBounds(123, 225, 160, 40);
+        txtFirst_Name.setBounds(110, 220, 160, 40);
 
         txtLast_Name.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
         txtLast_Name.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
@@ -192,12 +192,12 @@ public class Sign_Page extends javax.swing.JFrame {
             }
         });
         Right_Panel.add(txtLast_Name);
-        txtLast_Name.setBounds(293, 225, 160, 40);
+        txtLast_Name.setBounds(280, 220, 160, 40);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("Email");
         Right_Panel.add(jLabel6);
-        jLabel6.setBounds(123, 272, 314, 17);
+        jLabel6.setBounds(110, 270, 314, 17);
 
         txtNewEmail.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
         txtNewEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
@@ -207,12 +207,12 @@ public class Sign_Page extends javax.swing.JFrame {
             }
         });
         Right_Panel.add(txtNewEmail);
-        txtNewEmail.setBounds(123, 290, 330, 40);
+        txtNewEmail.setBounds(110, 290, 330, 40);
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Password");
         Right_Panel.add(jLabel8);
-        jLabel8.setBounds(123, 330, 314, 17);
+        jLabel8.setBounds(110, 330, 314, 17);
 
         txtNew_Password.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
         txtNew_Password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
@@ -222,12 +222,12 @@ public class Sign_Page extends javax.swing.JFrame {
             }
         });
         Right_Panel.add(txtNew_Password);
-        txtNew_Password.setBounds(123, 350, 330, 42);
+        txtNew_Password.setBounds(110, 350, 330, 42);
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("Confirm Password");
         Right_Panel.add(jLabel7);
-        jLabel7.setBounds(123, 399, 314, 17);
+        jLabel7.setBounds(110, 400, 314, 17);
 
         txtConfirm_Password.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
         txtConfirm_Password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
@@ -237,7 +237,7 @@ public class Sign_Page extends javax.swing.JFrame {
             }
         });
         Right_Panel.add(txtConfirm_Password);
-        txtConfirm_Password.setBounds(123, 417, 330, 42);
+        txtConfirm_Password.setBounds(110, 420, 330, 42);
 
         btnsignup.setBackground(new java.awt.Color(255, 102, 51));
         btnsignup.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -265,7 +265,7 @@ public class Sign_Page extends javax.swing.JFrame {
             }
         });
         Right_Panel.add(btnsignup);
-        btnsignup.setBounds(123, 496, 330, 40);
+        btnsignup.setBounds(110, 500, 330, 40);
 
         Sign_Back.setBackground(new java.awt.Color(153, 204, 255));
         Sign_Back.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
@@ -277,28 +277,28 @@ public class Sign_Page extends javax.swing.JFrame {
             }
         });
         Right_Panel.add(Sign_Back);
-        Sign_Back.setBounds(241, 581, 81, 26);
+        Sign_Back.setBounds(220, 580, 81, 26);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel3.setText("Sign Up");
         Right_Panel.add(jLabel3);
-        jLabel3.setBounds(209, 118, 138, 48);
+        jLabel3.setBounds(190, 120, 138, 48);
 
-        Main.add(Right_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 1, 580, 730));
+        Main.add(Right_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 1, 530, 630));
 
         Right_Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Right_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
-        Main.add(Right_Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 580, 730));
+        Main.add(Right_Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 440, 630));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
