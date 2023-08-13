@@ -4,13 +4,11 @@
  */
 package GUI;
 
-
 import Classes.Category;
 import Classes.CustomDialog;
 import Classes.Product;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -25,11 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -37,9 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -161,6 +155,7 @@ public class Index extends javax.swing.JFrame {
             productImageButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    txtPD_Id.setText(product.getId());
                     txtProduct_Name.setText(product.getName().replace("_", " "));
                     txtProduct_Price.setText("Rs: " + product.getPrice() + ".00/=");
                     txtProduct__Agegroup.setText(product.getAgeGroup() + "+");
@@ -186,11 +181,12 @@ public class Index extends javax.swing.JFrame {
                         // Set a placeholder or default image if the file path is empty or null
                         img_Product.setIcon(new ImageIcon("src/Images/icons8-add-image-48.png"));
                     }
-
+                    txtPD_Id.setVisible(false);
                     Body_Panel.removeAll();
                     Body_Panel.add(Product_DiscriptionPanel);
                     Body_Panel.repaint();
                     Body_Panel.revalidate();
+                    txtPD_Id.setVisible(false);
 
                 }
             });
@@ -220,48 +216,42 @@ public class Index extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Retrieve the quantity of the selected product (you need to implement the logic for quantity)
-                    
-                    // Calculate the total price for the selected product
-               //     double price = Double.parseDouble(product.getPrice());
-                //    double totalPrice = price * quantity;
 
-                            // Add a row to the cart table with the product details
-            int i = JOptionPane.showConfirmDialog(null, "Please Confirm", "Add to Cart", JOptionPane.YES_NO_OPTION);
-            if (i == 1) {
-                /* do nothing*/
-            }
-            if (i == 0) {
-                String Id = product.getId();
-                String name = product.getName().replace("_", " ");
-                int quantity = 1;
-
-                String Pprice = product.getPrice();
-                int sum = Integer.parseInt(Pprice) * quantity;
-                String tot = Integer.toString(sum);
-
-                DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
-
-                // Check if the product with the same ID is already in the table
-                boolean productExists = false;
-                for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
-                    if (dt.getValueAt(rowIndex, 0).equals(Id)) { // Assuming the ID is in the first column
-                        productExists = true;
-                        break;
+                    // Add a row to the cart table with the product details
+                    int i = JOptionPane.showConfirmDialog(null, "Please Confirm", "Add to Cart", JOptionPane.YES_NO_OPTION);
+                    if (i == 1) {
+                        /* do nothing*/
                     }
-                }
+                    if (i == 0) {
+                        String Id = product.getId();
+                        String name = product.getName().replace("_", " ");
+                        int quantity = 1;
 
-                if (productExists) {
-                    // Show a message here, for example:
-                    JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    Object[] toadd = {name, quantity, tot+".00/="};
-                    dt.addRow(toadd);
-                }
+                        String Pprice = product.getPrice();
+                        int sum = Integer.parseInt(Pprice) * quantity;
+                        String tot = Integer.toString(sum);
 
+                        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
 
-            }
-                        
-                    
+                        // Check if the product with the same ID is already in the table
+                        boolean productExists = false;
+                        for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                            if (dt.getValueAt(rowIndex, 0).equals(name)) { // Assuming the ID is in the first column
+                                productExists = true;
+                                break;
+                            }
+                        }
+
+                        if (productExists) {
+                            // Show a message here, for example:
+                            JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            Object[] toadd = {name, quantity, tot + ".00"};
+                            dt.addRow(toadd);
+                        }
+
+                    }
+
                 }
             });
             productDetailsPanel.add(addToCartButton, BorderLayout.SOUTH);
@@ -285,8 +275,6 @@ public class Index extends javax.swing.JFrame {
         Product_card_Panel.add(jScrollPane, BorderLayout.CENTER);
     }
 
- 
- 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -323,12 +311,12 @@ public class Index extends javax.swing.JFrame {
         Product_page = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         Product_card_Panel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnsearch1 = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         Product_search_panel = new javax.swing.JPanel();
         Product_card_Panel1 = new javax.swing.JPanel();
         txtSearch1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnSearch2 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         Product_DiscriptionPanel = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -344,16 +332,18 @@ public class Index extends javax.swing.JFrame {
         txtProduct__Agegroup = new javax.swing.JLabel();
         txtProduct_Category = new javax.swing.JLabel();
         btn_addtocart = new javax.swing.JButton();
+        txtPD_Id = new javax.swing.JLabel();
         About_Us_Page = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         Cart_panel = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
+        txtTotalPrice = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnRemove = new javax.swing.JButton();
-        btnPrint = new javax.swing.JButton();
+        btnBuy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -502,17 +492,17 @@ public class Index extends javax.swing.JFrame {
         Product_card_Panel.setLayout(new java.awt.GridLayout(1, 0));
         Product_page.add(Product_card_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1020, 460));
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 153));
-        jButton1.setForeground(new java.awt.Color(0, 204, 153));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-search-25.png"))); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnsearch1.setBackground(new java.awt.Color(0, 204, 153));
+        btnsearch1.setForeground(new java.awt.Color(0, 204, 153));
+        btnsearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-search-25.png"))); // NOI18N
+        btnsearch1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnsearch1.setBorderPainted(false);
+        btnsearch1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnsearch1ActionPerformed(evt);
             }
         });
-        Product_page.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 120, 50, 30));
+        Product_page.add(btnsearch1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 120, 50, 30));
 
         txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txtSearch.setToolTipText("");
@@ -533,17 +523,17 @@ public class Index extends javax.swing.JFrame {
         txtSearch1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Product_search_panel.add(txtSearch1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 120, 280, 30));
 
-        jButton2.setBackground(new java.awt.Color(0, 204, 153));
-        jButton2.setForeground(new java.awt.Color(0, 204, 153));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-search-25.png"))); // NOI18N
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButton2.setBorderPainted(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch2.setBackground(new java.awt.Color(0, 204, 153));
+        btnSearch2.setForeground(new java.awt.Color(0, 204, 153));
+        btnSearch2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-search-25.png"))); // NOI18N
+        btnSearch2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSearch2.setBorderPainted(false);
+        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSearch2ActionPerformed(evt);
             }
         });
-        Product_search_panel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 120, 50, 30));
+        Product_search_panel.add(btnSearch2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 120, 50, 30));
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel16.setText("Products");
@@ -614,7 +604,15 @@ public class Index extends javax.swing.JFrame {
         btn_addtocart.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_addtocart.setText("Add to Cart");
         btn_addtocart.setBorderPainted(false);
+        btn_addtocart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addtocartActionPerformed(evt);
+            }
+        });
         Product_DiscriptionPanel.add(btn_addtocart, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 610, -1));
+
+        txtPD_Id.setText("txtPD_Id");
+        Product_DiscriptionPanel.add(txtPD_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
 
         Body_Panel.add(Product_DiscriptionPanel, "card4");
 
@@ -646,6 +644,11 @@ public class Index extends javax.swing.JFrame {
         jLabel20.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         Cart_panel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
 
+        txtTotalPrice.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        txtTotalPrice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtTotalPrice.setText("Total Price- Rs: 00.00/=");
+        Cart_panel.add(txtTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 470, 370, -1));
+
         jTable1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jTable1.setForeground(new java.awt.Color(0, 77, 64));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -657,13 +660,14 @@ public class Index extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setGridColor(new java.awt.Color(204, 204, 204));
         jTable1.setShowGrid(true);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -685,16 +689,16 @@ public class Index extends javax.swing.JFrame {
         });
         Cart_panel.add(btnRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, -1, 40));
 
-        btnPrint.setBackground(new java.awt.Color(51, 153, 0));
-        btnPrint.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnPrint.setText("Print Bill");
-        btnPrint.setBorderPainted(false);
-        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+        btnBuy.setBackground(new java.awt.Color(51, 153, 0));
+        btnBuy.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnBuy.setText("Buy");
+        btnBuy.setBorderPainted(false);
+        btnBuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrintActionPerformed(evt);
+                btnBuyActionPerformed(evt);
             }
         });
-        Cart_panel.add(btnPrint, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 530, 150, 40));
+        Cart_panel.add(btnBuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 530, 150, 40));
 
         Body_Panel.add(Cart_panel, "card7");
 
@@ -726,7 +730,7 @@ public class Index extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel35MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnsearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearch1ActionPerformed
         String keyword = txtSearch.getText().trim();
         productsList.clear();
 
@@ -780,6 +784,7 @@ public class Index extends javax.swing.JFrame {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     // Add your code here to handle the "click" image action
+                                    txtPD_Id.setText(product.getId());
                                     txtProduct_Name.setText(product.getName().replace("_", " "));
                                     txtProduct_Price.setText("Rs: " + product.getPrice() + ".00/=");
                                     txtProduct__Agegroup.setText(product.getAgeGroup() + "+");
@@ -805,7 +810,7 @@ public class Index extends javax.swing.JFrame {
                                         // Set a placeholder or default image if the file path is empty or null
                                         img_Product.setIcon(new ImageIcon("src/Images/icons8-add-image-48.png"));
                                     }
-
+                                    txtPD_Id.setVisible(false);
                                     Body_Panel.removeAll();
                                     Body_Panel.add(Product_DiscriptionPanel);
                                     Body_Panel.repaint();
@@ -837,7 +842,42 @@ public class Index extends javax.swing.JFrame {
                             addToCartButton.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
-                                    // Add your code here to handle the "Add to Cart" button action
+                                    // Retrieve the quantity of the selected product (you need to implement the logic for quantity)
+
+                                    // Add a row to the cart table with the product details
+                                    int i = JOptionPane.showConfirmDialog(null, "Please Confirm", "Add to Cart", JOptionPane.YES_NO_OPTION);
+                                    if (i == 1) {
+                                        /* do nothing*/
+                                    }
+                                    if (i == 0) {
+                                        String Id = product.getId();
+                                        String name = product.getName().replace("_", " ");
+                                        int quantity = 1;
+
+                                        String Pprice = product.getPrice();
+                                        int sum = Integer.parseInt(Pprice) * quantity;
+                                        String tot = Integer.toString(sum);
+
+                                        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+
+                                        // Check if the product with the same ID is already in the table
+                                        boolean productExists = false;
+                                        for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                                            if (dt.getValueAt(rowIndex, 0).equals(Id)) { // Assuming the ID is in the first column
+                                                productExists = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if (productExists) {
+                                            // Show a message here, for example:
+                                            JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
+                                        } else {
+                                            Object[] toadd = {name, quantity, tot + ".00"};
+                                            dt.addRow(toadd);
+                                        }
+
+                                    }
                                 }
                             });
                             productDetailsPanel.add(addToCartButton, BorderLayout.SOUTH);
@@ -886,9 +926,9 @@ public class Index extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnsearch1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
         String keyword = txtSearch1.getText().trim();
         productsList.clear();
 
@@ -998,7 +1038,41 @@ public class Index extends javax.swing.JFrame {
                             addToCartButton.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
-                                    // Add your code here to handle the "Add to Cart" button action
+
+                                    // Add a row to the cart table with the product details
+                                    int i = JOptionPane.showConfirmDialog(null, "Please Confirm", "Add to Cart", JOptionPane.YES_NO_OPTION);
+                                    if (i == 1) {
+                                        /* do nothing*/
+                                    }
+                                    if (i == 0) {
+                                        String Id = product.getId();
+                                        String name = product.getName().replace("_", " ");
+                                        int quantity = 1;
+
+                                        String Pprice = product.getPrice();
+                                        int sum = Integer.parseInt(Pprice) * quantity;
+                                        String tot = Integer.toString(sum);
+
+                                        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+
+                                        // Check if the product with the same ID is already in the table
+                                        boolean productExists = false;
+                                        for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                                            if (dt.getValueAt(rowIndex, 0).equals(Id)) { // Assuming the ID is in the first column
+                                                productExists = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if (productExists) {
+                                            // Show a message here, for example:
+                                            JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
+                                        } else {
+                                            Object[] toadd = {name, quantity, tot + ".00"};
+                                            dt.addRow(toadd);
+                                        }
+
+                                    }
                                 }
                             });
                             productDetailsPanel.add(addToCartButton, BorderLayout.SOUTH);
@@ -1048,7 +1122,7 @@ public class Index extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSearch2ActionPerformed
 
     private void lbl_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_homeMouseClicked
         Body_Panel.removeAll();
@@ -1072,6 +1146,16 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_productsMouseClicked
 
     private void lbl_cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cartMouseClicked
+        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+        // Calculate the sum of the third column and display it in TxtTotal
+        double totalSum = 0.0;
+        for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+            String totalValue = dt.getValueAt(rowIndex, 2).toString();
+            totalSum += Double.parseDouble(totalValue.replace(".00", ""));
+        }
+        String formattedTotal = String.format("%.2f", totalSum);
+        txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming TxtTotal is a JTextField
+
         Body_Panel.removeAll();
         Body_Panel.add(Cart_panel);
         Body_Panel.repaint();
@@ -1086,28 +1170,84 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int row = jTable1.getSelectedRow();
+        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
 
+        if (row >= 0 && row < dt.getRowCount()) {
+            String pname = dt.getValueAt(row, 0).toString().replace("_", " "); // Assuming ID is in the 1st column
+            String Pprice = dt.getValueAt(row, 2).toString(); // Assuming price is in the 3rd column
+
+            try {
+                // Read the original price from the text file
+                BufferedReader br = new BufferedReader(new FileReader("PRODUCTS.txt"));
+                String line;
+                double originalPrice = 0.0;
+
+                while ((line = br.readLine()) != null) {
+                    String[] parts = line.split(" ");
+                    if (parts.length == 8 && parts[1].equals(pname)) {
+                        originalPrice = Double.parseDouble(parts[2]);
+                        break;
+                    }
+                }
+                br.close();
+
+                String inputValue = JOptionPane.showInputDialog(this, "Change Quantity");
+                int newQuantity = Integer.parseInt(inputValue);
+
+                double newTotal = newQuantity * originalPrice;
+
+                // Update the quantity and total in the table
+                dt.setValueAt(newQuantity, row, 1); // Assuming quantity is in the 2nd column
+                dt.setValueAt(newTotal + "0", row, 2);    // Assuming total is in the 3th column
+
+                // Calculate the sum of the third column and display it in TxtTotal
+                double totalSum = 0.0;
+                for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                    String totalValue = dt.getValueAt(rowIndex, 2).toString();
+                    totalSum += Double.parseDouble(totalValue.replace(".00", ""));
+                }
+                String formattedTotal = String.format("%.2f", totalSum);
+                txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming TxtTotal is a JTextField
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Invalid input! Please enter a valid integer.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error reading product prices.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a row to update.", "Row Selection", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        DefaultTableModel dt=(DefaultTableModel)jTable1.getModel();
-        try{   if (jTable1.getRowCount() >= 0){
-            int index=jTable1.getSelectedRow();
-            dt.removeRow(index);
-            JOptionPane.showMessageDialog(this, "Removed Successfull " );}
+        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+        try {
+            if (jTable1.getRowCount() >= 0) {
+                int index = jTable1.getSelectedRow();
+                dt.removeRow(index);
+                JOptionPane.showMessageDialog(this, "Removed Successfull ");
+               
+                                        // Calculate the sum of the third column and display it in TxtTotal
+            double totalSum = 0.0;
+            for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                String totalValue = dt.getValueAt(rowIndex, 2).toString();
+                totalSum += Double.parseDouble(totalValue.replace(".00", ""));
+            }
+            String formattedTotal = String.format("%.2f", totalSum);
+            txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming TxtTotal is a JTextField
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please Select a Row to Remove", "Check Again", JOptionPane.ERROR_MESSAGE);
         }
-
-        catch (Exception e){JOptionPane.showMessageDialog
-            (null, "Please Select a Row to Remove", "Check Again", JOptionPane.ERROR_MESSAGE);}
 
     }//GEN-LAST:event_btnRemoveActionPerformed
 
-    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+    private void btnBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyActionPerformed
 
         //   DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
         // int RowCount = jTable1.getRowCount();
         //  int Total = 0;
-
         if (jTable1.getRowCount() <= 0) {
             JOptionPane:
             JOptionPane.showMessageDialog(null, "Please Check the Cart", "Cart is Empty", JOptionPane.ERROR_MESSAGE);
@@ -1149,9 +1289,47 @@ public class Index extends javax.swing.JFrame {
 //            //jTextArea1.setText(jTextArea1.getText()+"\t\t\t ");
 
 //        }
-
         // jTextArea1.setText(Integer.toString(Total));
-    }//GEN-LAST:event_btnPrintActionPerformed
+    }//GEN-LAST:event_btnBuyActionPerformed
+
+    private void btn_addtocartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addtocartActionPerformed
+        // Add a row to the cart table with the product details
+        int i = JOptionPane.showConfirmDialog(null, "Please Confirm", "Add to Cart", JOptionPane.YES_NO_OPTION);
+        if (i == 1) {
+            /* do nothing*/
+        }
+        if (i == 0) {
+            String Id = txtPD_Id.getText();
+            String name = txtProduct_Name.getText().replace(" ", "_");
+            int quantity = 1;
+
+            String Pprice = txtProduct_Price.getText();
+            Pprice = Pprice.replace("Rs: ", "").replace(".00/=", ""); // Remove prefixes and suffixes
+
+            int sum = Integer.parseInt(Pprice) * quantity;
+            String tot = Integer.toString(sum);
+
+            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+
+            // Check if the product with the same ID is already in the table
+            boolean productExists = false;
+            for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                if (dt.getValueAt(rowIndex, 0).equals(name)) { // Assuming the ID is in the first column
+                    productExists = true;
+                    break;
+                }
+            }
+
+            if (productExists) {
+                // Show a message here, for example:
+                JOptionPane.showMessageDialog(null, "Product already in the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
+            } else {
+                Object[] toadd = {name, quantity, tot + ".00"};
+                dt.addRow(toadd);
+            }
+
+        }
+    }//GEN-LAST:event_btn_addtocartActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1199,12 +1377,12 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JPanel Product_card_Panel1;
     private javax.swing.JPanel Product_page;
     private javax.swing.JPanel Product_search_panel;
-    private javax.swing.JButton btnPrint;
+    private javax.swing.JButton btnBuy;
     private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnSearch2;
     private javax.swing.JButton btn_addtocart;
+    private javax.swing.JButton btnsearch1;
     private javax.swing.JLabel img_Product;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1240,6 +1418,7 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_home;
     private javax.swing.JLabel lbl_products;
     private javax.swing.JPanel nav_bar;
+    private javax.swing.JLabel txtPD_Id;
     private javax.swing.JLabel txtProduct_Category;
     private javax.swing.JLabel txtProduct_Description;
     private javax.swing.JLabel txtProduct_Name;
@@ -1247,6 +1426,6 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel txtProduct__Agegroup;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSearch1;
+    private javax.swing.JLabel txtTotalPrice;
     // End of variables declaration//GEN-END:variables
 }
-
