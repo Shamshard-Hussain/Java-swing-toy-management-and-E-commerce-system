@@ -273,6 +273,7 @@ public class Index extends javax.swing.JFrame {
 
         // Add the JScrollPane to your main panel or frame
         Product_card_Panel.add(jScrollPane, BorderLayout.CENTER);
+
     }
 
     /**
@@ -1170,53 +1171,56 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int row = jTable1.getSelectedRow();
-        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+        if (evt.getClickCount() == 2) { // Check for double-click
+            int row = jTable1.getSelectedRow();
+            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
 
-        if (row >= 0 && row < dt.getRowCount()) {
-            String pname = dt.getValueAt(row, 0).toString().replace("_", " "); // Assuming ID is in the 1st column
-            String Pprice = dt.getValueAt(row, 2).toString(); // Assuming price is in the 3rd column
+            if (row >= 0 && row < dt.getRowCount()) {
+                String pname = dt.getValueAt(row, 0).toString().replace("_", " "); // Assuming ID is in the 1st column
+                String Pprice = dt.getValueAt(row, 2).toString(); // Assuming price is in the 3rd column
 
-            try {
-                // Read the original price from the text file
-                BufferedReader br = new BufferedReader(new FileReader("PRODUCTS.txt"));
-                String line;
-                double originalPrice = 0.0;
+                try {
+                    // Read the original price from the text file
+                    BufferedReader br = new BufferedReader(new FileReader("PRODUCTS.txt"));
+                    String line;
+                    double originalPrice = 0.0;
 
-                while ((line = br.readLine()) != null) {
-                    String[] parts = line.split(" ");
-                    if (parts.length == 8 && parts[1].equals(pname)) {
-                        originalPrice = Double.parseDouble(parts[2]);
-                        break;
+                    while ((line = br.readLine()) != null) {
+                        String[] parts = line.split(" ");
+                        if (parts.length == 8 && parts[1].equals(pname)) {
+                            originalPrice = Double.parseDouble(parts[2]);
+                            break;
+                        }
                     }
+                    br.close();
+
+                    String inputValue = JOptionPane.showInputDialog(this, "Change Quantity");
+
+                    if (inputValue != null) {  // Check if input is not canceled
+                        int newQuantity = Integer.parseInt(inputValue);
+                        double newTotal = newQuantity * originalPrice;
+
+                        // Update the quantity and total in the table
+                        dt.setValueAt(newQuantity, row, 1); // Assuming quantity is in the 2nd column
+                        dt.setValueAt(String.format("%.2f", newTotal), row, 2);    // Assuming total is in the 3rd column
+
+                        // Calculate the sum of the third column and display it in TxtTotal
+                        double totalSum = 0.0;
+                        for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                            String totalValue = dt.getValueAt(rowIndex, 2).toString();
+                            totalSum += Double.parseDouble(totalValue);
+                        }
+                        String formattedTotal = String.format("%.2f", totalSum);
+                        txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming txtTotalPrice is a JTextField
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Invalid input! Please enter a valid integer.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, "Error reading product prices.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                br.close();
-
-                String inputValue = JOptionPane.showInputDialog(this, "Change Quantity");
-                int newQuantity = Integer.parseInt(inputValue);
-
-                double newTotal = newQuantity * originalPrice;
-
-                // Update the quantity and total in the table
-                dt.setValueAt(newQuantity, row, 1); // Assuming quantity is in the 2nd column
-                dt.setValueAt(newTotal + "0", row, 2);    // Assuming total is in the 3th column
-
-                // Calculate the sum of the third column and display it in TxtTotal
-                double totalSum = 0.0;
-                for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
-                    String totalValue = dt.getValueAt(rowIndex, 2).toString();
-                    totalSum += Double.parseDouble(totalValue.replace(".00", ""));
-                }
-                String formattedTotal = String.format("%.2f", totalSum);
-                txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming TxtTotal is a JTextField
-
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Invalid input! Please enter a valid integer.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Error reading product prices.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a row to update.", "Row Selection", JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a row to update.", "Row Selection", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -1227,15 +1231,15 @@ public class Index extends javax.swing.JFrame {
                 int index = jTable1.getSelectedRow();
                 dt.removeRow(index);
                 JOptionPane.showMessageDialog(this, "Removed Successfull ");
-               
-                                        // Calculate the sum of the third column and display it in TxtTotal
-            double totalSum = 0.0;
-            for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
-                String totalValue = dt.getValueAt(rowIndex, 2).toString();
-                totalSum += Double.parseDouble(totalValue.replace(".00", ""));
-            }
-            String formattedTotal = String.format("%.2f", totalSum);
-            txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming TxtTotal is a JTextField
+
+                // Calculate the sum of the third column and display it in TxtTotal
+                double totalSum = 0.0;
+                for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                    String totalValue = dt.getValueAt(rowIndex, 2).toString();
+                    totalSum += Double.parseDouble(totalValue.replace(".00", ""));
+                }
+                String formattedTotal = String.format("%.2f", totalSum);
+                txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming TxtTotal is a JTextField
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please Select a Row to Remove", "Check Again", JOptionPane.ERROR_MESSAGE);
@@ -1264,7 +1268,7 @@ public class Index extends javax.swing.JFrame {
 //                //        Total = Total + Integer.parseInt(jTable1.getValueAt(j, 3).toString());}
 //
 //            jTextArea1.setText(jTextArea1.getText() + "====================================================================\n");
-//            jTextArea1.setText(jTextArea1.getText() + "\t\t\t Toy Mart \n");
+//            jTextArea1.setText(jTextArea1.getText() + "\t\t\t Toy Gallery \n");
 //            jTextArea1.setText(jTextArea1.getText() + "====================================================================\n\n\n");
 //            jTextArea1.setText(jTextArea1.getText() + "______________________________________________________________________________________________________________________________");
 //            jTextArea1.setText(jTextArea1.getText() + "\n Toy Id" + "\t\t Toy Name" + "\t\t Qty" + "\t\t            Price\n ");
