@@ -84,11 +84,11 @@ public class Sign_Page extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel9.setText("Sign In");
-        Left_Panel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 110, -1));
+        Left_Panel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 120, -1));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel1.setText("Email");
-        Left_Panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 150, -1));
+        Left_Panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 150, -1));
 
         txtEmail.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
         txtEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
@@ -96,7 +96,7 @@ public class Sign_Page extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel2.setText("Password");
-        Left_Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 70, -1));
+        Left_Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 70, -1));
 
         txtPassword.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
         txtPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
@@ -282,7 +282,7 @@ public class Sign_Page extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel3.setText("Sign Up");
         Right_Panel.add(jLabel3);
-        jLabel3.setBounds(190, 120, 138, 48);
+        jLabel3.setBounds(200, 120, 138, 48);
 
         Main.add(Right_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 1, 530, 630));
 

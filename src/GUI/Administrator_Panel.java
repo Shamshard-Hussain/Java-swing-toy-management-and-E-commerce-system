@@ -46,10 +46,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
     public Administrator_Panel() {
         initComponents();
         
-        Admin_body_panel.removeAll();
-        Admin_body_panel.add(Admin_home_page);
-        Admin_body_panel.repaint();
-        Admin_body_panel.revalidate();
 
         category = new Category();
 
@@ -111,6 +107,21 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Admin_nav_bar = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         Admin_body_panel = new javax.swing.JPanel();
+        Admin_home_page = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        admin_slider = new javax.swing.JLabel();
         Manage_categoryes = new javax.swing.JPanel();
         btn_add_category = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
@@ -175,21 +186,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         Product_Table = new javax.swing.JTable();
         btn_search_products = new javax.swing.JButton();
-        Admin_home_page = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        admin_slider = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -361,6 +357,83 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jPanel1.add(Admin_nav_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 910, 50));
 
         Admin_body_panel.setLayout(new java.awt.CardLayout());
+
+        Admin_home_page.setBackground(new java.awt.Color(240, 248, 233));
+        Admin_home_page.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setText("Sold Items");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel2.setFocusable(false);
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 40));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-shopping-cart-30 (1).png"))); // NOI18N
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 30, 40));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Sold Items");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 80, 20));
+
+        Admin_home_page.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 220, 90));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel4.setText("Administrator Home");
+        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Admin_home_page.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setText("User Count");
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel5.setFocusable(false);
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 40));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-people-30.png"))); // NOI18N
+        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 30, 40));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("User Count");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 80, 20));
+
+        Admin_home_page.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 220, 90));
+
+        jPanel4.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel7.setText("Count");
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel7.setFocusable(false);
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 40));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-packing-30 (1).png"))); // NOI18N
+        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 30, 40));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Product Count");
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 100, 20));
+
+        Admin_home_page.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 220, 90));
+        Admin_home_page.add(admin_slider, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 610, 340));
+
+        Admin_body_panel.add(Admin_home_page, "card2");
 
         Manage_categoryes.setBackground(new java.awt.Color(255, 255, 255));
         Manage_categoryes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -698,8 +771,9 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Search_Product_Panel.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 740, 360));
 
         jLabel34.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setText("To access additional options for a particular product, simply click on the corresponding row of the product.");
-        Search_Product_Panel.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, 850, -1));
+        Search_Product_Panel.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 910, -1));
 
         btn_search.setBackground(new java.awt.Color(0, 204, 153));
         btn_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -778,85 +852,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
         Admin_body_panel.add(View_Products, "card4");
 
-        Admin_home_page.setBackground(new java.awt.Color(240, 248, 233));
-        Admin_home_page.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setText("Sold Items");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel2.setFocusable(false);
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 40));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-shopping-cart-30 (1).png"))); // NOI18N
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 30, 40));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Sold Items");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 80, 20));
-
-        Admin_home_page.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 220, 90));
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel4.setText("Administrator Home");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        Admin_home_page.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
-
-        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel5.setText("User Count");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel5.setFocusable(false);
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 40));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-people-30.png"))); // NOI18N
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 30, 40));
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("User Count");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 80, 20));
-
-        Admin_home_page.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 220, 90));
-
-        jPanel4.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel7.setText("Count");
-        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel7.setFocusable(false);
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 40));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-packing-30 (1).png"))); // NOI18N
-        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 30, 40));
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Product Count");
-        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 100, 20));
-
-        Admin_home_page.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 220, 90));
-
-        admin_slider.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Admin_home_page.add(admin_slider, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 630, 270));
-
-        Admin_body_panel.add(Admin_home_page, "card2");
-
         jPanel1.add(Admin_body_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 910, 640));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -930,7 +925,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) Product_Table.getModel();
         model.setRowCount(0);
-        
         toy.displayProductData(Product_Table);
     }//GEN-LAST:event_btnAdmin_productActionPerformed
 
@@ -1290,6 +1284,11 @@ public class Administrator_Panel extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Product deleted, but failed to delete the old image", "Delete Product", JOptionPane.WARNING_MESSAGE);
                     }
 
+                    DefaultTableModel model = (DefaultTableModel) Product_Table.getModel();
+                    model.setRowCount(0);
+                    toy.displayProductData(Product_Table);
+                    
+                    
                     Admin_body_panel.removeAll();
                     Admin_body_panel.add(View_Products);
                     Admin_body_panel.repaint();
@@ -1363,14 +1362,20 @@ public class Administrator_Panel extends javax.swing.JFrame {
                     newFileName = Tid.replace(" ", "_") + "." + originalExtension;
                     Path sourcePath = selectedFile.toPath();
                     Path destinationPath = Path.of("src/Products", newFileName);
+
+                  //  System.out.println("Source Path: " + sourcePath);
+                  //  System.out.println("Destination Path: " + destinationPath);
+
                     try {
                         Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
                         newImageFile = destinationPath.toFile();
+                      //  System.out.println("Image replaced successfully.");
                     } catch (IOException e) {
                         e.printStackTrace();
                         valid = false;
                     }
                 }
+
             }
 
             if (valid) {
@@ -1381,15 +1386,14 @@ public class Administrator_Panel extends javax.swing.JFrame {
                 if (updated) {
                     JOptionPane.showMessageDialog(null, "Product data updated successfully", "Update Product", JOptionPane.INFORMATION_MESSAGE);
 
+                    DefaultTableModel model = (DefaultTableModel) Product_Table.getModel();
+                    model.setRowCount(0);
+                    toy.displayProductData(Product_Table);
+
                     Admin_body_panel.removeAll();
                     Admin_body_panel.add(View_Products);
                     Admin_body_panel.repaint();
                     Admin_body_panel.revalidate();
-
-                    DefaultTableModel model = (DefaultTableModel) Product_Table.getModel();
-                    model.setRowCount(0);
-
-                    toy.displayProductData(Product_Table);
                 } else {
 
                     JOptionPane.showMessageDialog(null, "Failed to update product data.", "Update Product", JOptionPane.WARNING_MESSAGE);
@@ -1473,7 +1477,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
-      int i = JOptionPane.showConfirmDialog(null, "Do you want to logout?", "Logout?", JOptionPane.YES_NO_OPTION);
+      int i = JOptionPane.showConfirmDialog(null, "Do you want to logout", "Logout?", JOptionPane.YES_NO_OPTION);
         if (i == 1) {/* do nothing*/
         }
         if (i == 0) {

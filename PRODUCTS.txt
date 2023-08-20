@@ -1,0 +1,8 @@
+C001 Minion 500 10 3 Dolls_and_Accessories Made_in_Sri_lanka C001.png
+C002 Rubic_Cube 1500 20 5 Puzzles Made_in_chaina C002.png
+C003 car 1500 6 4 BATTERY_OPERATED_TOYS Made_in_Srilanka C003.png
+C005 Rc_Jeep 1500 9 4 BATTERY_OPERATED_TOYS Made_in_Sri_Lanka C005.png
+C006 Tedy_Bear 1500 30 5 Dolls_and_Accessories Made_in_Srilanka 45345.png
+C007 Barbie_Doll 100 17 4 Dolls_and_Accessories Made_in_Sri_Lanka 3434.png
+C008 Truck 1000 15 4 BATTERY_OPERATED_TOYS Made_in_Sri_Lanka 3223.png
+C009 Tedy_Bear 3400 16 6 Dolls_and_Accessories Made_in_Sri_Lanka C009.png

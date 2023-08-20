@@ -19,6 +19,8 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -34,6 +36,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -218,7 +221,7 @@ public class Index extends javax.swing.JFrame {
                     // Retrieve the quantity of the selected product (you need to implement the logic for quantity)
 
                     // Add a row to the cart table with the product details
-                    int i = JOptionPane.showConfirmDialog(null, "Please Confirm", "Add to Cart", JOptionPane.YES_NO_OPTION);
+                    int i = JOptionPane.showConfirmDialog(null, "Please Confirm!", "Add to Cart", JOptionPane.OK_CANCEL_OPTION);
                     if (i == 1) {
                         /* do nothing*/
                     }
@@ -231,7 +234,7 @@ public class Index extends javax.swing.JFrame {
                         int sum = Integer.parseInt(Pprice) * quantity;
                         String tot = Integer.toString(sum);
 
-                        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+                        DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
 
                         // Check if the product with the same ID is already in the table
                         boolean productExists = false;
@@ -246,7 +249,7 @@ public class Index extends javax.swing.JFrame {
                             // Show a message here, for example:
                             JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
                         } else {
-                            Object[] toadd = {name, quantity, tot + ".00"};
+                            Object[] toadd = {name, quantity, tot + ".00",Id};
                             dt.addRow(toadd);
                         }
 
@@ -274,6 +277,19 @@ public class Index extends javax.swing.JFrame {
         // Add the JScrollPane to your main panel or frame
         Product_card_Panel.add(jScrollPane, BorderLayout.CENTER);
 
+    }
+
+    private String formatCardNumber(String input) {
+        StringBuilder formatted = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++) {
+            if (i > 0 && i % 4 == 0) {
+                formatted.append("-");
+            }
+            formatted.append(input.charAt(i));
+        }
+
+        return formatted.toString();
     }
 
     /**
@@ -342,9 +358,21 @@ public class Index extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         txtTotalPrice = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCart = new javax.swing.JTable();
         btnRemove = new javax.swing.JButton();
         btnBuy = new javax.swing.JButton();
+        Payment = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        txtExpDate = new javax.swing.JTextField();
+        txtCardNumber = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        txtCardOwnerName = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        txtCvCode = new javax.swing.JTextField();
+        btnConfirmPayment = new javax.swing.JButton();
+        Bill_Panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -424,42 +452,42 @@ public class Index extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setText("Children ");
-        Home_Panel_Canteiner.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 230, 45));
+        Home_Panel_Canteiner.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 230, 45));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel2.setText("Toys.....");
-        Home_Panel_Canteiner.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, 180, 70));
+        Home_Panel_Canteiner.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 230, 70));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/PngItem_46837.png"))); // NOI18N
         Home_Panel_Canteiner.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 430, 330));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("Welcome to our toy shop! ");
-        Home_Panel_Canteiner.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 380, 30));
+        Home_Panel_Canteiner.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 380, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("we strive to offer something for everyone.");
-        Home_Panel_Canteiner.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, 470, 30));
+        Home_Panel_Canteiner.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, 470, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("We are dedicated to bringing joy and ");
-        Home_Panel_Canteiner.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, 420, -1));
+        Home_Panel_Canteiner.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, 420, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("excitement to children of all ages with our wide ");
-        Home_Panel_Canteiner.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, 470, -1));
+        Home_Panel_Canteiner.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 330, 470, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setText("selection of toys. At our toy shop, you'll find a diverse");
-        Home_Panel_Canteiner.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 470, -1));
+        Home_Panel_Canteiner.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 470, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setText("range of toys that cater to various interests and ");
-        Home_Panel_Canteiner.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, 470, -1));
+        Home_Panel_Canteiner.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, 470, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setText("preferences. From classic favorites to the latest trends, ");
-        Home_Panel_Canteiner.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 390, 470, 30));
+        Home_Panel_Canteiner.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, 470, 30));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel12.setText(" Explore More");
@@ -650,32 +678,48 @@ public class Index extends javax.swing.JFrame {
         txtTotalPrice.setText("Total Price- Rs: 00.00/=");
         Cart_panel.add(txtTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 470, 370, -1));
 
-        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 77, 64));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCart.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tblCart.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        tblCart.setForeground(new java.awt.Color(51, 51, 51));
+        tblCart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Model Name", "Quantity", "Price"
+                "Model Name", "Quantity", "Price", "Id"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(204, 204, 204));
-        jTable1.setShowGrid(true);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblCart.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tblCart.setGridColor(new java.awt.Color(255, 255, 255));
+        tblCart.setRowHeight(18);
+        tblCart.setShowGrid(true);
+        tblCart.getTableHeader().setResizingAllowed(false);
+        tblCart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tblCartMouseClicked(evt);
             }
         });
-        jScrollPane5.setViewportView(jTable1);
+        jScrollPane5.setViewportView(tblCart);
+        tblCart.getAccessibleContext().setAccessibleDescription("");
+        int columnIndexToHide = 3; // Index of the column to hide (0-based index)
+
+        if (columnIndexToHide >= 0 && columnIndexToHide < tblCart.getColumnCount()) {
+            TableColumn column = tblCart.getColumnModel().getColumn(columnIndexToHide);
+            column.setMinWidth(0);
+            column.setMaxWidth(0);
+            column.setWidth(0);
+            column.setPreferredWidth(0);
+        } else {
+            System.out.println("Column index is out of bounds.");
+        }
 
         Cart_panel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 162, 880, 300));
 
@@ -703,6 +747,108 @@ public class Index extends javax.swing.JFrame {
 
         Body_Panel.add(Cart_panel, "card7");
 
+        Payment.setBackground(new java.awt.Color(255, 255, 255));
+        Payment.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel21.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("Payment Details");
+        jLabel21.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Payment.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1020, -1));
+
+        jLabel29.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        jLabel29.setText("Expiration Date:");
+        Payment.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 276, 160, -1));
+
+        jLabel33.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        jLabel33.setText("Card Number:");
+        Payment.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 160, -1));
+
+        txtExpDate.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtExpDate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 204, 255)));
+        txtExpDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtExpDateKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtExpDateKeyTyped(evt);
+            }
+        });
+        Payment.add(txtExpDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 270, 40));
+
+        txtCardNumber.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtCardNumber.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 204, 255)));
+        txtCardNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCardNumberActionPerformed(evt);
+            }
+        });
+        txtCardNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCardNumberKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCardNumberKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCardNumberKeyTyped(evt);
+            }
+        });
+        Payment.add(txtCardNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 600, 40));
+
+        jLabel34.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        jLabel34.setText("Card Owner Name:");
+        Payment.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 160, -1));
+
+        txtCardOwnerName.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtCardOwnerName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 204, 255)));
+        txtCardOwnerName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCardOwnerNameKeyReleased(evt);
+            }
+        });
+        Payment.add(txtCardOwnerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 600, 40));
+
+        jLabel36.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        jLabel36.setText("CV Code:");
+        Payment.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 276, 160, -1));
+
+        txtCvCode.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtCvCode.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 204, 255)));
+        txtCvCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCvCodeKeyReleased(evt);
+            }
+        });
+        Payment.add(txtCvCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 270, 40));
+
+        btnConfirmPayment.setBackground(new java.awt.Color(51, 153, 0));
+        btnConfirmPayment.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        btnConfirmPayment.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfirmPayment.setText("Confirm Payment");
+        btnConfirmPayment.setBorderPainted(false);
+        btnConfirmPayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmPaymentActionPerformed(evt);
+            }
+        });
+        Payment.add(btnConfirmPayment, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, 600, 40));
+
+        Body_Panel.add(Payment, "card8");
+
+        javax.swing.GroupLayout Bill_PanelLayout = new javax.swing.GroupLayout(Bill_Panel);
+        Bill_Panel.setLayout(Bill_PanelLayout);
+        Bill_PanelLayout.setHorizontalGroup(
+            Bill_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1170, Short.MAX_VALUE)
+        );
+        Bill_PanelLayout.setVerticalGroup(
+            Bill_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 670, Short.MAX_VALUE)
+        );
+
+        Body_Panel.add(Bill_Panel, "card9");
+
         jPanel1.add(Body_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1170, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -721,7 +867,7 @@ public class Index extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
-        int i = JOptionPane.showConfirmDialog(null, "Do you want to logout?", "Logout?", JOptionPane.YES_NO_OPTION);
+        int i = JOptionPane.showConfirmDialog(null, "Do you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
         if (i == 1) {/* do nothing*/
         }
         if (i == 0) {
@@ -846,7 +992,7 @@ public class Index extends javax.swing.JFrame {
                                     // Retrieve the quantity of the selected product (you need to implement the logic for quantity)
 
                                     // Add a row to the cart table with the product details
-                                    int i = JOptionPane.showConfirmDialog(null, "Please Confirm", "Add to Cart", JOptionPane.YES_NO_OPTION);
+                                    int i = JOptionPane.showConfirmDialog(null, "Please Confirm!", "Add to Cart", JOptionPane.OK_CANCEL_OPTION);
                                     if (i == 1) {
                                         /* do nothing*/
                                     }
@@ -859,7 +1005,7 @@ public class Index extends javax.swing.JFrame {
                                         int sum = Integer.parseInt(Pprice) * quantity;
                                         String tot = Integer.toString(sum);
 
-                                        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+                                        DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
 
                                         // Check if the product with the same ID is already in the table
                                         boolean productExists = false;
@@ -874,7 +1020,7 @@ public class Index extends javax.swing.JFrame {
                                             // Show a message here, for example:
                                             JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
                                         } else {
-                                            Object[] toadd = {name, quantity, tot + ".00"};
+                                            Object[] toadd = {name, quantity, tot + ".00",Id};
                                             dt.addRow(toadd);
                                         }
 
@@ -1041,7 +1187,7 @@ public class Index extends javax.swing.JFrame {
                                 public void actionPerformed(ActionEvent e) {
 
                                     // Add a row to the cart table with the product details
-                                    int i = JOptionPane.showConfirmDialog(null, "Please Confirm", "Add to Cart", JOptionPane.YES_NO_OPTION);
+                                    int i = JOptionPane.showConfirmDialog(null, "Please Confirm!", "Add to Cart", JOptionPane.OK_CANCEL_OPTION);
                                     if (i == 1) {
                                         /* do nothing*/
                                     }
@@ -1054,7 +1200,7 @@ public class Index extends javax.swing.JFrame {
                                         int sum = Integer.parseInt(Pprice) * quantity;
                                         String tot = Integer.toString(sum);
 
-                                        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+                                        DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
 
                                         // Check if the product with the same ID is already in the table
                                         boolean productExists = false;
@@ -1069,7 +1215,7 @@ public class Index extends javax.swing.JFrame {
                                             // Show a message here, for example:
                                             JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
                                         } else {
-                                            Object[] toadd = {name, quantity, tot + ".00"};
+                                            Object[] toadd = {name, quantity, tot + ".00",Id};
                                             dt.addRow(toadd);
                                         }
 
@@ -1147,7 +1293,8 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_productsMouseClicked
 
     private void lbl_cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cartMouseClicked
-        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
+       
         // Calculate the sum of the third column and display it in TxtTotal
         double totalSum = 0.0;
         for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
@@ -1156,6 +1303,7 @@ public class Index extends javax.swing.JFrame {
         }
         String formattedTotal = String.format("%.2f", totalSum);
         txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming TxtTotal is a JTextField
+        
 
         Body_Panel.removeAll();
         Body_Panel.add(Cart_panel);
@@ -1170,65 +1318,65 @@ public class Index extends javax.swing.JFrame {
         Body_Panel.revalidate();
     }//GEN-LAST:event_jLabel12MouseClicked
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        if (evt.getClickCount() == 2) { // Check for double-click
-            int row = jTable1.getSelectedRow();
-            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+    private void tblCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCartMouseClicked
+    if (evt.getClickCount() == 2) { // Check for double-click
+    int row = tblCart.getSelectedRow();
+    DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
 
-            if (row >= 0 && row < dt.getRowCount()) {
-                String pname = dt.getValueAt(row, 0).toString().replace("_", " "); // Assuming ID is in the 1st column
-                String Pprice = dt.getValueAt(row, 2).toString(); // Assuming price is in the 3rd column
+    if (row >= 0 && row < dt.getRowCount()) {
+        String Pid =dt.getValueAt(row, 3).toString();// Assuming ID is in the last column
+        String pname = dt.getValueAt(row, 0).toString().replace("_", " "); 
+        String Pprice = dt.getValueAt(row, 2).toString(); // Assuming price is in the 3rd column
 
-                try {
-                    // Read the original price from the text file
-                    BufferedReader br = new BufferedReader(new FileReader("PRODUCTS.txt"));
-                    String line;
-                    double originalPrice = 0.0;
+        try {
+            // Read the original price from the text file
+            List<String> lines = Files.readAllLines(Paths.get("PRODUCTS.txt"));
+            double originalPrice = 0.0;
 
-                    while ((line = br.readLine()) != null) {
-                        String[] parts = line.split(" ");
-                        if (parts.length == 8 && parts[1].equals(pname)) {
-                            originalPrice = Double.parseDouble(parts[2]);
-                            break;
-                        }
-                    }
-                    br.close();
-
-                    String inputValue = JOptionPane.showInputDialog(this, "Change Quantity");
-
-                    if (inputValue != null) {  // Check if input is not canceled
-                        int newQuantity = Integer.parseInt(inputValue);
-                        double newTotal = newQuantity * originalPrice;
-
-                        // Update the quantity and total in the table
-                        dt.setValueAt(newQuantity, row, 1); // Assuming quantity is in the 2nd column
-                        dt.setValueAt(String.format("%.2f", newTotal), row, 2);    // Assuming total is in the 3rd column
-
-                        // Calculate the sum of the third column and display it in TxtTotal
-                        double totalSum = 0.0;
-                        for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
-                            String totalValue = dt.getValueAt(rowIndex, 2).toString();
-                            totalSum += Double.parseDouble(totalValue);
-                        }
-                        String formattedTotal = String.format("%.2f", totalSum);
-                        txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming txtTotalPrice is a JTextField
-                    }
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "Invalid input! Please enter a valid integer.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(this, "Error reading product prices.", "Error", JOptionPane.ERROR_MESSAGE);
+            for (String line : lines) {
+                String[] parts = line.split(" ");
+                if (parts.length >= 8 && parts[0].equals(Pid)) {
+                    originalPrice = Double.parseDouble(parts[2]);
+                    break;
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Please select a row to update.", "Row Selection", JOptionPane.WARNING_MESSAGE);
             }
+
+            String inputValue = JOptionPane.showInputDialog(this, "Change Quantity");
+            
+            if (inputValue != null) {  // Check if input is not canceled
+                int newQuantity = Integer.parseInt(inputValue);
+                double newTotal = newQuantity * originalPrice;
+
+                // Update the quantity and total in the table
+                dt.setValueAt(newQuantity, row, 1); // Assuming quantity is in the 2nd column
+                dt.setValueAt(String.format("%.2f", newTotal), row, 2);    // Assuming total is in the 3rd column
+
+                // Calculate the sum of the third column and display it in TxtTotal
+                double totalSum = 0.0;
+                for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                    String totalValue = dt.getValueAt(rowIndex, 2).toString();
+                    totalSum += Double.parseDouble(totalValue);
+                }
+                String formattedTotal = String.format("%.2f", totalSum);
+                txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming txtTotalPrice is a JTextField
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid input! Please enter a valid integer.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading product prices.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jTable1MouseClicked
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a row to update.", "Row Selection", JOptionPane.WARNING_MESSAGE);
+    }
+}
+
+    }//GEN-LAST:event_tblCartMouseClicked
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
         try {
-            if (jTable1.getRowCount() >= 0) {
-                int index = jTable1.getSelectedRow();
+            if (tblCart.getRowCount() >= 0) {
+                int index = tblCart.getSelectedRow();
                 dt.removeRow(index);
                 JOptionPane.showMessageDialog(this, "Removed Successfull ");
 
@@ -1252,7 +1400,7 @@ public class Index extends javax.swing.JFrame {
         //   DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
         // int RowCount = jTable1.getRowCount();
         //  int Total = 0;
-        if (jTable1.getRowCount() <= 0) {
+        if (tblCart.getRowCount() <= 0) {
             JOptionPane:
             JOptionPane.showMessageDialog(null, "Please Check the Cart", "Cart is Empty", JOptionPane.ERROR_MESSAGE);
 
@@ -1294,11 +1442,16 @@ public class Index extends javax.swing.JFrame {
 
 //        }
         // jTextArea1.setText(Integer.toString(Total));
+        
+//        Body_Panel.removeAll();
+//        Body_Panel.add(Payment);
+//        Body_Panel.repaint();
+//        Body_Panel.revalidate();
     }//GEN-LAST:event_btnBuyActionPerformed
 
     private void btn_addtocartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addtocartActionPerformed
         // Add a row to the cart table with the product details
-        int i = JOptionPane.showConfirmDialog(null, "Please Confirm", "Add to Cart", JOptionPane.YES_NO_OPTION);
+        int i = JOptionPane.showConfirmDialog(null, "Please Confirm!", "Add to Cart", JOptionPane.OK_CANCEL_OPTION);
         if (i == 1) {
             /* do nothing*/
         }
@@ -1313,7 +1466,7 @@ public class Index extends javax.swing.JFrame {
             int sum = Integer.parseInt(Pprice) * quantity;
             String tot = Integer.toString(sum);
 
-            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
 
             // Check if the product with the same ID is already in the table
             boolean productExists = false;
@@ -1328,12 +1481,167 @@ public class Index extends javax.swing.JFrame {
                 // Show a message here, for example:
                 JOptionPane.showMessageDialog(null, "Product already in the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
             } else {
-                Object[] toadd = {name, quantity, tot + ".00"};
+                Object[] toadd = {name, quantity, tot + ".00",Id};
                 dt.addRow(toadd);
             }
 
         }
     }//GEN-LAST:event_btn_addtocartActionPerformed
+
+    private void txtCardNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCardNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCardNumberActionPerformed
+
+    private void txtCardOwnerNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCardOwnerNameKeyReleased
+        String NamePattern = "^[a-zA-Z]+$";
+        String Name = txtCardOwnerName.getText().trim();
+
+        if (!Name.matches(NamePattern)) {
+            txtCardOwnerName.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else {
+            txtCardOwnerName.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+    }//GEN-LAST:event_txtCardOwnerNameKeyReleased
+
+    private void txtExpDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExpDateKeyReleased
+        String expirationDatePattern = "^(0[1-9]|1[0-2])\\/(\\d{2})$"; // MM/YY format
+        String expDate = txtExpDate.getText().trim();
+
+        if (!expDate.matches(expirationDatePattern)) {
+            txtExpDate.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else {
+            txtExpDate.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+    }//GEN-LAST:event_txtExpDateKeyReleased
+
+    private void txtExpDateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExpDateKeyTyped
+        char typedChar = evt.getKeyChar();
+
+        if (typedChar == '\b') { // Check if backspace key is pressed
+            String text = txtExpDate.getText();
+
+            if (text.length() > 0 && text.charAt(text.length() - 1) == '/') {
+                txtExpDate.setText(text.substring(0, text.length() - 1));
+            }
+        } else {
+            String text = txtExpDate.getText();
+
+            if (text.length() == 2) {
+                txtExpDate.setText(text + "/");
+            }
+        }
+    }//GEN-LAST:event_txtExpDateKeyTyped
+
+    private void txtCardNumberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCardNumberKeyTyped
+
+        String text = txtCardNumber.getText().replaceAll("-", "");
+
+        if (text.length() == 4 || text.length() == 9 || text.length() == 14) {
+            txtCardNumber.setText(text + "-");
+        }
+    }//GEN-LAST:event_txtCardNumberKeyTyped
+
+    private void txtCardNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCardNumberKeyPressed
+        String text = txtCardNumber.getText().replaceAll("-", "");
+
+        if (text.length() < 16) {
+            String formattedText = formatCardNumber(text);
+            txtCardNumber.setText(formattedText);
+        } else {
+            txtCardNumber.setText(text.substring(0, 15)); // Clear after 16 digits
+        }
+    }//GEN-LAST:event_txtCardNumberKeyPressed
+
+    private void txtCardNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCardNumberKeyReleased
+        String CardNumberPattern = "^(\\d{4}-){3}\\d{4}$"; // ####-####-####-####-#### format
+        String cardnum = txtCardNumber.getText().trim();
+
+        if (!cardnum.matches(CardNumberPattern)) {
+            txtCardNumber.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else {
+            txtCardNumber.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+    }//GEN-LAST:event_txtCardNumberKeyReleased
+
+    private void txtCvCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCvCodeKeyReleased
+        String CVCodePattern = "^[0-9]{3}$"; // ### format
+        String cvCode = txtCvCode.getText().trim();
+
+        if (!cvCode.matches(CVCodePattern)) {
+            txtCvCode.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else {
+            txtCvCode.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+    }//GEN-LAST:event_txtCvCodeKeyReleased
+
+    private void btnConfirmPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmPaymentActionPerformed
+       boolean valid = true;
+       
+        if (txtCardNumber.getText().trim().isEmpty()
+                || txtExpDate.getText().trim().isEmpty()
+                || txtCvCode.getText().trim().isEmpty()
+                || txtCardOwnerName.getText().trim().isEmpty()) {
+            JOptionPane:
+            JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Payment Details Form", JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }else{
+        
+            String CardNumberPattern = "^(\\d{4}-){3}\\d{4}$"; // ####-####-####-####-#### format
+            String cardnum = txtCardNumber.getText().trim();
+
+            String expirationDatePattern = "^(0[1-9]|1[0-2])\\/(\\d{2})$"; // MM/YY format
+            String expDate = txtExpDate.getText().trim();
+
+            String CVCodePattern = "^[0-9]{3}$"; // ### format
+            String cvCode = txtCvCode.getText().trim();
+
+            String NamePattern = "^[a-zA-Z]+$";
+            String Name = txtCardOwnerName.getText().trim();
+
+            if (!cardnum.matches(CardNumberPattern)) {
+                JOptionPane:
+                JOptionPane.showMessageDialog(null, "Invalid Card Number", "Payment Details Form", JOptionPane.ERROR_MESSAGE);
+                valid = false;
+
+            }
+            if (!expDate.matches(expirationDatePattern)) {
+                JOptionPane:
+                JOptionPane.showMessageDialog(null, "Invalid Expiration Date", "Payment Details Form", JOptionPane.ERROR_MESSAGE);
+                valid = false;
+
+            }
+            if (!cvCode.matches(CVCodePattern)) {
+                JOptionPane:
+                JOptionPane.showMessageDialog(null, "Invalid Card CV Code", "Payment Details Form", JOptionPane.ERROR_MESSAGE);
+                valid = false;
+
+            }
+            if (!Name.matches(NamePattern)) {
+                JOptionPane:
+                JOptionPane.showMessageDialog(null, "Invalid Card Owner Name", "Payment Details Form", JOptionPane.ERROR_MESSAGE);
+                valid = false;
+
+            }
+
+        }
+        if (valid) {
+
+            int i = JOptionPane.showConfirmDialog(null, "Please Confirm!", "Payment Details Form", JOptionPane.OK_CANCEL_OPTION);
+            if (i == 1) {/* do nothing*/
+            }
+            if (i == 0) {
+                JOptionPane:
+                JOptionPane.showMessageDialog(null, "Payment Successfull, Thank you!", "Payment Details Form", JOptionPane.INFORMATION_MESSAGE);
+                Body_Panel.removeAll();
+                Body_Panel.add(Bill_Panel);
+                Body_Panel.repaint();
+                Body_Panel.revalidate();
+            }
+             
+             
+         }
+
+    }//GEN-LAST:event_btnConfirmPaymentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1372,16 +1680,19 @@ public class Index extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel About_Us_Page;
+    private javax.swing.JPanel Bill_Panel;
     private javax.swing.JPanel Body_Panel;
     private javax.swing.JPanel Cart_panel;
     private javax.swing.JPanel Home;
     private javax.swing.JPanel Home_Panel_Canteiner;
+    private javax.swing.JPanel Payment;
     private javax.swing.JPanel Product_DiscriptionPanel;
     private javax.swing.JPanel Product_card_Panel;
     private javax.swing.JPanel Product_card_Panel1;
     private javax.swing.JPanel Product_page;
     private javax.swing.JPanel Product_search_panel;
     private javax.swing.JButton btnBuy;
+    private javax.swing.JButton btnConfirmPayment;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSearch2;
     private javax.swing.JButton btn_addtocart;
@@ -1400,13 +1711,18 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1416,12 +1732,16 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_aboutUs;
     private javax.swing.JLabel lbl_cart;
     private javax.swing.JLabel lbl_home;
     private javax.swing.JLabel lbl_products;
     private javax.swing.JPanel nav_bar;
+    private javax.swing.JTable tblCart;
+    private javax.swing.JTextField txtCardNumber;
+    private javax.swing.JTextField txtCardOwnerName;
+    private javax.swing.JTextField txtCvCode;
+    private javax.swing.JTextField txtExpDate;
     private javax.swing.JLabel txtPD_Id;
     private javax.swing.JLabel txtProduct_Category;
     private javax.swing.JLabel txtProduct_Description;
