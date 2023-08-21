@@ -4,6 +4,7 @@
  */
 package Classes;
 
+import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,9 +12,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import static javax.swing.SwingConstants.CENTER;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -59,22 +64,25 @@ public class Category {
 }
     
 
-    //C:\\Users\\Sham\\Documents\\NetBeansProjects\\E_Commerce\\delete.png
+    //C:\\Users\\Sham\\Documents\\NetBeansProjects\\E_Commerce\\src\\Images\\delete_icon.png
     public void populateCategoryTable(JTable tbl_Category) {
-        DefaultTableModel model = (DefaultTableModel) tbl_Category.getModel();
-        File file = new File("Category.txt");
-        model.setRowCount(0);
+    DefaultTableModel model = (DefaultTableModel) tbl_Category.getModel();
+    File file = new File("Category.txt");
+    model.setRowCount(0);
 
-        try ( BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String categoryName = line.trim();
-                model.addRow(new Object[]{categoryName, "Delete"});
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String categoryName = line.trim();
+            ImageIcon deleteButton  = new ImageIcon(getClass().getResource("/Images/delete_icon.png")); // Replace with the path to your delete icon
+
+            model.addRow(new Object[]{categoryName, deleteButton });
         }
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
 
     public void deleteCategory(String categoryName, DefaultTableModel tableModel, int row) {
         // Implement the logic to delete the category from the system

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -463,5 +464,29 @@ public class Product {
 
         return true;
     }
+    
+    public static int generateProductId(BufferedReader reader) {
+        int maxId = 0;
 
+        try {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" ");
+                if (parts.length >= 1) {
+                    int currentId = Integer.parseInt(parts[0].substring(1));
+                    maxId = Math.max(maxId, currentId);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return maxId + 1; // Increment the maximum ID for auto-increment
+    }
+
+    public static void displayNextProductId(BufferedReader reader, JTextField textField) {
+        int nextId = generateProductId(reader);
+        String generatedId = "C" + String.format("%03d", nextId); // Format as "C001"
+        textField.setText(generatedId);
+    }
 }

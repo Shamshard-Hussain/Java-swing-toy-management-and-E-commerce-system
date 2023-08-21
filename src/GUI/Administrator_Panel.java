@@ -8,12 +8,18 @@ import Classes.Category;
 import Classes.Product;
 import Classes.UserAccounts;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
 import javax.swing.Timer;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -21,10 +27,25 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import static javax.swing.SwingConstants.CENTER;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 /**
  *
@@ -91,13 +112,27 @@ public class Administrator_Panel extends javax.swing.JFrame {
         return images;
     }
 
+public class IconCellRenderer extends JLabel implements TableCellRenderer {
+    public IconCellRenderer() {
+        setOpaque(true);
+        setHorizontalAlignment(CENTER);
+        setEnabled(true);
+    }
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                                                   boolean hasFocus, int row, int column) {
+        setIcon((ImageIcon) value);
+        return this;
+    }
+}
 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        Main_Panel = new javax.swing.JPanel();
         Admin_menu_panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnAdmin_Customers = new javax.swing.JButton();
@@ -186,11 +221,12 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         Product_Table = new javax.swing.JTable();
         btn_search_products = new javax.swing.JButton();
+        btn_download = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Main_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Admin_menu_panel.setBackground(new java.awt.Color(102, 102, 102));
         Admin_menu_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -340,7 +376,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
         });
         Admin_menu_panel.add(btnAdmin_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 110, 110));
 
-        jPanel1.add(Admin_menu_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 690));
+        Main_Panel.add(Admin_menu_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 690));
 
         Admin_nav_bar.setBackground(new java.awt.Color(102, 102, 102));
         Admin_nav_bar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -354,7 +390,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
         });
         Admin_nav_bar.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 30, 50));
 
-        jPanel1.add(Admin_nav_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 910, 50));
+        Main_Panel.add(Admin_nav_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 910, 50));
 
         Admin_body_panel.setLayout(new java.awt.CardLayout());
 
@@ -479,7 +515,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Manage_categoryes.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 140, -1));
 
         txt_newCategoryname.setFont(new java.awt.Font("Times New Roman", 0, 17)); // NOI18N
-        txt_newCategoryname.setForeground(new java.awt.Color(0, 77, 64));
         txt_newCategoryname.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         txt_newCategoryname.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -503,8 +538,9 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Add_Products_Panel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 104, -1));
 
         txtToy_ID.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtToy_ID.setForeground(new java.awt.Color(0, 77, 64));
         txtToy_ID.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
+        txtToy_ID.setEnabled(false);
+        txtToy_ID.setVerifyInputWhenFocusTarget(false);
         Add_Products_Panel.add(txtToy_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 280, -1));
 
         jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
@@ -512,7 +548,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Add_Products_Panel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 120, -1));
 
         txtModel_Name.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtModel_Name.setForeground(new java.awt.Color(0, 77, 64));
         txtModel_Name.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         Add_Products_Panel.add(txtModel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 280, -1));
 
@@ -521,7 +556,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Add_Products_Panel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 104, -1));
 
         txtPrice.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtPrice.setForeground(new java.awt.Color(0, 77, 64));
         txtPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         Add_Products_Panel.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 90, -1));
 
@@ -530,7 +564,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Add_Products_Panel.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 104, -1));
 
         txtQty.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtQty.setForeground(new java.awt.Color(0, 77, 64));
         txtQty.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         Add_Products_Panel.add(txtQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 90, -1));
 
@@ -539,7 +572,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Add_Products_Panel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 104, -1));
 
         txtAge_Group.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtAge_Group.setForeground(new java.awt.Color(0, 77, 64));
         txtAge_Group.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         Add_Products_Panel.add(txtAge_Group, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 40, -1));
 
@@ -568,7 +600,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
         txtDescription.setColumns(20);
         txtDescription.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtDescription.setForeground(new java.awt.Color(0, 77, 64));
         txtDescription.setRows(5);
         txtDescription.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
         txtDescription.setHighlighter(null);
@@ -641,8 +672,8 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jLabel26.setText("Toy ID:");
         Update_Products_Panel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 104, -1));
 
+        txtToy_ID1.setBackground(null);
         txtToy_ID1.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtToy_ID1.setForeground(new java.awt.Color(0, 77, 64));
         txtToy_ID1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         txtToy_ID1.setEnabled(false);
         Update_Products_Panel.add(txtToy_ID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 280, -1));
@@ -652,7 +683,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Update_Products_Panel.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 120, -1));
 
         txtModel_Name1.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtModel_Name1.setForeground(new java.awt.Color(0, 77, 64));
         txtModel_Name1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         Update_Products_Panel.add(txtModel_Name1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 280, -1));
 
@@ -661,7 +691,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Update_Products_Panel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 104, -1));
 
         txtPrice1.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtPrice1.setForeground(new java.awt.Color(0, 77, 64));
         txtPrice1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         Update_Products_Panel.add(txtPrice1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 90, -1));
 
@@ -670,7 +699,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Update_Products_Panel.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 104, -1));
 
         txtProduct_Qty.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtProduct_Qty.setForeground(new java.awt.Color(0, 77, 64));
         txtProduct_Qty.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         Update_Products_Panel.add(txtProduct_Qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 90, -1));
 
@@ -679,7 +707,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Update_Products_Panel.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 104, -1));
 
         txtProduct_Age_Group.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtProduct_Age_Group.setForeground(new java.awt.Color(0, 77, 64));
         txtProduct_Age_Group.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         Update_Products_Panel.add(txtProduct_Age_Group, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 40, -1));
 
@@ -687,6 +714,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jLabel31.setText("Category:");
         Update_Products_Panel.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 104, -1));
 
+        cmbProduct_Category.setBackground(null);
         cmbProduct_Category.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cmbProduct_Category.setBorder(null);
         Update_Products_Panel.add(cmbProduct_Category, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 220, -1));
@@ -708,7 +736,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
         txtProduct_Description.setColumns(20);
         txtProduct_Description.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txtProduct_Description.setForeground(new java.awt.Color(0, 77, 64));
         txtProduct_Description.setRows(5);
         txtProduct_Description.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
         txtProduct_Description.setHighlighter(null);
@@ -789,7 +816,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Search_Product_Panel.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 40, 40));
 
         txt_search_bar.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
-        txt_search_bar.setForeground(new java.awt.Color(0, 77, 64));
         txt_search_bar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         Search_Product_Panel.add(txt_search_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 400, 40));
 
@@ -817,7 +843,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
                 btn_add_ProductsActionPerformed(evt);
             }
         });
-        View_Products.add(btn_add_Products, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
+        View_Products.add(btn_add_Products, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
 
         Product_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -837,9 +863,9 @@ public class Administrator_Panel extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(Product_Table);
 
-        View_Products.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 790, 360));
+        View_Products.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 790, 340));
 
-        btn_search_products.setBackground(new java.awt.Color(0, 204, 153));
+        btn_search_products.setBackground(new java.awt.Color(102, 204, 255));
         btn_search_products.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_search_products.setText("Search Products");
         btn_search_products.setBorderPainted(false);
@@ -848,21 +874,33 @@ public class Administrator_Panel extends javax.swing.JFrame {
                 btn_search_productsActionPerformed(evt);
             }
         });
-        View_Products.add(btn_search_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 190, -1));
+        View_Products.add(btn_search_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 190, -1));
+
+        btn_download.setBackground(new java.awt.Color(255, 255, 255));
+        btn_download.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_download.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/download2.png"))); // NOI18N
+        btn_download.setToolTipText("Download Report");
+        btn_download.setBorderPainted(false);
+        btn_download.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_downloadActionPerformed(evt);
+            }
+        });
+        View_Products.add(btn_download, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 210, 50, 40));
 
         Admin_body_panel.add(View_Products, "card4");
 
-        jPanel1.add(Admin_body_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 910, 640));
+        Main_Panel.add(Admin_body_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 910, 640));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Main_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 689, Short.MAX_VALUE)
+            .addComponent(Main_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 689, Short.MAX_VALUE)
         );
 
         pack();
@@ -954,6 +992,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
         // Category category = new Category();
         category.populateCategoryTable(tbl_Category);
+        tbl_Category.getColumnModel().getColumn(1).setCellRenderer(new IconCellRenderer());
     }//GEN-LAST:event_btnAdmin_CategoriesActionPerformed
 
     private void btnAdmin_HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin_HomeActionPerformed
@@ -1026,11 +1065,28 @@ public class Administrator_Panel extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_newCategorynameKeyReleased
 
     private void btn_add_ProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_ProductsActionPerformed
+        String filePath = "PRODUCTS.txt"; // Set your data file path
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            int generatedId = Product.generateProductId(reader);
+            String formattedId = "C" + String.format("%03d", generatedId); // Format as "C001"
+            System.out.println("Generated ID: " + formattedId); // Print generated ID for debugging
+
+                txtToy_ID.setText(formattedId);
+                txtToy_ID.revalidate(); // Trigger layout revalidation
+                txtToy_ID.repaint();    // Trigger repaint
+            
+        } catch (IOException e) {
+            System.out.println("Id  Canot be Generate " + e);
+            JOptionPane.showMessageDialog(null, "Sorry! Somthing Went Wrong,Id  Canot be Generate", "Add New Product", JOptionPane.WARNING_MESSAGE);
+        }
+
+        
+        
         Admin_body_panel.removeAll();
         Admin_body_panel.add(Add_Products_Panel);
         Admin_body_panel.repaint();
         Admin_body_panel.revalidate();
-
         category.populateCategoryComboBox(cmbCategory);
     }//GEN-LAST:event_btn_add_ProductsActionPerformed
 
@@ -1487,10 +1543,98 @@ public class Administrator_Panel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel35MouseClicked
 
+    private void btn_downloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_downloadActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+    int choice = fileChooser.showSaveDialog(this); // Show the save dialog
+
+    if (choice == JFileChooser.APPROVE_OPTION) {
+        File selectedDirectory = fileChooser.getSelectedFile();
+        String outputFilePath = selectedDirectory.getAbsolutePath() + File.separator + "Product_Output.xlsx";
+
+
+        try {
+        FileInputStream fis = new FileInputStream("PRODUCTS.txt");
+        Workbook workbook = new XSSFWorkbook(); // Create a new Excel workbook
+        Sheet sheet = workbook.createSheet("Products"); // Create a new sheet
+
+        // Create bold style for header row
+        CellStyle headerStyle = workbook.createCellStyle();
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerStyle.setFont(headerFont);
+
+        // Create header row with column names and apply bold style
+        Row headerRow = sheet.createRow(0);
+        String[] columnNames = {
+            "Product ID", "Name", "Price", "Quantity", "Age Group","Category", "Description", "Image Name"
+        };
+        for (int i = 0; i < columnNames.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columnNames[i]);
+            cell.setCellStyle(headerStyle);
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+        String line;
+        int rowNumber = 1; // Start from the second row
+
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(" ");
+            Row row = sheet.createRow(rowNumber++);
+            
+            for (int i = 0; i < parts.length; i++) {
+                Cell cell = row.createCell(i);
+                if (i == 2 || i == 3 || i == 4) { // Columns Price, Quantity, Age Group
+                    cell.setCellValue(Double.parseDouble(parts[i])); // Convert to numeric value
+                } else {
+                    cell.setCellValue(parts[i]);
+                }
+            }
+        }
+
+        fis.close();
+        br.close();
+
+        // Apply borders to all cells
+        CellStyle borderStyle = workbook.createCellStyle();
+        borderStyle.setBorderTop(BorderStyle.THIN);
+        borderStyle.setBorderBottom(BorderStyle.THIN);
+        borderStyle.setBorderLeft(BorderStyle.THIN);
+        borderStyle.setBorderRight(BorderStyle.THIN);
+        
+        for (Row row : sheet) {
+            for (Cell cell : row) {
+                cell.setCellStyle(borderStyle);
+            }
+        }
+
+        // Resize columns for better appearance
+        for (int i = 0; i < columnNames.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        // Write the workbook to the output file
+        FileOutputStream fos = new FileOutputStream(outputFilePath);
+        workbook.write(fos);
+        fos.close();
+
+      //  System.out.println("Excel file created successfully.");
+        JOptionPane.showMessageDialog(this, "Excel file created successfully.", "Save Products", JOptionPane.PLAIN_MESSAGE);
+    } catch (Exception e) {
+        e.printStackTrace();
+       // System.out.println("Error creating Excel file.");
+        JOptionPane.showMessageDialog(this, "Error creating Excel file", "Save Products", JOptionPane.ERROR_MESSAGE);
+    }
+    }
+
+    }//GEN-LAST:event_btn_downloadActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) {  
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1529,6 +1673,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private javax.swing.JPanel Admin_home_page;
     private javax.swing.JPanel Admin_menu_panel;
     private javax.swing.JPanel Admin_nav_bar;
+    private javax.swing.JPanel Main_Panel;
     private javax.swing.JPanel Manage_categoryes;
     private javax.swing.JTable Product_Table;
     private javax.swing.JPanel Search_Product_Panel;
@@ -1546,6 +1691,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private javax.swing.JButton btn_add_category;
     private javax.swing.JButton btn_add_new_product;
     private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_download;
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_search_products;
     private javax.swing.JButton btn_update;
@@ -1588,7 +1734,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
