@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +70,7 @@ public class FileSystem {
             return true;
 
         } catch (IOException e) {
-            System.out.println("Something went wrowng with creating file" + e);
+            System.out.println("Something went wrowng with writing file" + e);
             return false;
         }
     }
@@ -92,7 +94,7 @@ public class FileSystem {
                 BufferedReader buffer = new BufferedReader(reader);
                 return buffer;
             } catch (IOException e) {
-                System.out.println("Something went wrowng with creating file" + e);
+                System.out.println("Something went wrowng with reading file" + e);
             }
         }
         return null;
@@ -108,7 +110,7 @@ public class FileSystem {
             }
             reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+              System.out.println("Something went wrowng with reading file" + e);
         }
         return records;
     }
@@ -128,4 +130,14 @@ public class FileSystem {
         return records;
     }
 
+   public boolean isContentEmpty(String filePath) {
+        try {
+            return Files.size(Paths.get(filePath)) == 0;
+        } catch (IOException e) {
+            System.out.println("Something went wrowng.can't Read FileData " + e);
+            return true; // Return true if an error occurs (for safety)
+        }
+    }
+    
+    
 }

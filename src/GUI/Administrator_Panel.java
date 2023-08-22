@@ -112,20 +112,21 @@ public class Administrator_Panel extends javax.swing.JFrame {
         return images;
     }
 
-public class IconCellRenderer extends JLabel implements TableCellRenderer {
-    public IconCellRenderer() {
-        setOpaque(true);
-        setHorizontalAlignment(CENTER);
-        setEnabled(true);
-    }
+    public class IconCellRenderer extends JLabel implements TableCellRenderer {
 
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-                                                   boolean hasFocus, int row, int column) {
-        setIcon((ImageIcon) value);
-        return this;
+        public IconCellRenderer() {
+            setOpaque(true);
+            setHorizontalAlignment(CENTER);
+            setEnabled(true);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                boolean hasFocus, int row, int column) {
+            setIcon((ImageIcon) value);
+            return this;
+        }
     }
-}
 
 
     @SuppressWarnings("unchecked")
@@ -1070,7 +1071,7 @@ public class IconCellRenderer extends JLabel implements TableCellRenderer {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             int generatedId = Product.generateProductId(reader);
             String formattedId = "C" + String.format("%03d", generatedId); // Format as "C001"
-            System.out.println("Generated ID: " + formattedId); // Print generated ID for debugging
+           // System.out.println("Generated ID: " + formattedId); // Print generated ID for debugging
 
                 txtToy_ID.setText(formattedId);
                 txtToy_ID.revalidate(); // Trigger layout revalidation
@@ -1161,7 +1162,6 @@ public class IconCellRenderer extends JLabel implements TableCellRenderer {
             Product newToys = new Product(Tid, MName, Price, qty, age, Category, Description, newFileName);
             if (newToys.addPRODUCTS()) {
                 JOptionPane.showMessageDialog(null, "Add Successfully", "Add New Product", JOptionPane.INFORMATION_MESSAGE);
-                txtToy_ID.setText("");
                 txtModel_Name.setText("");
                 txtPrice.setText("");
                 txtQty.setText("");
@@ -1208,7 +1208,8 @@ public class IconCellRenderer extends JLabel implements TableCellRenderer {
                 }
                 //   System.out.println("Selected file: " + imageName);
             } catch (IOException e) {
-                e.printStackTrace();
+               // e.printStackTrace();
+               JOptionPane.showMessageDialog(null, "Sorry! Image not Selected", "Add New Product", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_imgProductMouseClicked
@@ -1315,7 +1316,8 @@ public class IconCellRenderer extends JLabel implements TableCellRenderer {
                 }
                 //   System.out.println("Selected file: " + imageName);
             } catch (IOException e) {
-                e.printStackTrace();
+              //  e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Sorry! Image not Selected", "Manage Product", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_imgProduct1MouseClicked
@@ -1406,7 +1408,7 @@ public class IconCellRenderer extends JLabel implements TableCellRenderer {
                         Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
                         newImageFile = destinationPath.toFile();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                          System.out.println("Something went wrowng with replacing old image" + e);
                         valid = false;
                     }
                 }
@@ -1427,7 +1429,7 @@ public class IconCellRenderer extends JLabel implements TableCellRenderer {
                         newImageFile = destinationPath.toFile();
                       //  System.out.println("Image replaced successfully.");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.out.println("Something went wrowng with replacing new image" + e);
                         valid = false;
                     }
                 }

@@ -1122,9 +1122,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtToy_ID1">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color type="null"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="19" style="0"/>
                     </Property>
@@ -1286,9 +1283,6 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cmbProduct_Category">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color type="null"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="14" style="0"/>
                     </Property>

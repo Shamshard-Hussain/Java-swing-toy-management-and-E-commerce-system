@@ -153,14 +153,24 @@ public class Product {
         return 0;
     }
 
-    public boolean addPRODUCTS() {
-        if (!fs.createANewFile()) {
-            String record = Id + " " + Name + " " + Price + " " + Qty + " " + AgeGroup + " " + Category + " " + Description + " " + imageName;
-            //  System.err.println(TID+ " "+MName+" "+Price+" "+Qty+" "+AgeGroup+" "+Category+" "+Product_Description);
-            return fs.writeDataToFile(record);
+public boolean addPRODUCTS() {
+    if (!fs.createANewFile()) {
+        String record = Id + " " + Name + " " + Price + " " + Qty + " " + AgeGroup + " " + Category + " " + Description + " " + imageName;
+        
+        String filePath = "PRODUCTS.txt"; // Change this to your file path
+        
+        if (!fs.isContentEmpty(filePath)) { // Check if the file is not empty
+            record = "\n" + record;   // Append a new line before the record
         }
-        return false;
+        
+        return fs.writeDataToFile(record);
     }
+    return false;
+}
+
+
+
+
 
     public boolean isPIDExist(String pid) {
         List<String> records = fs.readFileData();
@@ -197,7 +207,7 @@ public class Product {
                 model.addRow(dataRow);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+               System.out.println("Something went wrowng with reading file" + e);
         }
 
         // Hide the "Description" and "Image Name" columns
@@ -279,7 +289,7 @@ public class Product {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+               System.out.println("Something went wrowng with reading file" + e);
         }
 
         // Hide the "Description" and "Image Name" columns
@@ -356,7 +366,7 @@ public class Product {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+               System.out.println("Something went wrowng with searching toy" + e);
         } finally {
             // Close the BufferedReader
             if (gt != null) {
@@ -389,7 +399,7 @@ public class Product {
                 writer.write(updatedRec + "\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+              System.out.println("Something went wrowng with writing temp file" + e);
             return false;
         }
 
@@ -408,7 +418,7 @@ public class Product {
 
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+             System.out.println("Failed to Update Product .");
         }
 
         return false;
@@ -458,7 +468,7 @@ public class Product {
             Path destination = Path.of("PRODUCTS.txt");
             Files.move(source, destination, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            e.printStackTrace();
+               System.out.println("Something went wrowng with replacing files" + e);
             return false;
         }
 
@@ -478,7 +488,7 @@ public class Product {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Failed to generate Product Id.");
         }
 
         return maxId + 1; // Increment the maximum ID for auto-increment

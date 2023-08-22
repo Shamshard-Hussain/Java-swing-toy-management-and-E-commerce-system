@@ -4,7 +4,6 @@
  */
 package Classes;
 
-import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,11 +13,8 @@ import java.io.IOException;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JTable;
-import static javax.swing.SwingConstants.CENTER;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -79,7 +75,7 @@ public class Category {
             model.addRow(new Object[]{categoryName, deleteButton });
         }
     } catch (IOException e) {
-        e.printStackTrace();
+           System.out.println("Something went wrowng with reading image file" + e);
     }
 }
 
@@ -121,7 +117,7 @@ public class Category {
                 System.out.println("Error deleting the file");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+              System.out.println("Something went wrowng with updating file" + e);
         }
     }
     
@@ -133,7 +129,7 @@ public class Category {
                 cmbCategory.addItem(line.trim());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+               System.out.println("Something went wrowng with reading category" + e);
         }
     }  
     
@@ -147,7 +143,7 @@ public class Category {
             cmbCategory.addItem(line.trim());
         }
     } catch (IOException e) {
-        e.printStackTrace();
+       System.out.println("Something went wrowng with reading category" + e);
     }
 }
   

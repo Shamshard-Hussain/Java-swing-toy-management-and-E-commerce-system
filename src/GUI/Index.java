@@ -23,7 +23,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -34,7 +33,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -77,27 +75,7 @@ public class Index extends javax.swing.JFrame {
         li3 = new ImageIcon(image3);
         jLabel14.setIcon(li3);
 
-        Timer timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (jLabel12.isShowing()) {
-                    // Generate random RGB values for the color
-                    Random random = new Random();
-                    int red = random.nextInt(256);
-                    int green = random.nextInt(256);
-                    int blue = random.nextInt(256);
 
-                    // Create a new Color object with the random RGB values
-                    Color randomColor = new Color(red, green, blue);
-
-                    // Set the foreground color of jLabel12 to the random color
-                    jLabel12.setForeground(randomColor);
-                }
-            }
-        });
-
-        // Start the timer
-        timer.start();
 
     }
 
@@ -301,8 +279,8 @@ public class Index extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        nav_bar = new javax.swing.JPanel();
+        Main_Panel = new javax.swing.JPanel();
+        Nav_Bar = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         lbl_home = new javax.swing.JLabel();
         lbl_aboutUs = new javax.swing.JLabel();
@@ -373,15 +351,17 @@ public class Index extends javax.swing.JFrame {
         txtCvCode = new javax.swing.JTextField();
         btnConfirmPayment = new javax.swing.JButton();
         Bill_Panel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Main_Panel.setBackground(new java.awt.Color(255, 255, 255));
+        Main_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        nav_bar.setBackground(new java.awt.Color(102, 102, 102));
-        nav_bar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Nav_Bar.setBackground(new java.awt.Color(102, 102, 102));
+        Nav_Bar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-login-25.png"))); // NOI18N
         jLabel35.setToolTipText("Logout");
@@ -390,7 +370,7 @@ public class Index extends javax.swing.JFrame {
                 jLabel35MouseClicked(evt);
             }
         });
-        nav_bar.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 10, 30, 40));
+        Nav_Bar.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 10, 30, 40));
 
         lbl_home.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl_home.setForeground(new java.awt.Color(255, 255, 255));
@@ -400,7 +380,7 @@ public class Index extends javax.swing.JFrame {
                 lbl_homeMouseClicked(evt);
             }
         });
-        nav_bar.add(lbl_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 50, 20));
+        Nav_Bar.add(lbl_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 50, 20));
 
         lbl_aboutUs.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl_aboutUs.setForeground(new java.awt.Color(255, 255, 255));
@@ -410,7 +390,7 @@ public class Index extends javax.swing.JFrame {
                 lbl_aboutUsMouseClicked(evt);
             }
         });
-        nav_bar.add(lbl_aboutUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 80, 20));
+        Nav_Bar.add(lbl_aboutUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 80, 20));
 
         lbl_products.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl_products.setForeground(new java.awt.Color(255, 255, 255));
@@ -420,7 +400,7 @@ public class Index extends javax.swing.JFrame {
                 lbl_productsMouseClicked(evt);
             }
         });
-        nav_bar.add(lbl_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 90, 20));
+        Nav_Bar.add(lbl_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 90, 20));
 
         lbl_cart.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl_cart.setForeground(new java.awt.Color(255, 255, 255));
@@ -430,14 +410,14 @@ public class Index extends javax.swing.JFrame {
                 lbl_cartMouseClicked(evt);
             }
         });
-        nav_bar.add(lbl_cart, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, 50, 20));
+        Nav_Bar.add(lbl_cart, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, 50, 20));
 
         jLabel13.setFont(new java.awt.Font("Trebuchet MS", 3, 36)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Toy Gallery");
-        nav_bar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 210, 60));
+        Nav_Bar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 210, 60));
 
-        jPanel1.add(nav_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 60));
+        Main_Panel.add(Nav_Bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 60));
 
         Body_Panel.setBackground(new java.awt.Color(255, 255, 255));
         Body_Panel.setLayout(new java.awt.CardLayout());
@@ -836,30 +816,27 @@ public class Index extends javax.swing.JFrame {
 
         Body_Panel.add(Payment, "card8");
 
-        javax.swing.GroupLayout Bill_PanelLayout = new javax.swing.GroupLayout(Bill_Panel);
-        Bill_Panel.setLayout(Bill_PanelLayout);
-        Bill_PanelLayout.setHorizontalGroup(
-            Bill_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1170, Short.MAX_VALUE)
-        );
-        Bill_PanelLayout.setVerticalGroup(
-            Bill_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
-        );
+        Bill_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        Bill_Panel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 690));
 
         Body_Panel.add(Bill_Panel, "card9");
 
-        jPanel1.add(Body_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1170, 670));
+        Main_Panel.add(Body_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1170, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1018, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Main_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1018, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Main_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1405,48 +1382,44 @@ public class Index extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please Check the Cart", "Cart is Empty", JOptionPane.ERROR_MESSAGE);
 
         }
-//        else if (jTable1.getRowCount() >= 0) {
-//            Main.removeAll();
-//            Main.add(Bill_Panel);
-//            Main.repaint();
-//            Main.revalidate();
-//            jTextArea1.setText("");
-//
-//            //   for (int j = 0; j < RowCount; j++) {
-//                //        Total = Total + Integer.parseInt(jTable1.getValueAt(j, 3).toString());}
-//
-//            jTextArea1.setText(jTextArea1.getText() + "====================================================================\n");
-//            jTextArea1.setText(jTextArea1.getText() + "\t\t\t Toy Gallery \n");
-//            jTextArea1.setText(jTextArea1.getText() + "====================================================================\n\n\n");
-//            jTextArea1.setText(jTextArea1.getText() + "______________________________________________________________________________________________________________________________");
-//            jTextArea1.setText(jTextArea1.getText() + "\n Toy Id" + "\t\t Toy Name" + "\t\t Qty" + "\t\t            Price\n ");
-//            jTextArea1.setText(jTextArea1.getText() + "-----------------------------------------------------------------------------------------------------------------------------\n ");
-//            for (int i = 0; i < jTable1.getRowCount(); i++) {
-//                String id = jTable1.getValueAt(i, 0).toString();
-//                String name = jTable1.getValueAt(i, 1).toString();
-//                String qty = jTable1.getValueAt(i, 2).toString();
-//                String price = jTable1.getValueAt(i, 3).toString();
-//                jTextArea1.setText(jTextArea1.getText() + id + "\t\t" + name + "\t" + "\t" + qty + "\t\t           " + price + "\n");
-//                int sum = Integer.parseInt(qty) * Integer.parseInt(price);
-//                String tot = Integer.toString(sum);
-//
-//            }
-//            //jTextArea1.setText(jTextArea1.getText()+"\n\n====================================================================\n");
-//            //jTextArea1.setText(jTextArea1.getText()+"\t\t\t Total Price- Rs:"+""+"\n");
-//            //jTextArea1.setText(jTextArea1.getText()+"====================================================================\n");
-//            //   jTextArea1.setText(Integer.toString(Total));
-//            jTextArea1.setText(jTextArea1.getText() + "\n\n\n====================================================================\n");
-//            jTextArea1.setText(jTextArea1.getText() + "\t\t\t Thank Yoy");
-//            jTextArea1.setText(jTextArea1.getText() + "\n====================================================================\n");
-//            //jTextArea1.setText(jTextArea1.getText()+"\t\t\t ");
+        else if (tblCart.getRowCount() >= 0) {
 
-//        }
+
+            //   for (int j = 0; j < RowCount; j++) {
+                //        Total = Total + Integer.parseInt(jTable1.getValueAt(j, 3).toString());}
+
+            jTextArea1.setText(jTextArea1.getText() + "====================================================================\n");
+            jTextArea1.setText(jTextArea1.getText() + "\t\t\t Toy Gallery \n");
+            jTextArea1.setText(jTextArea1.getText() + "====================================================================\n\n\n");
+            jTextArea1.setText(jTextArea1.getText() + "______________________________________________________________________________________________________________________________");
+            jTextArea1.setText(jTextArea1.getText() + "\n Toy Id" + "\t\t Toy Name" + "\t\t Qty" + "\t\t            Price\n ");
+            jTextArea1.setText(jTextArea1.getText() + "-----------------------------------------------------------------------------------------------------------------------------\n ");
+            for (int i = 0; i < tblCart.getRowCount(); i++) {
+                String id = tblCart.getValueAt(i, 3).toString();
+                String name = tblCart.getValueAt(i, 0).toString();
+                String qty = tblCart.getValueAt(i, 1).toString();
+                double price = Double.parseDouble(tblCart.getValueAt(i, 2).toString());;
+                jTextArea1.setText(jTextArea1.getText() + id + "\t\t" + name + "\t" + "\t" + qty + "\t\t           " + price + "\n");
+                double sum = Integer.parseInt(qty) * price;
+                String tot = String.format("%.2f", sum); // Format the total value to two decimal places
+
+            }
+            //jTextArea1.setText(jTextArea1.getText()+"\n\n====================================================================\n");
+            //jTextArea1.setText(jTextArea1.getText()+"\t\t\t Total Price- Rs:"+""+"\n");
+            //jTextArea1.setText(jTextArea1.getText()+"====================================================================\n");
+            //   jTextArea1.setText(Integer.toString(Total));
+            jTextArea1.setText(jTextArea1.getText() + "\n\n\n====================================================================\n");
+            jTextArea1.setText(jTextArea1.getText() + "\t\t\t Thank Yoy");
+            jTextArea1.setText(jTextArea1.getText() + "\n====================================================================\n");
+            //jTextArea1.setText(jTextArea1.getText()+"\t\t\t ");
+
+        }
         // jTextArea1.setText(Integer.toString(Total));
         
-//        Body_Panel.removeAll();
-//        Body_Panel.add(Payment);
-//        Body_Panel.repaint();
-//        Body_Panel.revalidate();
+        Body_Panel.removeAll();
+        Body_Panel.add(Payment);
+        Body_Panel.repaint();
+        Body_Panel.revalidate();
     }//GEN-LAST:event_btnBuyActionPerformed
 
     private void btn_addtocartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addtocartActionPerformed
@@ -1685,6 +1658,8 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JPanel Cart_panel;
     private javax.swing.JPanel Home;
     private javax.swing.JPanel Home_Panel_Canteiner;
+    private javax.swing.JPanel Main_Panel;
+    private javax.swing.JPanel Nav_Bar;
     private javax.swing.JPanel Payment;
     private javax.swing.JPanel Product_DiscriptionPanel;
     private javax.swing.JPanel Product_card_Panel;
@@ -1729,14 +1704,14 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbl_aboutUs;
     private javax.swing.JLabel lbl_cart;
     private javax.swing.JLabel lbl_home;
     private javax.swing.JLabel lbl_products;
-    private javax.swing.JPanel nav_bar;
     private javax.swing.JTable tblCart;
     private javax.swing.JTextField txtCardNumber;
     private javax.swing.JTextField txtCardOwnerName;
