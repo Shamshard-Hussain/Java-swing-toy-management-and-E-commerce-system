@@ -30,10 +30,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import static javax.swing.SwingConstants.CENTER;
-import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -1572,10 +1570,12 @@ public class Administrator_Panel extends javax.swing.JFrame {
         String[] columnNames = {
             "Product ID", "Name", "Price", "Quantity", "Age Group","Category", "Description", "Image Name"
         };
+    
         for (int i = 0; i < columnNames.length; i++) {
             Cell cell = headerRow.createCell(i);
             cell.setCellValue(columnNames[i]);
             cell.setCellStyle(headerStyle);
+            
         }
 
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
@@ -1623,11 +1623,11 @@ public class Administrator_Panel extends javax.swing.JFrame {
         fos.close();
 
       //  System.out.println("Excel file created successfully.");
-        JOptionPane.showMessageDialog(this, "Excel file created successfully.", "Save Products", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Excel file created successfully.", "Save Products File", JOptionPane.PLAIN_MESSAGE);
     } catch (Exception e) {
         e.printStackTrace();
        // System.out.println("Error creating Excel file.");
-        JOptionPane.showMessageDialog(this, "Error creating Excel file", "Save Products", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Error creating Excel file", "Save Products File", JOptionPane.ERROR_MESSAGE);
     }
     }
 
