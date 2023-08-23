@@ -33,6 +33,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.Border;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -227,7 +229,7 @@ public class Index extends javax.swing.JFrame {
                             // Show a message here, for example:
                             JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
                         } else {
-                            Object[] toadd = {name, quantity, tot + ".00",Id};
+                            Object[] toadd = {name, quantity, Pprice, tot + ".00",Id};
                             dt.addRow(toadd);
                         }
 
@@ -269,6 +271,8 @@ public class Index extends javax.swing.JFrame {
 
         return formatted.toString();
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -353,6 +357,7 @@ public class Index extends javax.swing.JFrame {
         Bill_Panel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel22 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -666,7 +671,7 @@ public class Index extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Model Name", "Quantity", "Price", "Id"
+                "Model Name", "Quantity", "Unit Price","Amount", "Id"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -680,7 +685,8 @@ public class Index extends javax.swing.JFrame {
         tblCart.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblCart.setGridColor(new java.awt.Color(255, 255, 255));
         tblCart.setRowHeight(18);
-        tblCart.setShowGrid(true);
+        tblCart.setShowGrid(false);
+        tblCart.setShowVerticalLines(false);
         tblCart.getTableHeader().setResizingAllowed(false);
         tblCart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -689,7 +695,7 @@ public class Index extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(tblCart);
         tblCart.getAccessibleContext().setAccessibleDescription("");
-        int columnIndexToHide = 3; // Index of the column to hide (0-based index)
+        int columnIndexToHide = 4; // Index of the column to hide (0-based index)
 
         if (columnIndexToHide >= 0 && columnIndexToHide < tblCart.getColumnCount()) {
             TableColumn column = tblCart.getColumnModel().getColumn(columnIndexToHide);
@@ -701,12 +707,25 @@ public class Index extends javax.swing.JFrame {
             System.out.println("Column index is out of bounds.");
         }
 
+        DefaultTableCellRenderer rightAlignmentRenderer = new DefaultTableCellRenderer();
+        rightAlignmentRenderer.setHorizontalAlignment(JLabel.RIGHT); // Align cell data to the right
+
+        int columnIndexToAlignRight = 0; // Index of the column to align right (0-based index)
+
+        for (int i = 0; i <= 4; i++) {
+            TableColumn column = tblCart.getColumnModel().getColumn(i);
+            column.setHeaderRenderer(rightAlignmentRenderer); // Align header text to the right
+            column.setCellRenderer(rightAlignmentRenderer);   // Align cell data to the right
+        }
+
         Cart_panel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 162, 880, 300));
 
         btnRemove.setBackground(new java.awt.Color(255, 51, 51));
         btnRemove.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnRemove.setText("Remove Item");
-        btnRemove.setBorderPainted(false);
+        btnRemove.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Border roundedBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20);
+        btnRemove.setBorder(BorderFactory.createCompoundBorder(roundedBorder, btnRemove.getBorder()));
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoveActionPerformed(evt);
@@ -822,7 +841,11 @@ public class Index extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        Bill_Panel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 690));
+        Bill_Panel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 920, 270));
+
+        jLabel22.setText("jLabel22");
+        jLabel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Bill_Panel.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 110, 70));
 
         Body_Panel.add(Bill_Panel, "card9");
 
@@ -1002,6 +1025,7 @@ public class Index extends javax.swing.JFrame {
                                         }
 
                                     }
+                                    
                                 }
                             });
                             productDetailsPanel.add(addToCartButton, BorderLayout.SOUTH);
@@ -1192,7 +1216,7 @@ public class Index extends javax.swing.JFrame {
                                             // Show a message here, for example:
                                             JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
                                         } else {
-                                            Object[] toadd = {name, quantity, tot + ".00",Id};
+                                            Object[] toadd = {name, quantity, Pprice, tot + ".00",Id};
                                             dt.addRow(toadd);
                                         }
 
@@ -1301,7 +1325,7 @@ public class Index extends javax.swing.JFrame {
     DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
 
     if (row >= 0 && row < dt.getRowCount()) {
-        String Pid =dt.getValueAt(row, 3).toString();// Assuming ID is in the last column
+        String Pid =dt.getValueAt(row, 4).toString();// Assuming ID is in the last column
         String pname = dt.getValueAt(row, 0).toString().replace("_", " "); 
         String Pprice = dt.getValueAt(row, 2).toString(); // Assuming price is in the 3rd column
 
@@ -1326,12 +1350,12 @@ public class Index extends javax.swing.JFrame {
 
                 // Update the quantity and total in the table
                 dt.setValueAt(newQuantity, row, 1); // Assuming quantity is in the 2nd column
-                dt.setValueAt(String.format("%.2f", newTotal), row, 2);    // Assuming total is in the 3rd column
+                dt.setValueAt(String.format("%.2f", newTotal), row, 3);    // Assuming total is in the 4th column
 
                 // Calculate the sum of the third column and display it in TxtTotal
                 double totalSum = 0.0;
                 for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
-                    String totalValue = dt.getValueAt(rowIndex, 2).toString();
+                    String totalValue = dt.getValueAt(rowIndex, 3).toString();
                     totalSum += Double.parseDouble(totalValue);
                 }
                 String formattedTotal = String.format("%.2f", totalSum);
@@ -1360,7 +1384,7 @@ public class Index extends javax.swing.JFrame {
                 // Calculate the sum of the third column and display it in TxtTotal
                 double totalSum = 0.0;
                 for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
-                    String totalValue = dt.getValueAt(rowIndex, 2).toString();
+                    String totalValue = dt.getValueAt(rowIndex, 3).toString();
                     totalSum += Double.parseDouble(totalValue.replace(".00", ""));
                 }
                 String formattedTotal = String.format("%.2f", totalSum);
@@ -1454,7 +1478,7 @@ public class Index extends javax.swing.JFrame {
                 // Show a message here, for example:
                 JOptionPane.showMessageDialog(null, "Product already in the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
             } else {
-                Object[] toadd = {name, quantity, tot + ".00",Id};
+                Object[] toadd = {name, quantity, Pprice, tot + ".00",Id};
                 dt.addRow(toadd);
             }
 
@@ -1620,6 +1644,7 @@ public class Index extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1687,6 +1712,7 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;

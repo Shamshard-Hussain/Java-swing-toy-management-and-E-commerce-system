@@ -948,7 +948,7 @@
                           <Color blue="33" green="33" red="33" type="rgb"/>
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;Model Name&quot;, &quot;Quantity&quot;, &quot;Price&quot;, &quot;Id&quot;&#xa;    }&#xa;) {&#xa;    boolean[] canEdit = new boolean [] {&#xa;        false, false, false, false&#xa;    };&#xa;&#xa;    public boolean isCellEditable(int rowIndex, int columnIndex) {&#xa;        return canEdit [columnIndex];&#xa;    }&#xa;}" type="code"/>
+                          <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;Model Name&quot;, &quot;Quantity&quot;, &quot;Unit Price&quot;,&quot;Amount&quot;, &quot;Id&quot;&#xa;    }&#xa;) {&#xa;    boolean[] canEdit = new boolean [] {&#xa;        false, false, false, false&#xa;    };&#xa;&#xa;    public boolean isCellEditable(int rowIndex, int columnIndex) {&#xa;        return canEdit [columnIndex];&#xa;    }&#xa;}" type="code"/>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0"/>
@@ -960,13 +960,14 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="rowHeight" type="int" value="18"/>
-                        <Property name="showGrid" type="boolean" value="true"/>
+                        <Property name="showGrid" type="boolean" value="false"/>
+                        <Property name="showVerticalLines" type="boolean" value="false"/>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="false"/>
                         </Property>
                       </Properties>
                       <AccessibilityProperties>
-                        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="" postCode="int columnIndexToHide = 3; // Index of the column to hide (0-based index)&#xa;&#xa;        if (columnIndexToHide &gt;= 0 &amp;&amp; columnIndexToHide &lt; tblCart.getColumnCount()) {&#xa;            TableColumn column = tblCart.getColumnModel().getColumn(columnIndexToHide);&#xa;            column.setMinWidth(0);&#xa;            column.setMaxWidth(0);&#xa;            column.setWidth(0);&#xa;            column.setPreferredWidth(0);&#xa;        } else {&#xa;            System.out.println(&quot;Column index is out of bounds.&quot;);&#xa;        }"/>
+                        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="" postCode="int columnIndexToHide = 4; // Index of the column to hide (0-based index)&#xa;&#xa;        if (columnIndexToHide &gt;= 0 &amp;&amp; columnIndexToHide &lt; tblCart.getColumnCount()) {&#xa;            TableColumn column = tblCart.getColumnModel().getColumn(columnIndexToHide);&#xa;            column.setMinWidth(0);&#xa;            column.setMaxWidth(0);&#xa;            column.setWidth(0);&#xa;            column.setPreferredWidth(0);&#xa;        } else {&#xa;            System.out.println(&quot;Column index is out of bounds.&quot;);&#xa;        }&#xa;&#xa;        &#xa;        &#xa;DefaultTableCellRenderer rightAlignmentRenderer = new DefaultTableCellRenderer();&#xa;rightAlignmentRenderer.setHorizontalAlignment(JLabel.RIGHT); // Align cell data to the right&#xa;&#xa;int columnIndexToAlignRight = 0; // Index of the column to align right (0-based index)&#xa;&#xa;for (int i = 0; i &lt;= 4; i++) {&#xa;    TableColumn column = tblCart.getColumnModel().getColumn(i);&#xa;    column.setHeaderRenderer(rightAlignmentRenderer); // Align header text to the right&#xa;    column.setCellRenderer(rightAlignmentRenderer);   // Align cell data to the right&#xa;}"/>
                       </AccessibilityProperties>
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblCartMouseClicked"/>
@@ -983,11 +984,18 @@
                       <Font name="Times New Roman" size="18" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Remove Item"/>
-                    <Property name="borderPainted" type="boolean" value="false"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                        <EmptyBorder/>
+                      </Border>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="Border roundedBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20);&#xa;btnRemove.setBorder(BorderFactory.createCompoundBorder(roundedBorder, btnRemove.getBorder()));"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="70" y="530" width="-1" height="40"/>
@@ -1234,7 +1242,7 @@
                 <Container class="javax.swing.JScrollPane" name="jScrollPane2">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="0" width="1020" height="690"/>
+                      <AbsoluteConstraints x="50" y="220" width="920" height="270"/>
                     </Constraint>
                   </Constraints>
 
@@ -1248,6 +1256,21 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JLabel" name="jLabel22">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel22"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                        <EtchetBorder/>
+                      </Border>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="870" y="30" width="110" height="70"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
