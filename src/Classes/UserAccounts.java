@@ -1,17 +1,14 @@
 
 package Classes;
 
-import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class UserAccounts {
     FileSystem fs =new FileSystem("Customer.txt");
@@ -89,15 +86,21 @@ public class UserAccounts {
         return 0;
     }
     
-    public boolean addUser(){
-       if (!fs.createANewFile())
-       {
-         String record = User_F_Name+ " "+User_L_Name+" "+User_Email+" "+User_Password;
+    public boolean addUser() {
+    if (!fs.createANewFile()) {
+        String record = User_F_Name+ " "+User_L_Name+" "+User_Email+" "+User_Password;
         //   System.err.println(User_F_Name+ " "+User_L_Name+" "+User_Email+" "+User_Password);
-           return fs.writeDataToFile(record);
-       }
-       return false;
+        
+        String filePath = "Customer.txt"; // Change this to your file path
+        
+        if (!fs.isContentEmpty(filePath)) { // Check if the file is not empty
+            record = "\n" + record;   // Append a new line before the record
+        }
+        
+        return fs.writeDataToFile(record);
     }
+    return false;
+}
     
     
     public boolean isUserExist(String email) {
@@ -160,4 +163,35 @@ public class UserAccounts {
     return false; // Login failed
 }
     
+    
+public boolean resetPassword(String email, String newPassword) {
+    String filePath = "Customer.txt"; // Replace with the actual file path
+    List<String> records = fs.readuserFileData(filePath);
+
+    for (int i = 0; i < records.size(); i++) {
+        String record = records.get(i);
+        String[] fields = record.split(" ");
+        String recordEmail = fields[2]; // Assuming email is at index 2 in the record
+
+        if (recordEmail.equalsIgnoreCase(email)) {
+            // Update the password in the record
+            fields[3] = newPassword; // Assuming password is at index 3 in the record
+            records.set(i, String.join(" ", fields)); // Update the modified record
+            
+            // Convert the list of records to a single string with newline characters
+            String updatedContent = String.join("\n", records);
+
+            fs.writeDataToFile(filePath, updatedContent); // Write updated content back to the file
+            return true; // Password reset successful
+        }
+    }
+
+    return false; // Email not found, password reset failed
 }
+
+
+
+}
+
+
+

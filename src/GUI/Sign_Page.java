@@ -33,6 +33,8 @@ public class Sign_Page extends javax.swing.JFrame {
         txtPassword.setEchoChar('\u25cf');
         txtConfirm_Password.setEchoChar('\u25cf');
         txtNew_Password.setEchoChar('\u25cf');
+        txtNew_Password1.setEchoChar('\u25cf');
+        txtConfirm_Password1.setEchoChar('\u25cf');
     }
 
     
@@ -57,6 +59,7 @@ public class Sign_Page extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         btnSign_in = new javax.swing.JButton();
         btnCreat_User = new javax.swing.JButton();
+        btnForgot_Password = new javax.swing.JButton();
         Left_Background = new javax.swing.JLabel();
         Right_Panel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -72,10 +75,27 @@ public class Sign_Page extends javax.swing.JFrame {
         btnsignup = new javax.swing.JButton();
         Sign_Back = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        btnForgot_Password2 = new javax.swing.JButton();
         Right_Background = new javax.swing.JLabel();
+        Reset_password_Panel = new javax.swing.JPanel();
+        Reset_password = new javax.swing.JPanel();
+        txtNewEmail1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtNew_Password1 = new javax.swing.JPasswordField();
+        jLabel12 = new javax.swing.JLabel();
+        txtConfirm_Password1 = new javax.swing.JPasswordField();
+        btnsReset = new javax.swing.JButton();
+        Sign_Back1 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        Left_Background1 = new javax.swing.JLabel();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jToggleButton3 = new javax.swing.JToggleButton();
+        btnsReset1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        getContentPane().setLayout(new java.awt.CardLayout());
 
         Main.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -153,13 +173,28 @@ public class Sign_Page extends javax.swing.JFrame {
                 btnCreat_UserActionPerformed(evt);
             }
         });
-        Left_Panel.add(btnCreat_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, -1, 30));
+        Left_Panel.add(btnCreat_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 220, 30));
 
-        Main.add(Left_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 630));
+        btnForgot_Password.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
+        btnForgot_Password.setText("Forgot Password?");
+        btnForgot_Password.setBorder(null);
+        btnForgot_Password.setBorderPainted(false);
+        btnForgot_Password.setContentAreaFilled(false);
+        btnForgot_Password.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnForgot_Password.setRequestFocusEnabled(false);
+        btnForgot_Password.setVerifyInputWhenFocusTarget(false);
+        btnForgot_Password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnForgot_PasswordActionPerformed(evt);
+            }
+        });
+        Left_Panel.add(btnForgot_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 600, 150, 30));
+
+        Main.add(Left_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 630));
 
         Left_Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Left_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
-        Main.add(Left_Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 630));
+        Main.add(Left_Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 630));
 
         Right_Panel.setBackground(new java.awt.Color(255, 255, 255));
         Right_Panel.setLayout(null);
@@ -265,7 +300,7 @@ public class Sign_Page extends javax.swing.JFrame {
             }
         });
         Right_Panel.add(btnsignup);
-        btnsignup.setBounds(110, 500, 330, 40);
+        btnsignup.setBounds(110, 480, 330, 40);
 
         Sign_Back.setBackground(new java.awt.Color(153, 204, 255));
         Sign_Back.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
@@ -277,29 +312,180 @@ public class Sign_Page extends javax.swing.JFrame {
             }
         });
         Right_Panel.add(Sign_Back);
-        Sign_Back.setBounds(220, 580, 81, 26);
+        Sign_Back.setBounds(220, 580, 100, 26);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel3.setText("Sign Up");
         Right_Panel.add(jLabel3);
         jLabel3.setBounds(200, 120, 138, 48);
 
-        Main.add(Right_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 1, 530, 630));
+        btnForgot_Password2.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
+        btnForgot_Password2.setText("Forgot Password?");
+        btnForgot_Password2.setBorder(null);
+        btnForgot_Password2.setBorderPainted(false);
+        btnForgot_Password2.setContentAreaFilled(false);
+        btnForgot_Password2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnForgot_Password2.setRequestFocusEnabled(false);
+        btnForgot_Password2.setVerifyInputWhenFocusTarget(false);
+        btnForgot_Password2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnForgot_Password2ActionPerformed(evt);
+            }
+        });
+        Right_Panel.add(btnForgot_Password2);
+        btnForgot_Password2.setBounds(380, 610, 140, 21);
+
+        Main.add(Right_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(498, 1, 520, 630));
 
         Right_Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Right_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
-        Main.add(Right_Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 440, 630));
+        Main.add(Right_Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 520, 630));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(Main, "card3");
+
+        Reset_password_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Reset_password.setBackground(new java.awt.Color(255, 255, 255));
+        Reset_password.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtNewEmail1.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
+        txtNewEmail1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
+        txtNewEmail1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNewEmail1KeyReleased(evt);
+            }
+        });
+        Reset_password.add(txtNewEmail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 260, 330, 40));
+
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel10.setText("Email");
+        Reset_password.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 314, -1));
+
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel11.setText("New Password");
+        Reset_password.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, 314, -1));
+
+        txtNew_Password1.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
+        txtNew_Password1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
+        txtNew_Password1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNew_Password1KeyReleased(evt);
+            }
+        });
+        Reset_password.add(txtNew_Password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 340, 330, 42));
+
+        jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel12.setText("New Confirm Password");
+        Reset_password.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, 314, -1));
+
+        txtConfirm_Password1.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
+        txtConfirm_Password1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
+        txtConfirm_Password1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtConfirm_Password1KeyReleased(evt);
+            }
+        });
+        Reset_password.add(txtConfirm_Password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 420, 330, 42));
+
+        btnsReset.setBackground(new java.awt.Color(255, 102, 51));
+        btnsReset.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        btnsReset.setText("Find and Reset");
+        btnsReset.setBorder(null);
+        btnsReset.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnsReset.setFocusPainted(false);
+        btnsReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnsResetMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnsResetMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnsResetMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnsResetMouseReleased(evt);
+            }
+        });
+        btnsReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsResetActionPerformed(evt);
+            }
+        });
+        Reset_password.add(btnsReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, 330, 40));
+
+        Sign_Back1.setBackground(new java.awt.Color(153, 204, 255));
+        Sign_Back1.setFont(new java.awt.Font("Times New Roman", 1, 17)); // NOI18N
+        Sign_Back1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/goback.png"))); // NOI18N
+        Sign_Back1.setText("BACK");
+        Sign_Back1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Sign_Back1MouseClicked(evt);
+            }
+        });
+        Reset_password.add(Sign_Back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 570, 90, 26));
+
+        jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Reset Password");
+        Reset_password.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(498, 110, 520, 48));
+
+        Left_Background1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Left_Background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
+        Reset_password.add(Left_Background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 630));
+
+        jToggleButton2.setBackground(new java.awt.Color(238, 232, 232));
+        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-hide-15.png"))); // NOI18N
+        jToggleButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jToggleButton2.setBorderPainted(false);
+        jToggleButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jToggleButton2MouseClicked(evt);
+            }
+        });
+        Reset_password.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 420, 30, 40));
+
+        jToggleButton3.setBackground(new java.awt.Color(238, 232, 232));
+        jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-hide-15.png"))); // NOI18N
+        jToggleButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jToggleButton3.setBorderPainted(false);
+        jToggleButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jToggleButton3MouseClicked(evt);
+            }
+        });
+        Reset_password.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 340, 30, 40));
+
+        btnsReset1.setBackground(new java.awt.Color(255, 102, 51));
+        btnsReset1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        btnsReset1.setText("Find and Reset");
+        btnsReset1.setBorder(null);
+        btnsReset1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnsReset1.setFocusPainted(false);
+        btnsReset1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnsReset1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnsReset1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnsReset1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnsReset1MouseReleased(evt);
+            }
+        });
+        btnsReset1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsReset1ActionPerformed(evt);
+            }
+        });
+        Reset_password.add(btnsReset1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, 330, 40));
+
+        Reset_password_Panel.add(Reset_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 630));
+
+        getContentPane().add(Reset_password_Panel, "card4");
 
         pack();
         setLocationRelativeTo(null);
@@ -534,6 +720,235 @@ if (!lastName.matches(firstNamePattern)) {
      
     }//GEN-LAST:event_txtConfirm_PasswordKeyReleased
 
+    private void txtNewEmail1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewEmail1KeyReleased
+       String PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
+Pattern patt = Pattern.compile(PATTERN);
+Matcher match = patt.matcher(txtNewEmail1.getText().trim());
+
+if (!match.matches()) {
+    txtNewEmail1.setBorder(BorderFactory.createLineBorder(Color.RED));
+} else {
+    txtNewEmail1.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));  
+}
+    }//GEN-LAST:event_txtNewEmail1KeyReleased
+
+    private void txtNew_Password1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNew_Password1KeyReleased
+       if(txtNew_Password1.getText().trim().length()<8){
+       txtNew_Password1.setBorder(BorderFactory.createLineBorder(Color.RED));
+      }else{
+     txtNew_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+     }
+    }//GEN-LAST:event_txtNew_Password1KeyReleased
+
+    private void txtConfirm_Password1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirm_Password1KeyReleased
+         if(!txtNew_Password1.getText().trim().equals(txtConfirm_Password1.getText())){
+       txtConfirm_Password1.setBorder(BorderFactory.createLineBorder(Color.RED));
+      }else{
+     txtConfirm_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+     }
+    }//GEN-LAST:event_txtConfirm_Password1KeyReleased
+
+    private void btnsResetMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMouseEntered
+        btnsReset.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_btnsResetMouseEntered
+
+    private void btnsResetMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMouseExited
+         btnsReset.setBackground(new Color(255,102,51));
+    }//GEN-LAST:event_btnsResetMouseExited
+
+    private void btnsResetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMousePressed
+        btnsReset.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_btnsResetMousePressed
+
+    private void btnsResetMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMouseReleased
+       btnsReset.setBackground(new Color(255,102,51));
+    }//GEN-LAST:event_btnsResetMouseReleased
+
+    private void btnsResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsResetActionPerformed
+       boolean valid = true;
+
+        
+        UserAccounts user = new UserAccounts();
+        boolean userExists = user.isUserExist(txtNewEmail1.getText().trim());
+        
+         String PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
+            Pattern patt = Pattern.compile(PATTERN);
+            Matcher match = patt.matcher(txtNewEmail1.getText().trim());
+        
+       if (txtNewEmail1.getText().trim().isEmpty()) {
+            JOptionPane:
+            JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }else if (!match.matches()) {
+                JOptionPane:
+                JOptionPane.showMessageDialog(null, "Invalid Email", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+                valid = false;  
+        } else if (userExists) {
+            JOptionPane.showMessageDialog(null, "User exists!", "Confirmed", JOptionPane.INFORMATION_MESSAGE);
+            valid = true;
+            
+            txtNewEmail1.setEditable(false);
+            
+        btnsReset.setText("Find Account");
+        jLabel11.setEnabled(true);
+        txtNew_Password1.setEnabled(true);;
+        jLabel12.setEnabled(true);
+        txtConfirm_Password1.setEnabled(true); 
+        jToggleButton3.setEnabled(true);
+        jToggleButton2.setEnabled(true);
+        btnsReset.setVisible(false);
+        btnsReset1.setVisible(true);
+        btnsReset1.setText("Reset Password");
+        }
+    }//GEN-LAST:event_btnsResetActionPerformed
+
+    private void Sign_Back1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Sign_Back1MouseClicked
+      ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
+    Image image2 =(li).getImage().getScaledInstance(Right_Background.getWidth(), Right_Background.getHeight(),Image.SCALE_SMOOTH);
+    li= new ImageIcon(image2);
+    Right_Background.setIcon(li);
+    
+      Main.setVisible(true);
+        Reset_password_Panel.setVisible(false);
+        Right_Panel.setVisible(false);
+        Right_Background.setVisible(true);
+        Left_Background.setVisible(false);
+        Left_Panel.setVisible(true);
+    }//GEN-LAST:event_Sign_Back1MouseClicked
+
+    private void jToggleButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton2MouseClicked
+      if(jToggleButton2.isSelected())
+        {txtConfirm_Password1.setEchoChar((char)0);}
+        else
+        {txtConfirm_Password1.setEchoChar('\u25cf');}
+    }//GEN-LAST:event_jToggleButton2MouseClicked
+
+    private void jToggleButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton3MouseClicked
+      if(jToggleButton3.isSelected())
+        {txtNew_Password1.setEchoChar((char)0);}
+        else
+        {txtNew_Password1.setEchoChar('\u25cf');}
+    }//GEN-LAST:event_jToggleButton3MouseClicked
+
+    private void btnForgot_PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgot_PasswordActionPerformed
+        ImageIcon li = new ImageIcon(getClass().getResource("/Images/image.jpg"));
+        Image image2 = (li).getImage().getScaledInstance(Left_Background1.getWidth(), Left_Background1.getHeight(), Image.SCALE_SMOOTH);
+        li = new ImageIcon(image2);
+        Left_Background1.setIcon(li);
+
+        btnsReset.setText("Find Account");
+        jLabel11.setEnabled(false);
+        txtNew_Password1.setEnabled(false);;
+        jLabel12.setEnabled(false);
+        txtConfirm_Password1.setEnabled(false); 
+        jToggleButton3.setEnabled(false);
+        jToggleButton2.setEnabled(false);
+        btnsReset1.setVisible(false);
+        
+                 
+        Main.setVisible(false);
+        Reset_password_Panel.setVisible(true);
+    }//GEN-LAST:event_btnForgot_PasswordActionPerformed
+
+    private void btnForgot_Password2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgot_Password2ActionPerformed
+        ImageIcon li = new ImageIcon(getClass().getResource("/Images/image.jpg"));
+        Image image2 = (li).getImage().getScaledInstance(Left_Background1.getWidth(), Left_Background1.getHeight(), Image.SCALE_SMOOTH);
+        li = new ImageIcon(image2);
+        
+        btnsReset.setText("Find Account");
+        jLabel11.setEnabled(false);
+        txtNew_Password1.setEnabled(false);;
+        jLabel12.setEnabled(false);
+        txtConfirm_Password1.setEnabled(false); 
+        jToggleButton3.setEnabled(false);
+        jToggleButton2.setEnabled(false);
+        btnsReset1.setVisible(false);
+                 
+        Left_Background1.setIcon(li);
+        Main.setVisible(false);
+        Reset_password_Panel.setVisible(true);
+    }//GEN-LAST:event_btnForgot_Password2ActionPerformed
+
+    private void btnsReset1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MouseEntered
+        btnsReset1.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_btnsReset1MouseEntered
+
+    private void btnsReset1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MouseExited
+        btnsReset1.setBackground(new Color(255,102,51));
+    }//GEN-LAST:event_btnsReset1MouseExited
+
+    private void btnsReset1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MousePressed
+         btnsReset1.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_btnsReset1MousePressed
+
+    private void btnsReset1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MouseReleased
+       btnsReset1.setBackground(new Color(255,102,51));
+    }//GEN-LAST:event_btnsReset1MouseReleased
+
+    private void btnsReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsReset1ActionPerformed
+       boolean valid = true;
+       
+       if ( txtNew_Password1.getText().trim().isEmpty()
+                || txtConfirm_Password1.getText().trim().isEmpty()) {
+            JOptionPane:
+            JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }else if (txtNew_Password1.getText().trim().length() < 8) {
+                JOptionPane.showMessageDialog(null, "Password must have 8 characters", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+                valid = false;
+        } else if (!txtNew_Password1.getText().trim().equals(txtConfirm_Password1.getText().trim())) {
+                JOptionPane.showMessageDialog(null, "Password and Cinfirm Password should match", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+                valid = false;
+        }else{
+        valid = true;
+        UserAccounts user = new UserAccounts();
+        String Email = txtNewEmail1.getText().trim();
+        String newPassword = txtNew_Password1.getText().trim();
+        
+        boolean passwordResetSuccessful = user.resetPassword(Email, newPassword);
+        if (passwordResetSuccessful) {
+         //   System.out.println("Password reset successful.");
+             JOptionPane.showMessageDialog(null, "Password reset successful!", "Reset Password Form", JOptionPane.INFORMATION_MESSAGE);
+        
+        btnsReset.setText("Find Account");
+        btnsReset.setVisible(true);
+          txtNewEmail1.setText(null);
+          txtNew_Password1.setText(null);
+        txtConfirm_Password1.setText(null);
+        
+        txtNewEmail1.setBorder(BorderFactory.createLineBorder(Color.decode("#0078D7")));  
+        txtNew_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0078D7")));  
+        txtConfirm_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0078D7")));  
+        
+        jLabel11.setEnabled(false);
+        txtNew_Password1.setEnabled(false);;
+        jLabel12.setEnabled(false);
+        txtConfirm_Password1.setEnabled(false); 
+        jToggleButton3.setEnabled(false);
+        jToggleButton2.setEnabled(false);
+        btnsReset1.setVisible(false);
+        txtNewEmail1.setEditable(true);
+        
+        ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
+    Image image2 =(li).getImage().getScaledInstance(Right_Background.getWidth(), Right_Background.getHeight(),Image.SCALE_SMOOTH);
+    li= new ImageIcon(image2);
+    Right_Background.setIcon(li);
+    
+      Main.setVisible(true);
+        Reset_password_Panel.setVisible(false);
+        Right_Panel.setVisible(false);
+        Right_Background.setVisible(true);
+        Left_Background.setVisible(false);
+        Left_Panel.setVisible(true);
+        
+
+        } else {
+          //  System.out.println("Password reset failed");
+             JOptionPane.showMessageDialog(null, "Password reset failed", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_btnsReset1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -571,15 +986,27 @@ if (!lastName.matches(firstNamePattern)) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Left_Background;
+    private javax.swing.JLabel Left_Background1;
     private javax.swing.JPanel Left_Panel;
     private javax.swing.JPanel Main;
+    private javax.swing.JPanel Reset_password;
+    private javax.swing.JPanel Reset_password_Panel;
     private javax.swing.JLabel Right_Background;
     private javax.swing.JPanel Right_Panel;
     private javax.swing.JLabel Sign_Back;
+    private javax.swing.JLabel Sign_Back1;
     private javax.swing.JButton btnCreat_User;
+    private javax.swing.JButton btnForgot_Password;
+    private javax.swing.JButton btnForgot_Password2;
     private javax.swing.JButton btnSign_in;
+    private javax.swing.JButton btnsReset;
+    private javax.swing.JButton btnsReset1;
     private javax.swing.JButton btnsignup;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -589,12 +1016,17 @@ if (!lastName.matches(firstNamePattern)) {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JPasswordField txtConfirm_Password;
+    private javax.swing.JPasswordField txtConfirm_Password1;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirst_Name;
     private javax.swing.JTextField txtLast_Name;
     private javax.swing.JTextField txtNewEmail;
+    private javax.swing.JTextField txtNewEmail1;
     private javax.swing.JPasswordField txtNew_Password;
+    private javax.swing.JPasswordField txtNew_Password1;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }
