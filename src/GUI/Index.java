@@ -7,6 +7,7 @@ package GUI;
 import Classes.Category;
 import Classes.CustomDialog;
 import Classes.Product;
+import Classes.UserAccounts;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -21,6 +22,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -44,11 +47,16 @@ import javax.swing.table.TableColumn;
  */
 public class Index extends javax.swing.JFrame {
 
+    LocalDate currentDate = LocalDate.now();
+    // Format the current date as a string
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    String formattedDate = currentDate.format(formatter);
+
     /**
      * Creates new form Index
      */
     Category category = new Category();
-
+    UserAccounts user = new UserAccounts();
     Product toy = new Product();
     private List<Product> productsList;
     private DefaultListModel<String> cartListModel;
@@ -58,9 +66,15 @@ public class Index extends javax.swing.JFrame {
 
     public Index() {
         initComponents();
+        String userFirstName = user.getUser_F_Name();
+        System.out.println("User's First Name: " + userFirstName);
+
         productsList = new ArrayList<>();
         populateProducts();
         displayProductCards();
+
+        // Update the date label text
+        Date.setText(formattedDate);
 
         ImageIcon li = new ImageIcon(getClass().getResource("/Images/2.jpg"));
         Image image = (li).getImage().getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH);
@@ -76,8 +90,6 @@ public class Index extends javax.swing.JFrame {
         Image image3 = (li3).getImage().getScaledInstance(jLabel14.getWidth(), jLabel14.getHeight(), Image.SCALE_SMOOTH);
         li3 = new ImageIcon(image3);
         jLabel14.setIcon(li3);
-
-
 
     }
 
@@ -229,7 +241,7 @@ public class Index extends javax.swing.JFrame {
                             // Show a message here, for example:
                             JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
                         } else {
-                            Object[] toadd = {name, quantity, Pprice, tot + ".00",Id};
+                            Object[] toadd = {name, quantity, Pprice, tot + ".00", Id};
                             dt.addRow(toadd);
                         }
 
@@ -271,8 +283,6 @@ public class Index extends javax.swing.JFrame {
 
         return formatted.toString();
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -355,9 +365,21 @@ public class Index extends javax.swing.JFrame {
         txtCvCode = new javax.swing.JTextField();
         btnConfirmPayment = new javax.swing.JButton();
         Bill_Panel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        Date = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        BillTable = new javax.swing.JTable();
+        jLabel41 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        txtTotalValue = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -686,7 +708,6 @@ public class Index extends javax.swing.JFrame {
         tblCart.setGridColor(new java.awt.Color(255, 255, 255));
         tblCart.setRowHeight(18);
         tblCart.setShowGrid(false);
-        tblCart.setShowVerticalLines(false);
         tblCart.getTableHeader().setResizingAllowed(false);
         tblCart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -724,6 +745,7 @@ public class Index extends javax.swing.JFrame {
         btnRemove.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnRemove.setText("Remove Item");
         btnRemove.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnRemove.setBorderPainted(false);
         Border roundedBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20);
         btnRemove.setBorder(BorderFactory.createCompoundBorder(roundedBorder, btnRemove.getBorder()));
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
@@ -835,17 +857,93 @@ public class Index extends javax.swing.JFrame {
 
         Body_Panel.add(Payment, "card8");
 
+        Bill_Panel.setBackground(new java.awt.Color(255, 255, 255));
         Bill_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        jLabel22.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Invoice");
+        Bill_Panel.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 30, 140, 40));
 
-        Bill_Panel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 920, 270));
+        jLabel23.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel23.setText("Date");
+        Bill_Panel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 70, 40, -1));
 
-        jLabel22.setText("jLabel22");
-        jLabel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        Bill_Panel.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 110, 70));
+        Date.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        Date.setText("dd/mm/yy");
+        Bill_Panel.add(Date, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 70, -1, -1));
+
+        jLabel37.setFont(new java.awt.Font("Segoe UI", 3, 26)); // NOI18N
+        jLabel37.setText("Toy Gallery");
+        Bill_Panel.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 150, 40));
+
+        jLabel38.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel38.setText("No:12/34,");
+        Bill_Panel.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 160, -1));
+
+        jLabel39.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel39.setText("Lutos Street,");
+        Bill_Panel.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 85, 140, -1));
+
+        jLabel40.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel40.setText("Negombo,");
+        Bill_Panel.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 90, -1));
+
+        BillTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        BillTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Discription", "Quantity", "Unit Price", "Amount"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        BillTable.setGridColor(new java.awt.Color(0, 0, 0));
+        BillTable.setShowHorizontalLines(false);
+        BillTable.setShowVerticalLines(false);
+        jScrollPane3.setViewportView(BillTable);
+        DefaultTableCellRenderer rightAlignmentRendererBilcart = new DefaultTableCellRenderer();
+        rightAlignmentRendererBilcart.setHorizontalAlignment(JLabel.RIGHT); // Align cell data to the right
+
+        for (int i = 0; i <= 3; i++) {
+            TableColumn column = BillTable.getColumnModel().getColumn(i);
+            column.setHeaderRenderer(rightAlignmentRendererBilcart); // Align header text to the right
+            column.setCellRenderer(rightAlignmentRendererBilcart);   // Align cell data to the right
+        }
+
+        Bill_Panel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 920, 310));
+
+        jLabel41.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel41.setText(" Total");
+        Bill_Panel.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 480, 50, -1));
+        Bill_Panel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 450, -1, -1));
+
+        txtTotalValue.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtTotalValue.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtTotalValue.setText("Rs.00.00/=");
+        Bill_Panel.add(txtTotalValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 480, 70, -1));
+
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        Bill_Panel.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 470, 140, 10));
+
+        jLabel26.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel26.setText("0771234567");
+        Bill_Panel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 115, 60, -1));
+
+        jLabel42.setFont(new java.awt.Font("Times New Roman", 1, 22)); // NOI18N
+        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel42.setText("Thank You For Your Business!");
+        Bill_Panel.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 1020, 40));
 
         Body_Panel.add(Bill_Panel, "card9");
 
@@ -1020,12 +1118,12 @@ public class Index extends javax.swing.JFrame {
                                             // Show a message here, for example:
                                             JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
                                         } else {
-                                            Object[] toadd = {name, quantity, tot + ".00",Id};
+                                            Object[] toadd = {name, quantity, tot + ".00", Id};
                                             dt.addRow(toadd);
                                         }
 
                                     }
-                                    
+
                                 }
                             });
                             productDetailsPanel.add(addToCartButton, BorderLayout.SOUTH);
@@ -1216,7 +1314,7 @@ public class Index extends javax.swing.JFrame {
                                             // Show a message here, for example:
                                             JOptionPane.showMessageDialog(null, "Product already add to the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
                                         } else {
-                                            Object[] toadd = {name, quantity, Pprice, tot + ".00",Id};
+                                            Object[] toadd = {name, quantity, Pprice, tot + ".00", Id};
                                             dt.addRow(toadd);
                                         }
 
@@ -1295,7 +1393,7 @@ public class Index extends javax.swing.JFrame {
 
     private void lbl_cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cartMouseClicked
         DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
-       
+
         // Calculate the sum of the third column and display it in TxtTotal
         double totalSum = 0.0;
         for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
@@ -1304,7 +1402,6 @@ public class Index extends javax.swing.JFrame {
         }
         String formattedTotal = String.format("%.2f", totalSum);
         txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming TxtTotal is a JTextField
-        
 
         Body_Panel.removeAll();
         Body_Panel.add(Cart_panel);
@@ -1320,56 +1417,56 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void tblCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCartMouseClicked
-    if (evt.getClickCount() == 2) { // Check for double-click
-    int row = tblCart.getSelectedRow();
-    DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
+        if (evt.getClickCount() == 2) { // Check for double-click
+            int row = tblCart.getSelectedRow();
+            DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
 
-    if (row >= 0 && row < dt.getRowCount()) {
-        String Pid =dt.getValueAt(row, 4).toString();// Assuming ID is in the last column
-        String pname = dt.getValueAt(row, 0).toString().replace("_", " "); 
-        String Pprice = dt.getValueAt(row, 2).toString(); // Assuming price is in the 3rd column
+            if (row >= 0 && row < dt.getRowCount()) {
+                String Pid = dt.getValueAt(row, 4).toString();// Assuming ID is in the last column
+                String pname = dt.getValueAt(row, 0).toString().replace("_", " ");
+                String Pprice = dt.getValueAt(row, 2).toString(); // Assuming price is in the 3rd column
 
-        try {
-            // Read the original price from the text file
-            List<String> lines = Files.readAllLines(Paths.get("PRODUCTS.txt"));
-            double originalPrice = 0.0;
+                try {
+                    // Read the original price from the text file
+                    List<String> lines = Files.readAllLines(Paths.get("PRODUCTS.txt"));
+                    double originalPrice = 0.0;
 
-            for (String line : lines) {
-                String[] parts = line.split(" ");
-                if (parts.length >= 8 && parts[0].equals(Pid)) {
-                    originalPrice = Double.parseDouble(parts[2]);
-                    break;
+                    for (String line : lines) {
+                        String[] parts = line.split(" ");
+                        if (parts.length >= 8 && parts[0].equals(Pid)) {
+                            originalPrice = Double.parseDouble(parts[2]);
+                            break;
+                        }
+                    }
+
+                    String inputValue = JOptionPane.showInputDialog(this, "Change Quantity");
+
+                    if (inputValue != null) {  // Check if input is not canceled
+                        int newQuantity = Integer.parseInt(inputValue);
+                        double newTotal = newQuantity * originalPrice;
+
+                        // Update the quantity and total in the table
+                        dt.setValueAt(newQuantity, row, 1); // Assuming quantity is in the 2nd column
+                        dt.setValueAt(String.format("%.2f", newTotal), row, 3);    // Assuming total is in the 4th column
+
+                        // Calculate the sum of the third column and display it in TxtTotal
+                        double totalSum = 0.0;
+                        for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                            String totalValue = dt.getValueAt(rowIndex, 3).toString();
+                            totalSum += Double.parseDouble(totalValue);
+                        }
+                        String formattedTotal = String.format("%.2f", totalSum);
+                        txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming txtTotalPrice is a JTextField
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Invalid input! Please enter a valid integer.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, "Error reading product prices.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a row to update.", "Row Selection", JOptionPane.WARNING_MESSAGE);
             }
-
-            String inputValue = JOptionPane.showInputDialog(this, "Change Quantity");
-            
-            if (inputValue != null) {  // Check if input is not canceled
-                int newQuantity = Integer.parseInt(inputValue);
-                double newTotal = newQuantity * originalPrice;
-
-                // Update the quantity and total in the table
-                dt.setValueAt(newQuantity, row, 1); // Assuming quantity is in the 2nd column
-                dt.setValueAt(String.format("%.2f", newTotal), row, 3);    // Assuming total is in the 4th column
-
-                // Calculate the sum of the third column and display it in TxtTotal
-                double totalSum = 0.0;
-                for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
-                    String totalValue = dt.getValueAt(rowIndex, 3).toString();
-                    totalSum += Double.parseDouble(totalValue);
-                }
-                String formattedTotal = String.format("%.2f", totalSum);
-                txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming txtTotalPrice is a JTextField
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid input! Please enter a valid integer.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error reading product prices.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Please select a row to update.", "Row Selection", JOptionPane.WARNING_MESSAGE);
-    }
-}
 
     }//GEN-LAST:event_tblCartMouseClicked
 
@@ -1405,45 +1502,26 @@ public class Index extends javax.swing.JFrame {
             JOptionPane:
             JOptionPane.showMessageDialog(null, "Please Check the Cart", "Cart is Empty", JOptionPane.ERROR_MESSAGE);
 
-        }
-        else if (tblCart.getRowCount() >= 0) {
+        } else if (tblCart.getRowCount() >= 0) {
 
-
-            //   for (int j = 0; j < RowCount; j++) {
-                //        Total = Total + Integer.parseInt(jTable1.getValueAt(j, 3).toString());}
-
-            jTextArea1.setText(jTextArea1.getText() + "====================================================================\n");
-            jTextArea1.setText(jTextArea1.getText() + "\t\t\t Toy Gallery \n");
-            jTextArea1.setText(jTextArea1.getText() + "====================================================================\n\n\n");
-            jTextArea1.setText(jTextArea1.getText() + "______________________________________________________________________________________________________________________________");
-            jTextArea1.setText(jTextArea1.getText() + "\n Toy Id" + "\t\t Toy Name" + "\t\t Qty" + "\t\t            Price\n ");
-            jTextArea1.setText(jTextArea1.getText() + "-----------------------------------------------------------------------------------------------------------------------------\n ");
             for (int i = 0; i < tblCart.getRowCount(); i++) {
                 String id = tblCart.getValueAt(i, 3).toString();
                 String name = tblCart.getValueAt(i, 0).toString();
                 String qty = tblCart.getValueAt(i, 1).toString();
                 double price = Double.parseDouble(tblCart.getValueAt(i, 2).toString());;
-                jTextArea1.setText(jTextArea1.getText() + id + "\t\t" + name + "\t" + "\t" + qty + "\t\t           " + price + "\n");
+
                 double sum = Integer.parseInt(qty) * price;
                 String tot = String.format("%.2f", sum); // Format the total value to two decimal places
 
+                Body_Panel.removeAll();
+                Body_Panel.add(Payment);
+                Body_Panel.repaint();
+                Body_Panel.revalidate();
             }
-            //jTextArea1.setText(jTextArea1.getText()+"\n\n====================================================================\n");
-            //jTextArea1.setText(jTextArea1.getText()+"\t\t\t Total Price- Rs:"+""+"\n");
-            //jTextArea1.setText(jTextArea1.getText()+"====================================================================\n");
-            //   jTextArea1.setText(Integer.toString(Total));
-            jTextArea1.setText(jTextArea1.getText() + "\n\n\n====================================================================\n");
-            jTextArea1.setText(jTextArea1.getText() + "\t\t\t Thank Yoy");
-            jTextArea1.setText(jTextArea1.getText() + "\n====================================================================\n");
-            //jTextArea1.setText(jTextArea1.getText()+"\t\t\t ");
 
         }
-        // jTextArea1.setText(Integer.toString(Total));
-        
-        Body_Panel.removeAll();
-        Body_Panel.add(Payment);
-        Body_Panel.repaint();
-        Body_Panel.revalidate();
+
+
     }//GEN-LAST:event_btnBuyActionPerformed
 
     private void btn_addtocartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addtocartActionPerformed
@@ -1478,7 +1556,7 @@ public class Index extends javax.swing.JFrame {
                 // Show a message here, for example:
                 JOptionPane.showMessageDialog(null, "Product already in the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
             } else {
-                Object[] toadd = {name, quantity, Pprice, tot + ".00",Id};
+                Object[] toadd = {name, quantity, Pprice, tot + ".00", Id};
                 dt.addRow(toadd);
             }
 
@@ -1572,8 +1650,8 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCvCodeKeyReleased
 
     private void btnConfirmPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmPaymentActionPerformed
-       boolean valid = true;
-       
+        boolean valid = true;
+
         if (txtCardNumber.getText().trim().isEmpty()
                 || txtExpDate.getText().trim().isEmpty()
                 || txtCvCode.getText().trim().isEmpty()
@@ -1581,8 +1659,8 @@ public class Index extends javax.swing.JFrame {
             JOptionPane:
             JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Payment Details Form", JOptionPane.ERROR_MESSAGE);
             valid = false;
-        }else{
-        
+        } else {
+
             String CardNumberPattern = "^(\\d{4}-){3}\\d{4}$"; // ####-####-####-####-#### format
             String cardnum = txtCardNumber.getText().trim();
 
@@ -1627,6 +1705,35 @@ public class Index extends javax.swing.JFrame {
             if (i == 1) {/* do nothing*/
             }
             if (i == 0) {
+                DefaultTableModel sourceModel = (DefaultTableModel) tblCart.getModel();
+                DefaultTableModel destinationModel = (DefaultTableModel) BillTable.getModel();
+
+                int rowCount = sourceModel.getRowCount(); // Get the total number of rows in the source table
+                int row = BillTable.getSelectedRow();
+
+                for (int z = 0; z < rowCount; z++) {
+                    // Get the data from the current row of the source table
+                    Object[] rowData = new Object[4];
+                    for (int j = 0; j < 4; j++) {
+                        rowData[j] = sourceModel.getValueAt(z, j);
+                    }
+
+                    // Add the retrieved data to the destination table
+                    destinationModel.addRow(rowData);
+                }
+
+                // Calculate the sum of the third column and display it in TxtTotal in bill
+                double totalSum = 0.0;
+                for (int rowIndex = 0; rowIndex < destinationModel.getRowCount(); rowIndex++) {
+                    String totalValue = destinationModel.getValueAt(rowIndex, 3).toString();
+                    totalSum += Double.parseDouble(totalValue);
+                }
+                String formattedTotal = String.format("%.2f", totalSum);
+                txtTotalValue.setText("Rs. " + formattedTotal + "/="); // Assuming txtTotalPrice is a JTextField
+
+                // Clear all rows from the Cart table
+                sourceModel.setRowCount(0);
+
                 JOptionPane:
                 JOptionPane.showMessageDialog(null, "Payment Successfull, Thank you!", "Payment Details Form", JOptionPane.INFORMATION_MESSAGE);
                 Body_Panel.removeAll();
@@ -1634,9 +1741,8 @@ public class Index extends javax.swing.JFrame {
                 Body_Panel.repaint();
                 Body_Panel.revalidate();
             }
-             
-             
-         }
+
+        }
 
     }//GEN-LAST:event_btnConfirmPaymentActionPerformed
 
@@ -1678,9 +1784,11 @@ public class Index extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel About_Us_Page;
+    private javax.swing.JTable BillTable;
     private javax.swing.JPanel Bill_Panel;
     private javax.swing.JPanel Body_Panel;
     private javax.swing.JPanel Cart_panel;
+    private javax.swing.JLabel Date;
     private javax.swing.JPanel Home;
     private javax.swing.JPanel Home_Panel_Canteiner;
     private javax.swing.JPanel Main_Panel;
@@ -1713,6 +1821,8 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
@@ -1724,16 +1834,23 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbl_aboutUs;
     private javax.swing.JLabel lbl_cart;
     private javax.swing.JLabel lbl_home;
@@ -1752,5 +1869,6 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSearch1;
     private javax.swing.JLabel txtTotalPrice;
+    private javax.swing.JLabel txtTotalValue;
     // End of variables declaration//GEN-END:variables
 }

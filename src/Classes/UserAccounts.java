@@ -17,7 +17,6 @@ public class UserAccounts {
         private String User_Email;
         private String User_Password;
         private int UsersCount;
-
       public UserAccounts(){}
 
     public UserAccounts(String User_F_Name, String User_L_Name, String User_Email, String User_Password) 
@@ -31,6 +30,7 @@ public class UserAccounts {
 
     public String getUser_F_Name() {
         return User_F_Name;
+        
     }
 
     public void setUser_F_Name(String User_F_Name) {
@@ -152,11 +152,15 @@ public class UserAccounts {
 
     for (String record : records) {
         String[] fields = record.split(" ");
+        String firstName = fields[0]; 
         String recordEmail = fields[2]; // Assuming email is at index 2 in the record
         String recordPassword = fields[3]; // Assuming password is at index 3 in the record
+        
 
         if (recordEmail.equalsIgnoreCase(email) && recordPassword.equals(password)) {
+            setUser_F_Name(firstName); // Set the user's first name in the UserAccounts object
             return true; // Login successful
+            
         }
     }
 
@@ -189,7 +193,22 @@ public boolean resetPassword(String email, String newPassword) {
     return false; // Email not found, password reset failed
 }
 
+public String getUserFirstName(String userId) {
+        String filePath = "Customer.txt"; // Replace with the actual file path
+        List<String> records = fs.readuserFileData(filePath);
 
+        for (String record : records) {
+            String[] fields = record.split(" ");
+            String recordUserId = fields[2]; // Assuming user ID is at index 0 in the record
+            String firstName = fields[0];    // Assuming first name is at index 1 in the record
+            
+            if (recordUserId.equalsIgnoreCase(userId)) {
+                return firstName; // Return the first name if the user ID matches
+            }
+        }
+
+        return null; // Return null if user ID not found
+    }
 
 }
 

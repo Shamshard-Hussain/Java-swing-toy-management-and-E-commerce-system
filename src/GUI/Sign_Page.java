@@ -14,12 +14,13 @@ import javax.swing.JOptionPane;
  * @author Sham
  */
 public class Sign_Page extends javax.swing.JFrame {
-
+   
     /**
      * Creates new form Sign_Page
      */
     public Sign_Page() {
         initComponents();
+      
         
     ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
     Image image =(li).getImage().getScaledInstance(Right_Background.getWidth(), Right_Background.getHeight(),Image.SCALE_SMOOTH);
@@ -37,8 +38,6 @@ public class Sign_Page extends javax.swing.JFrame {
         txtConfirm_Password1.setEchoChar('\u25cf');
     }
 
-    
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -633,39 +632,34 @@ if (!match.matches()) {
 
     private void btnSign_inActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSign_inActionPerformed
  boolean valid = true;
-      UserAccounts user = new UserAccounts();
-        String userid = txtEmail.getText().trim();
-        String pass = txtPassword.getText().trim();
-        
-        
-        if (txtEmail.getText().trim().isEmpty() || txtPassword.getText().trim().isEmpty()) {
-            JOptionPane:
-            JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Signin", JOptionPane.ERROR_MESSAGE);
-            valid = false;
-        }
+UserAccounts user = new UserAccounts();
+String userid = txtEmail.getText().trim();
+String pass = txtPassword.getText().trim();
 
-        if (valid) {
+if (txtEmail.getText().trim().isEmpty() || txtPassword.getText().trim().isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Field can't be Empty", "Sign in", JOptionPane.ERROR_MESSAGE);
+    valid = false;
+}
 
-            if (userid.equals("admin") && pass.equals("1234")) {
-                JOptionPane:
-                JOptionPane.showMessageDialog(null, "Sign in as Admin", "Sign in", JOptionPane.INFORMATION_MESSAGE);
-                Administrator_Panel ap = new Administrator_Panel();
-                ap.setVisible(true);
-                this.dispose();
-            } else if (user.login(userid, pass)) {
-                // Login successful
-               
-                JOptionPane.showMessageDialog(null, "Login successful");
-                                Index home = new Index();
-                                home.setVisible(true);
-                                this.dispose();
-                                
-            }else {
-                // Login failed
-               // System.out.println("Login failed");
-                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
-            }
-        }
+if (valid) {
+    if (userid.equals("admin") && pass.equals("1234")) {
+        JOptionPane.showMessageDialog(null, "Sign in as Admin ", "Sign in", JOptionPane.INFORMATION_MESSAGE);
+        Administrator_Panel ap = new Administrator_Panel();
+        ap.setVisible(true);
+        this.dispose();
+    } else if (user.login(userid, pass)) {
+        // Login successful
+        JOptionPane.showMessageDialog(null, "Login successful !");
+    
+        Index home = new Index();
+        home.setVisible(true);
+        this.dispose();
+    } else {
+        // Login failed
+        JOptionPane.showMessageDialog(this, "Invalid Username or Password !");
+    }
+}
+
     }//GEN-LAST:event_btnSign_inActionPerformed
 
     private void btnCreat_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreat_UserActionPerformed
