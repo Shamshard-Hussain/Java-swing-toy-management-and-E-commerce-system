@@ -66,9 +66,7 @@ public class Index extends javax.swing.JFrame {
 
     public Index() {
         initComponents();
-        String userFirstName = user.getUser_F_Name();
-        System.out.println("User's First Name: " + userFirstName);
-
+       
         productsList = new ArrayList<>();
         populateProducts();
         displayProductCards();

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class FileSystem {
 
-    private static String FILE_PATH = "C:\\Users\\Sham\\Documents\\NetBeansProjects\\E_Commerce\\";
+    private static String FILE_PATH = "";
     File file;
     private String fileName;
 
