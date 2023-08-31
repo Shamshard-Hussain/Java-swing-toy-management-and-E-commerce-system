@@ -649,10 +649,9 @@ if (valid) {
         this.dispose();
     } else if (user.login(userid, pass)) {
         // Login successful
-        JOptionPane.showMessageDialog(null, "Login successful !");
-    
         Index home = new Index();
         home.setVisible(true);
+        JOptionPane.showMessageDialog(null, "Login successful !");
         this.dispose();
     } else {
         // Login failed
