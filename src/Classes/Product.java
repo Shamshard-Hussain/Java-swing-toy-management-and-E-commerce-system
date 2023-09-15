@@ -7,15 +7,21 @@ package Classes;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -46,17 +52,15 @@ public class Product {
     }
 
     public void setImageIcon(ImageIcon imageIcon) {
-       Image image = imageIcon.getImage();
+        Image image = imageIcon.getImage();
         Image resizedImage = image.getScaledInstance(265, 173, Image.SCALE_SMOOTH);
-        
+
         // Create a new ImageIcon with the resized image
         this.imageIcon = new ImageIcon(resizedImage);
     }
 
-   
-
-
-    public Product() {}
+    public Product() {
+    }
 
     public Product(String Id, String Name, String Price, String Qty, String AgeGroup, String Category, String Description, String imageName) {
         this.Id = Id;
@@ -147,30 +151,26 @@ public class Product {
 
             return count;
         } catch (IOException e) {
-            e.printStackTrace();
+             System.out.println("canot read the product file" + e);
         }
 
         return 0;
     }
 
-public boolean addPRODUCTS() {
-    if (!fs.createANewFile()) {
-        String record = Id + " " + Name + " " + Price + " " + Qty + " " + AgeGroup + " " + Category + " " + Description + " " + imageName;
-        
-        String filePath = "PRODUCTS.txt"; // Change this to your file path
-        
-        if (!fs.isContentEmpty(filePath)) { // Check if the file is not empty
-            record = "\n" + record;   // Append a new line before the record
+    public boolean addPRODUCTS() {
+        if (!fs.createANewFile()) {
+            String record = Id + " " + Name + " " + Price + " " + Qty + " " + AgeGroup + " " + Category + " " + Description + " " + imageName;
+
+            String filePath = "PRODUCTS.txt"; // Change this to your file path
+
+            if (!fs.isContentEmpty(filePath)) { // Check if the file is not empty
+                record = "\n" + record;   // Append a new line before the record
+            }
+
+            return fs.writeDataToFile(record);
         }
-        
-        return fs.writeDataToFile(record);
+        return false;
     }
-    return false;
-}
-
-
-
-
 
     public boolean isPIDExist(String pid) {
         List<String> records = fs.readFileData();
@@ -207,7 +207,7 @@ public boolean addPRODUCTS() {
                 model.addRow(dataRow);
             }
         } catch (IOException e) {
-               System.out.println("Something went wrowng with reading file" + e);
+            System.out.println("Something went wrowng with displaying product data" + e);
         }
 
         // Hide the "Description" and "Image Name" columns
@@ -289,7 +289,7 @@ public boolean addPRODUCTS() {
                 }
             }
         } catch (IOException e) {
-               System.out.println("Something went wrowng with reading file" + e);
+            System.out.println("Something went wrowng with search product data" + e);
         }
 
         // Hide the "Description" and "Image Name" columns
@@ -366,7 +366,7 @@ public boolean addPRODUCTS() {
                 }
             }
         } catch (IOException e) {
-               System.out.println("Something went wrowng with searching toy" + e);
+            System.out.println("Something went wrowng with searching toy" + e);
         } finally {
             // Close the BufferedReader
             if (gt != null) {
@@ -399,7 +399,7 @@ public boolean addPRODUCTS() {
                 writer.write(updatedRec + "\n");
             }
         } catch (IOException e) {
-              System.out.println("Something went wrowng with writing temp file" + e);
+            System.out.println("Something went wrowng with writing temp file" + e);
             return false;
         }
 
@@ -418,7 +418,7 @@ public boolean addPRODUCTS() {
 
             return true;
         } catch (IOException e) {
-             System.out.println("Failed to Update Product .");
+            System.out.println("Failed to Update Product .");
         }
 
         return false;
@@ -468,13 +468,13 @@ public boolean addPRODUCTS() {
             Path destination = Path.of("PRODUCTS.txt");
             Files.move(source, destination, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-               System.out.println("Something went wrowng with replacing files" + e);
+            System.out.println("Something went wrowng with replacing files" + e);
             return false;
         }
 
         return true;
     }
-    
+
     public static int generateProductId(BufferedReader reader) {
         int maxId = 0;
 
@@ -499,4 +499,122 @@ public boolean addPRODUCTS() {
         String generatedId = "C" + String.format("%03d", nextId); // Format as "C001"
         textField.setText(generatedId);
     }
+
+    public void resizeImage(Product product) {
+        try {
+            ImageIcon imageIcon = new ImageIcon(product.getImageName());
+            Image image = imageIcon.getImage().getScaledInstance(265, 173, Image.SCALE_SMOOTH);
+            product.setImageIcon(new ImageIcon(image));
+        } catch (Exception e) {
+             System.out.println("Something went wrowng with resize images" + e);
+        }
+    }
+
+    public void populateHomeProducts(JLabel[] nameLabelLabels, JLabel[] categoryLabelLabels, JLabel[] imageLabels, JLabel[] priceLabelLabels) {
+
+        try ( BufferedReader br = new BufferedReader(new FileReader("PRODUCTS.txt"))) {
+            LinkedList<String> lastThreeLines = new LinkedList<>();
+            String line;
+
+            // Read and store the last 3 lines of the file
+            while ((line = br.readLine()) != null) {
+                lastThreeLines.add(line);
+                if (lastThreeLines.size() > 3) {
+                    lastThreeLines.removeFirst(); // Remove the oldest line if more than 3 lines are stored
+                }
+            }
+
+            int index = 0; // Initialize an index for the labels arrays
+
+            // Iterate over the last 3 lines in reverse order
+            for (int i = lastThreeLines.size() - 1; i >= 0 && index < nameLabelLabels.length; i--) {
+                line = lastThreeLines.get(i);
+                String[] productData = line.split(" ");
+                if (productData.length == 8) {
+                    Product product = new Product();
+                    product.setId(productData[0]);
+                    product.setName(productData[1]);
+                    product.setPrice(productData[2]);
+                    product.setAgeGroup(productData[3]);
+                    product.setCategory(productData[5]);
+                    product.setDescription(productData[6]);
+                    product.setImageName("src/Products/" + productData[7]);
+                    resizeImage(product);
+
+                    // Set the product name and category on the corresponding labels
+                    nameLabelLabels[index].setText(product.getName());
+                    categoryLabelLabels[index].setText(product.getCategory());
+                    priceLabelLabels[index].setText("Rs. " + product.getPrice() + ".00/=");
+
+                    // Set the image on the corresponding JLabel
+                    ImageIcon imageIcon = new ImageIcon(product.getImageName());
+                    Image scaledImage = imageIcon.getImage().getScaledInstance(
+                            imageLabels[index].getWidth(),
+                            imageLabels[index].getHeight(),
+                            Image.SCALE_SMOOTH
+                    );
+                    imageLabels[index].setIcon(new ImageIcon(scaledImage));
+
+                    index++; // Increment the index for the next labels
+                }
+            }
+        } catch (IOException e) {
+             System.out.println("Something went wrowng with populate home products" + e);
+        }
+    }
+    
+    // Method to add a value to the encrypted total sum
+    public static void addToTotalSum(double valueToAdd) {
+        try {
+            double existingSum = 0.0;
+
+            // Check if the encryption file exists
+            File encryptionFile = new File("income.enc");
+
+            if (encryptionFile.exists()) {
+                // If the encryption file exists, read the existing value
+                FileInputStream fis = new FileInputStream(encryptionFile);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                existingSum = ois.readDouble();
+                ois.close();
+                fis.close();
+            }
+
+            // Add the new value to the existing sum
+            double newSum = existingSum + valueToAdd;
+
+            // Write the new sum to the encryption file
+            FileOutputStream fos = new FileOutputStream(encryptionFile);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeDouble(newSum);
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrowng with create total income" + e);
+        }
+    }
+
+    // Method to retrieve the total sum
+    public static double getTotalSum() {
+        try {
+            // Check if the encryption file exists
+            File encryptionFile = new File("income.enc");
+
+            if (encryptionFile.exists()) {
+                // If the encryption file exists, read the existing value
+                FileInputStream fis = new FileInputStream(encryptionFile);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                double totalSum = ois.readDouble();
+                ois.close();
+                fis.close();
+                return totalSum;
+            }
+        } catch (IOException e) {
+           System.out.println("Something went wrowng with displaying total income" + e);
+        }
+        return 0.0; // Return 0 if the file doesn't exist or if there was an error
+    }
+    
+    
 }
+

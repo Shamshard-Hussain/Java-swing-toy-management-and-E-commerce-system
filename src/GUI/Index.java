@@ -11,6 +11,7 @@ import Classes.UserAccounts;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -25,6 +26,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -36,9 +38,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 /**
@@ -52,9 +56,7 @@ public class Index extends javax.swing.JFrame {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     String formattedDate = currentDate.format(formatter);
 
-    /**
-     * Creates new form Index
-     */
+    
     Category category = new Category();
     UserAccounts user = new UserAccounts();
     Product toy = new Product();
@@ -66,7 +68,7 @@ public class Index extends javax.swing.JFrame {
 
     public Index() {
         initComponents();
-       
+      
         productsList = new ArrayList<>();
         populateProducts();
         displayProductCards();
@@ -74,10 +76,17 @@ public class Index extends javax.swing.JFrame {
         // Update the date label text
         Date.setText(formattedDate);
 
-        ImageIcon li = new ImageIcon(getClass().getResource("/Images/2.jpg"));
-        Image image = (li).getImage().getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH);
-        li = new ImageIcon(image);
-        jLabel3.setIcon(li);
+        // populateHomeProducts();
+        JLabel[] nameLabelLabels = {txtHome_product_name1, txtHome_product_name2, txtHome_product_name3};
+        JLabel[] categoryLabelLabels = {txt_Home_product_category1, txt_Home_product_category2, txt_Home_product_category3};
+        JLabel[] imageLabels = {lbl_Home_img1, lbl_Home_img2, lbl_Home_img3};
+        JLabel[] priceLabelLabels = {txt_Home_product_Price1, txt_Home_product_Price2, txt_Home_product_Price3};
+        toy.populateHomeProducts(nameLabelLabels, categoryLabelLabels, imageLabels, priceLabelLabels);
+
+        ImageIcon li1 = new ImageIcon(getClass().getResource("/Images/2.jpg"));
+        Image image1 = (li1).getImage().getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH);
+        li1 = new ImageIcon(image1);
+        jLabel3.setIcon(li1);
 
         ImageIcon li2 = new ImageIcon(getClass().getResource("/Images/PngItem_46837.png"));
         Image image2 = (li2).getImage().getScaledInstance(jLabel4.getWidth(), jLabel4.getHeight(), Image.SCALE_SMOOTH);
@@ -88,10 +97,17 @@ public class Index extends javax.swing.JFrame {
         Image image3 = (li3).getImage().getScaledInstance(jLabel14.getWidth(), jLabel14.getHeight(), Image.SCALE_SMOOTH);
         li3 = new ImageIcon(image3);
         jLabel14.setIcon(li3);
+        
+        ImageIcon li4 = new ImageIcon(getClass().getResource("/Images/home_image2.jpg"));
+        Image image4 = (li4).getImage().getScaledInstance(jLabel25.getWidth(), jLabel25.getHeight(), Image.SCALE_SMOOTH);
+        li4 = new ImageIcon(image4);
+        jLabel25.setIcon(li4);
 
     }
+  
 
-    private void populateProducts() {
+    
+    private void populateProducts() {  
         productsList.clear(); // Clear the list before populating it again
         try ( BufferedReader br = new BufferedReader(new FileReader("PRODUCTS.txt"))) {
             String line;
@@ -106,7 +122,7 @@ public class Index extends javax.swing.JFrame {
                     product.setCategory(productData[5]);
                     product.setDescription(productData[6]);
                     product.setImageName("src/Products/" + productData[7]);
-                    resizeImage(product);
+                    toy.resizeImage(product);
                     productsList.add(product);
                 }
             }
@@ -115,15 +131,6 @@ public class Index extends javax.swing.JFrame {
         }
     }
 
-    private void resizeImage(Product product) {
-        try {
-            ImageIcon imageIcon = new ImageIcon(product.getImageName());
-            Image image = imageIcon.getImage().getScaledInstance(265, 173, Image.SCALE_SMOOTH);
-            product.setImageIcon(new ImageIcon(image));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private void displayProductCards() {
         Product_card_Panel.removeAll();
@@ -281,12 +288,7 @@ public class Index extends javax.swing.JFrame {
 
         return formatted.toString();
     }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -314,6 +316,24 @@ public class Index extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        lbl_Home_img3 = new javax.swing.JLabel();
+        lbl_Home_img1 = new javax.swing.JLabel();
+        lbl_Home_img2 = new javax.swing.JLabel();
+        txtHome_product_name1 = new javax.swing.JLabel();
+        txt_Home_product_category1 = new javax.swing.JLabel();
+        txt_Home_product_Price1 = new javax.swing.JLabel();
+        txt_Home_product_Price2 = new javax.swing.JLabel();
+        txt_Home_product_category2 = new javax.swing.JLabel();
+        txtHome_product_name2 = new javax.swing.JLabel();
+        txt_Home_product_Price3 = new javax.swing.JLabel();
+        txt_Home_product_category3 = new javax.swing.JLabel();
+        txtHome_product_name3 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         Product_page = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -380,6 +400,7 @@ public class Index extends javax.swing.JFrame {
         jLabel42 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
         Main_Panel.setBackground(new java.awt.Color(255, 255, 255));
@@ -452,7 +473,7 @@ public class Index extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        Home_Panel_Canteiner.setBackground(new java.awt.Color(204, 204, 204));
+        Home_Panel_Canteiner.setBackground(new java.awt.Color(255, 255, 255));
         Home_Panel_Canteiner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
@@ -504,9 +525,101 @@ public class Index extends javax.swing.JFrame {
         });
         Home_Panel_Canteiner.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 490, 170, 50));
 
+        jLabel24.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setText("NEW ARRIVALS");
+        Home_Panel_Canteiner.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 590, 1020, 40));
+
+        jSeparator4.setForeground(new java.awt.Color(51, 204, 0));
+        Home_Panel_Canteiner.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 630, 200, 10));
+
+        jLabel43.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel43.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel43.setText("New");
+        Home_Panel_Canteiner.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 690, 30, -1));
+
+        jLabel44.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel44.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel44.setText("New");
+        Home_Panel_Canteiner.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(586, 690, 30, -1));
+
+        jLabel45.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel45.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel45.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel45.setText("New");
+        Home_Panel_Canteiner.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(896, 690, 30, -1));
+
+        lbl_Home_img3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Home_img3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-add-image-48.png"))); // NOI18N
+        lbl_Home_img3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Home_Panel_Canteiner.add(lbl_Home_img3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 690, 220, 260));
+
+        lbl_Home_img1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Home_img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-add-image-48.png"))); // NOI18N
+        lbl_Home_img1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Home_Panel_Canteiner.add(lbl_Home_img1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 690, 220, 260));
+
+        lbl_Home_img2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Home_img2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-add-image-48.png"))); // NOI18N
+        lbl_Home_img2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Home_Panel_Canteiner.add(lbl_Home_img2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 690, 220, 260));
+
+        txtHome_product_name1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        txtHome_product_name1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtHome_product_name1.setText("Name");
+        Home_Panel_Canteiner.add(txtHome_product_name1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 960, 220, -1));
+
+        txt_Home_product_category1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        txt_Home_product_category1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_Home_product_category1.setText("Category");
+        Home_Panel_Canteiner.add(txt_Home_product_category1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 980, 220, -1));
+
+        txt_Home_product_Price1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        txt_Home_product_Price1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_Home_product_Price1.setText("Price");
+        Home_Panel_Canteiner.add(txt_Home_product_Price1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 1000, 220, -1));
+
+        txt_Home_product_Price2.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        txt_Home_product_Price2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_Home_product_Price2.setText("Price");
+        Home_Panel_Canteiner.add(txt_Home_product_Price2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 1000, 220, -1));
+
+        txt_Home_product_category2.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        txt_Home_product_category2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_Home_product_category2.setText("Category");
+        Home_Panel_Canteiner.add(txt_Home_product_category2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 980, 220, -1));
+
+        txtHome_product_name2.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        txtHome_product_name2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtHome_product_name2.setText("Name");
+        Home_Panel_Canteiner.add(txtHome_product_name2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 960, 220, -1));
+
+        txt_Home_product_Price3.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        txt_Home_product_Price3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_Home_product_Price3.setText("Price");
+        Home_Panel_Canteiner.add(txt_Home_product_Price3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 1000, 220, -1));
+
+        txt_Home_product_category3.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        txt_Home_product_category3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_Home_product_category3.setText("Category");
+        Home_Panel_Canteiner.add(txt_Home_product_category3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 980, 220, -1));
+
+        txtHome_product_name3.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        txtHome_product_name3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtHome_product_name3.setText("Name");
+        Home_Panel_Canteiner.add(txtHome_product_name3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 960, 220, -1));
+
+        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/home_image2.jpg"))); // NOI18N
+        Home_Panel_Canteiner.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 1080, 820, 210));
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/2.jpg"))); // NOI18N
         jLabel3.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
-        Home_Panel_Canteiner.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1020, 640));
+        Home_Panel_Canteiner.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 550));
 
         jScrollPane1.setViewportView(Home_Panel_Canteiner);
 
@@ -691,7 +804,7 @@ public class Index extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Model Name", "Quantity", "Unit Price","Amount", "Id"
+                "Product Name", "Quantity", "Unit Price","Amount", "Id"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -713,8 +826,7 @@ public class Index extends javax.swing.JFrame {
             }
         });
         jScrollPane5.setViewportView(tblCart);
-        tblCart.getAccessibleContext().setAccessibleDescription("");
-        int columnIndexToHide = 4; // Index of the column to hide (0-based index)
+        int columnIndexToHide = tblCart.getColumnCount() - 1; // Index of the last column
 
         if (columnIndexToHide >= 0 && columnIndexToHide < tblCart.getColumnCount()) {
             TableColumn column = tblCart.getColumnModel().getColumn(columnIndexToHide);
@@ -726,16 +838,22 @@ public class Index extends javax.swing.JFrame {
             System.out.println("Column index is out of bounds.");
         }
 
-        DefaultTableCellRenderer rightAlignmentRenderer = new DefaultTableCellRenderer();
-        rightAlignmentRenderer.setHorizontalAlignment(JLabel.RIGHT); // Align cell data to the right
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER); // Align center
 
-        int columnIndexToAlignRight = 0; // Index of the column to align right (0-based index)
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT); // Align right
 
-        for (int i = 0; i <= 4; i++) {
-            TableColumn column = tblCart.getColumnModel().getColumn(i);
-            column.setHeaderRenderer(rightAlignmentRenderer); // Align header text to the right
-            column.setCellRenderer(rightAlignmentRenderer);   // Align cell data to the right
-        }
+        // Apply the renderers to specific columns
+        tblCart.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); // Quantity column
+        tblCart.getColumnModel().getColumn(2).setCellRenderer(rightRenderer); // Unit Price column
+        tblCart.getColumnModel().getColumn(3).setCellRenderer(rightRenderer); // Amount column
+
+        // Apply the renderers to the column headers (column names)
+        JTableHeader header = tblCart.getTableHeader();
+        header.setDefaultRenderer(centerRenderer); // Center align for Quantity
+        header.getColumnModel().getColumn(2).setHeaderRenderer(rightRenderer); // Right align for Unit Price
+        header.getColumnModel().getColumn(3).setHeaderRenderer(rightRenderer); // Right align for Amount
 
         Cart_panel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 162, 880, 300));
 
@@ -973,6 +1091,52 @@ public class Index extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel35MouseClicked
 
+    private void lbl_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_homeMouseClicked
+        Body_Panel.removeAll();
+        Body_Panel.add(Home);
+        Body_Panel.repaint();
+        Body_Panel.revalidate();
+    }//GEN-LAST:event_lbl_homeMouseClicked
+
+    private void lbl_aboutUsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_aboutUsMouseClicked
+        Body_Panel.removeAll();
+        Body_Panel.add(About_Us_Page);
+        Body_Panel.repaint();
+        Body_Panel.revalidate();
+    }//GEN-LAST:event_lbl_aboutUsMouseClicked
+
+    private void lbl_productsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_productsMouseClicked
+        Body_Panel.removeAll();
+        Body_Panel.add(Product_page);
+        Body_Panel.repaint();
+        Body_Panel.revalidate();
+    }//GEN-LAST:event_lbl_productsMouseClicked
+
+    private void lbl_cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cartMouseClicked
+        DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
+
+        // Calculate the sum of the third column and display it in TxtTotal
+        double totalSum = 0.0;
+        for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+            String totalValue = dt.getValueAt(rowIndex, 2).toString();
+            totalSum += Double.parseDouble(totalValue.replace(".00", ""));
+        }
+        String formattedTotal = String.format("%.2f", totalSum);
+        txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming TxtTotal is a JTextField
+
+        Body_Panel.removeAll();
+        Body_Panel.add(Cart_panel);
+        Body_Panel.repaint();
+        Body_Panel.revalidate();
+    }//GEN-LAST:event_lbl_cartMouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        Body_Panel.removeAll();
+        Body_Panel.add(Product_page);
+        Body_Panel.repaint();
+        Body_Panel.revalidate();
+    }//GEN-LAST:event_jLabel12MouseClicked
+
     private void btnsearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearch1ActionPerformed
         String keyword = txtSearch.getText().trim();
         productsList.clear();
@@ -992,13 +1156,13 @@ public class Index extends javax.swing.JFrame {
                     productdata.setCategory(productData[5]);
                     productdata.setDescription(productData[6]);
                     productdata.setImageName("src/Products/" + productData[7]);
-                    resizeImage(productdata);
+                    toy.resizeImage(productdata);
 
                     // Perform the search based on name, category, price, and description
                     if (productdata.getName().toLowerCase().contains(keyword.toLowerCase())
-                            || productdata.getCategory().toLowerCase().contains(keyword.toLowerCase())
-                            || productdata.getPrice().toLowerCase().contains(keyword.toLowerCase())
-                            || productdata.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                        || productdata.getCategory().toLowerCase().contains(keyword.toLowerCase())
+                        || productdata.getPrice().toLowerCase().contains(keyword.toLowerCase())
+                        || productdata.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                         productsList.add(productdata);
                         foundProducts = true; // Set the flag to true if any products are found
 
@@ -1169,7 +1333,6 @@ public class Index extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }//GEN-LAST:event_btnsearch1ActionPerformed
 
     private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
@@ -1191,13 +1354,13 @@ public class Index extends javax.swing.JFrame {
                     productdata.setCategory(productData[5]);
                     productdata.setDescription(productData[6]);
                     productdata.setImageName("src/Products/" + productData[7]);
-                    resizeImage(productdata);
+                    toy.resizeImage(productdata);
 
                     // Perform the search based on name, category, price, and description
                     if (productdata.getName().toLowerCase().contains(keyword.toLowerCase())
-                            || productdata.getCategory().toLowerCase().contains(keyword.toLowerCase())
-                            || productdata.getPrice().toLowerCase().contains(keyword.toLowerCase())
-                            || productdata.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                        || productdata.getCategory().toLowerCase().contains(keyword.toLowerCase())
+                        || productdata.getPrice().toLowerCase().contains(keyword.toLowerCase())
+                        || productdata.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                         productsList.add(productdata);
                         foundProducts = true; // Set the flag to true if any products are found
 
@@ -1365,54 +1528,46 @@ public class Index extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
-
     }//GEN-LAST:event_btnSearch2ActionPerformed
 
-    private void lbl_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_homeMouseClicked
-        Body_Panel.removeAll();
-        Body_Panel.add(Home);
-        Body_Panel.repaint();
-        Body_Panel.revalidate();
-    }//GEN-LAST:event_lbl_homeMouseClicked
-
-    private void lbl_aboutUsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_aboutUsMouseClicked
-        Body_Panel.removeAll();
-        Body_Panel.add(About_Us_Page);
-        Body_Panel.repaint();
-        Body_Panel.revalidate();
-    }//GEN-LAST:event_lbl_aboutUsMouseClicked
-
-    private void lbl_productsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_productsMouseClicked
-        Body_Panel.removeAll();
-        Body_Panel.add(Product_page);
-        Body_Panel.repaint();
-        Body_Panel.revalidate();
-    }//GEN-LAST:event_lbl_productsMouseClicked
-
-    private void lbl_cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cartMouseClicked
-        DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
-
-        // Calculate the sum of the third column and display it in TxtTotal
-        double totalSum = 0.0;
-        for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
-            String totalValue = dt.getValueAt(rowIndex, 2).toString();
-            totalSum += Double.parseDouble(totalValue.replace(".00", ""));
+    private void btn_addtocartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addtocartActionPerformed
+        // Add a row to the cart table with the product details
+        int i = JOptionPane.showConfirmDialog(null, "Please Confirm!", "Add to Cart", JOptionPane.OK_CANCEL_OPTION);
+        if (i == 1) {
+            /* do nothing*/
         }
-        String formattedTotal = String.format("%.2f", totalSum);
-        txtTotalPrice.setText("Total Price: Rs. " + formattedTotal + "/="); // Assuming TxtTotal is a JTextField
+        if (i == 0) {
+            String Id = txtPD_Id.getText();
+            String name = txtProduct_Name.getText().replace(" ", "_");
+            int quantity = 1;
 
-        Body_Panel.removeAll();
-        Body_Panel.add(Cart_panel);
-        Body_Panel.repaint();
-        Body_Panel.revalidate();
-    }//GEN-LAST:event_lbl_cartMouseClicked
+            String Pprice = txtProduct_Price.getText();
+            Pprice = Pprice.replace("Rs: ", "").replace(".00/=", ""); // Remove prefixes and suffixes
 
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
-        Body_Panel.removeAll();
-        Body_Panel.add(Product_page);
-        Body_Panel.repaint();
-        Body_Panel.revalidate();
-    }//GEN-LAST:event_jLabel12MouseClicked
+            int sum = Integer.parseInt(Pprice) * quantity;
+            String tot = Integer.toString(sum);
+
+            DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
+
+            // Check if the product with the same ID is already in the table
+            boolean productExists = false;
+            for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
+                if (dt.getValueAt(rowIndex, 0).equals(name)) { // Assuming the ID is in the first column
+                    productExists = true;
+                    break;
+                }
+            }
+
+            if (productExists) {
+                // Show a message here, for example:
+                JOptionPane.showMessageDialog(null, "Product already in the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
+            } else {
+                Object[] toadd = {name, quantity, Pprice, tot + ".00", Id};
+                dt.addRow(toadd);
+            }
+
+        }
+    }//GEN-LAST:event_btn_addtocartActionPerformed
 
     private void tblCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCartMouseClicked
         if (evt.getClickCount() == 2) { // Check for double-click
@@ -1465,7 +1620,6 @@ public class Index extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please select a row to update.", "Row Selection", JOptionPane.WARNING_MESSAGE);
             }
         }
-
     }//GEN-LAST:event_tblCartMouseClicked
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -1488,7 +1642,6 @@ public class Index extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please Select a Row to Remove", "Check Again", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyActionPerformed
@@ -1519,62 +1672,7 @@ public class Index extends javax.swing.JFrame {
 
         }
 
-
     }//GEN-LAST:event_btnBuyActionPerformed
-
-    private void btn_addtocartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addtocartActionPerformed
-        // Add a row to the cart table with the product details
-        int i = JOptionPane.showConfirmDialog(null, "Please Confirm!", "Add to Cart", JOptionPane.OK_CANCEL_OPTION);
-        if (i == 1) {
-            /* do nothing*/
-        }
-        if (i == 0) {
-            String Id = txtPD_Id.getText();
-            String name = txtProduct_Name.getText().replace(" ", "_");
-            int quantity = 1;
-
-            String Pprice = txtProduct_Price.getText();
-            Pprice = Pprice.replace("Rs: ", "").replace(".00/=", ""); // Remove prefixes and suffixes
-
-            int sum = Integer.parseInt(Pprice) * quantity;
-            String tot = Integer.toString(sum);
-
-            DefaultTableModel dt = (DefaultTableModel) tblCart.getModel();
-
-            // Check if the product with the same ID is already in the table
-            boolean productExists = false;
-            for (int rowIndex = 0; rowIndex < dt.getRowCount(); rowIndex++) {
-                if (dt.getValueAt(rowIndex, 0).equals(name)) { // Assuming the ID is in the first column
-                    productExists = true;
-                    break;
-                }
-            }
-
-            if (productExists) {
-                // Show a message here, for example:
-                JOptionPane.showMessageDialog(null, "Product already in the cart.", "Product Exists", JOptionPane.WARNING_MESSAGE);
-            } else {
-                Object[] toadd = {name, quantity, Pprice, tot + ".00", Id};
-                dt.addRow(toadd);
-            }
-
-        }
-    }//GEN-LAST:event_btn_addtocartActionPerformed
-
-    private void txtCardNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCardNumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCardNumberActionPerformed
-
-    private void txtCardOwnerNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCardOwnerNameKeyReleased
-        String NamePattern = "^[a-zA-Z]+$";
-        String Name = txtCardOwnerName.getText().trim();
-
-        if (!Name.matches(NamePattern)) {
-            txtCardOwnerName.setBorder(BorderFactory.createLineBorder(Color.RED));
-        } else {
-            txtCardOwnerName.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
-        }
-    }//GEN-LAST:event_txtCardOwnerNameKeyReleased
 
     private void txtExpDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExpDateKeyReleased
         String expirationDatePattern = "^(0[1-9]|1[0-2])\\/(\\d{2})$"; // MM/YY format
@@ -1605,14 +1703,9 @@ public class Index extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtExpDateKeyTyped
 
-    private void txtCardNumberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCardNumberKeyTyped
-
-        String text = txtCardNumber.getText().replaceAll("-", "");
-
-        if (text.length() == 4 || text.length() == 9 || text.length() == 14) {
-            txtCardNumber.setText(text + "-");
-        }
-    }//GEN-LAST:event_txtCardNumberKeyTyped
+    private void txtCardNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCardNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCardNumberActionPerformed
 
     private void txtCardNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCardNumberKeyPressed
         String text = txtCardNumber.getText().replaceAll("-", "");
@@ -1636,6 +1729,26 @@ public class Index extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCardNumberKeyReleased
 
+    private void txtCardNumberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCardNumberKeyTyped
+
+        String text = txtCardNumber.getText().replaceAll("-", "");
+
+        if (text.length() == 4 || text.length() == 9 || text.length() == 14) {
+            txtCardNumber.setText(text + "-");
+        }
+    }//GEN-LAST:event_txtCardNumberKeyTyped
+
+    private void txtCardOwnerNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCardOwnerNameKeyReleased
+        String NamePattern = "^[a-zA-Z]+$";
+        String Name = txtCardOwnerName.getText().trim();
+
+        if (!Name.matches(NamePattern)) {
+            txtCardOwnerName.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else {
+            txtCardOwnerName.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+    }//GEN-LAST:event_txtCardOwnerNameKeyReleased
+
     private void txtCvCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCvCodeKeyReleased
         String CVCodePattern = "^[0-9]{3}$"; // ### format
         String cvCode = txtCvCode.getText().trim();
@@ -1651,9 +1764,9 @@ public class Index extends javax.swing.JFrame {
         boolean valid = true;
 
         if (txtCardNumber.getText().trim().isEmpty()
-                || txtExpDate.getText().trim().isEmpty()
-                || txtCvCode.getText().trim().isEmpty()
-                || txtCardOwnerName.getText().trim().isEmpty()) {
+            || txtExpDate.getText().trim().isEmpty()
+            || txtCvCode.getText().trim().isEmpty()
+            || txtCardOwnerName.getText().trim().isEmpty()) {
             JOptionPane:
             JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Payment Details Form", JOptionPane.ERROR_MESSAGE);
             valid = false;
@@ -1728,6 +1841,10 @@ public class Index extends javax.swing.JFrame {
                 }
                 String formattedTotal = String.format("%.2f", totalSum);
                 txtTotalValue.setText("Rs. " + formattedTotal + "/="); // Assuming txtTotalPrice is a JTextField
+                
+                // Add a value to the total sum in to encryption file
+                toy.addToTotalSum(totalSum);
+                
 
                 // Clear all rows from the Cart table
                 sourceModel.setRowCount(0);
@@ -1741,14 +1858,12 @@ public class Index extends javax.swing.JFrame {
             }
 
         }
-
     }//GEN-LAST:event_btnConfirmPaymentActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1820,6 +1935,8 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -1839,6 +1956,9 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1849,6 +1969,10 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel lbl_Home_img1;
+    private javax.swing.JLabel lbl_Home_img2;
+    private javax.swing.JLabel lbl_Home_img3;
     private javax.swing.JLabel lbl_aboutUs;
     private javax.swing.JLabel lbl_cart;
     private javax.swing.JLabel lbl_home;
@@ -1858,6 +1982,9 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JTextField txtCardOwnerName;
     private javax.swing.JTextField txtCvCode;
     private javax.swing.JTextField txtExpDate;
+    private javax.swing.JLabel txtHome_product_name1;
+    private javax.swing.JLabel txtHome_product_name2;
+    private javax.swing.JLabel txtHome_product_name3;
     private javax.swing.JLabel txtPD_Id;
     private javax.swing.JLabel txtProduct_Category;
     private javax.swing.JLabel txtProduct_Description;
@@ -1868,5 +1995,11 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JTextField txtSearch1;
     private javax.swing.JLabel txtTotalPrice;
     private javax.swing.JLabel txtTotalValue;
+    private javax.swing.JLabel txt_Home_product_Price1;
+    private javax.swing.JLabel txt_Home_product_Price2;
+    private javax.swing.JLabel txt_Home_product_Price3;
+    private javax.swing.JLabel txt_Home_product_category1;
+    private javax.swing.JLabel txt_Home_product_category2;
+    private javax.swing.JLabel txt_Home_product_category3;
     // End of variables declaration//GEN-END:variables
 }

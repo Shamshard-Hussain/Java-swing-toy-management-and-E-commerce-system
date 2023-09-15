@@ -1,10 +1,14 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package GUI;
 
 import Classes.UserAccounts;
 import java.awt.Color;
 import java.awt.Image;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -14,14 +18,14 @@ import javax.swing.JOptionPane;
  * @author Sham
  */
 public class Sign_Page extends javax.swing.JFrame {
-   
+
     /**
      * Creates new form Sign_Page
      */
     public Sign_Page() {
         initComponents();
-      
         
+             
     ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
     Image image =(li).getImage().getScaledInstance(Right_Background.getWidth(), Right_Background.getHeight(),Image.SCALE_SMOOTH);
     li= new ImageIcon(image);
@@ -38,7 +42,6 @@ public class Sign_Page extends javax.swing.JFrame {
         txtConfirm_Password1.setEchoChar('\u25cf');
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,7 +90,7 @@ public class Sign_Page extends javax.swing.JFrame {
         btnsReset = new javax.swing.JButton();
         Sign_Back1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        Left_Background1 = new javax.swing.JLabel();
+        reset_Left_Background1 = new javax.swing.JLabel();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         btnsReset1 = new javax.swing.JButton();
@@ -332,12 +335,12 @@ public class Sign_Page extends javax.swing.JFrame {
             }
         });
         Right_Panel.add(btnForgot_Password2);
-        btnForgot_Password2.setBounds(380, 610, 140, 21);
+        btnForgot_Password2.setBounds(380, 601, 140, 30);
 
         Main.add(Right_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(498, 1, 520, 630));
 
         Right_Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Right_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
+        Right_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/login(3).jpg"))); // NOI18N
         Main.add(Right_Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 520, 630));
 
         getContentPane().add(Main, "card3");
@@ -429,9 +432,9 @@ public class Sign_Page extends javax.swing.JFrame {
         jLabel13.setText("Reset Password");
         Reset_password.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(498, 110, 520, 48));
 
-        Left_Background1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Left_Background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
-        Reset_password.add(Left_Background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 630));
+        reset_Left_Background1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        reset_Left_Background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/login(2).jpg"))); // NOI18N
+        Reset_password.add(reset_Left_Background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 630));
 
         jToggleButton2.setBackground(new java.awt.Color(238, 232, 232));
         jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-hide-15.png"))); // NOI18N
@@ -490,17 +493,328 @@ public class Sign_Page extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNewEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewEmailKeyReleased
-String PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
-Pattern patt = Pattern.compile(PATTERN);
-Matcher match = patt.matcher(txtNewEmail.getText().trim());
+    private void txtNewEmail1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewEmail1KeyReleased
+        String PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
+        Pattern patt = Pattern.compile(PATTERN);
+        Matcher match = patt.matcher(txtNewEmail1.getText().trim());
 
-if (!match.matches()) {
-    txtNewEmail.setBorder(BorderFactory.createLineBorder(Color.RED));
-} else {
-    txtNewEmail.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));  
-}
+        if (!match.matches()) {
+            txtNewEmail1.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else {
+            txtNewEmail1.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+    }//GEN-LAST:event_txtNewEmail1KeyReleased
+
+    private void txtNew_Password1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNew_Password1KeyReleased
+        if(txtNew_Password1.getText().trim().length()<8){
+            txtNew_Password1.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            txtNew_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+    }//GEN-LAST:event_txtNew_Password1KeyReleased
+
+    private void txtConfirm_Password1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirm_Password1KeyReleased
+        if(!txtNew_Password1.getText().trim().equals(txtConfirm_Password1.getText())){
+            txtConfirm_Password1.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            txtConfirm_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+    }//GEN-LAST:event_txtConfirm_Password1KeyReleased
+
+    private void btnsResetMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMouseEntered
+        btnsReset.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_btnsResetMouseEntered
+
+    private void btnsResetMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMouseExited
+        btnsReset.setBackground(new Color(255,102,51));
+    }//GEN-LAST:event_btnsResetMouseExited
+
+    private void btnsResetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMousePressed
+        btnsReset.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_btnsResetMousePressed
+
+    private void btnsResetMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMouseReleased
+        btnsReset.setBackground(new Color(255,102,51));
+    }//GEN-LAST:event_btnsResetMouseReleased
+
+    private void btnsResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsResetActionPerformed
+        boolean valid = true;
+
+        UserAccounts user = new UserAccounts();
+        boolean userExists = user.isUserExist(txtNewEmail1.getText().trim());
+
+        String PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
+        Pattern patt = Pattern.compile(PATTERN);
+        Matcher match = patt.matcher(txtNewEmail1.getText().trim());
+
+        if (txtNewEmail1.getText().trim().isEmpty()) {
+            JOptionPane:
+            JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }else if (!match.matches()) {
+            JOptionPane:
+            JOptionPane.showMessageDialog(null, "Invalid Email", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        } else if (userExists) {
+            JOptionPane.showMessageDialog(null, "User exists!", "Confirmed", JOptionPane.INFORMATION_MESSAGE);
+            valid = true;
+
+            txtNewEmail1.setEditable(false);
+
+            btnsReset.setText("Find Account");
+            jLabel11.setEnabled(true);
+            txtNew_Password1.setEnabled(true);;
+            jLabel12.setEnabled(true);
+            txtConfirm_Password1.setEnabled(true);
+            jToggleButton3.setEnabled(true);
+            jToggleButton2.setEnabled(true);
+            btnsReset.setVisible(false);
+            btnsReset1.setVisible(true);
+            btnsReset1.setText("Reset Password");
+        }
+    }//GEN-LAST:event_btnsResetActionPerformed
+
+    private void Sign_Back1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Sign_Back1MouseClicked
+        ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
+        Image image2 =(li).getImage().getScaledInstance(Right_Background.getWidth(), Right_Background.getHeight(),Image.SCALE_SMOOTH);
+        li= new ImageIcon(image2);
+        Right_Background.setIcon(li);
+
+        Main.setVisible(true);
+        Reset_password_Panel.setVisible(false);
+        Right_Panel.setVisible(false);
+        Right_Background.setVisible(true);
+        Left_Background.setVisible(false);
+        Left_Panel.setVisible(true);
+    }//GEN-LAST:event_Sign_Back1MouseClicked
+
+    private void jToggleButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton2MouseClicked
+        if(jToggleButton2.isSelected())
+        {txtConfirm_Password1.setEchoChar((char)0);}
+        else
+        {txtConfirm_Password1.setEchoChar('\u25cf');}
+    }//GEN-LAST:event_jToggleButton2MouseClicked
+
+    private void jToggleButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton3MouseClicked
+        if(jToggleButton3.isSelected())
+        {txtNew_Password1.setEchoChar((char)0);}
+        else
+        {txtNew_Password1.setEchoChar('\u25cf');}
+    }//GEN-LAST:event_jToggleButton3MouseClicked
+
+    private void btnsReset1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MouseEntered
+        btnsReset1.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_btnsReset1MouseEntered
+
+    private void btnsReset1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MouseExited
+        btnsReset1.setBackground(new Color(255,102,51));
+    }//GEN-LAST:event_btnsReset1MouseExited
+
+    private void btnsReset1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MousePressed
+        btnsReset1.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_btnsReset1MousePressed
+
+    private void btnsReset1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MouseReleased
+        btnsReset1.setBackground(new Color(255,102,51));
+    }//GEN-LAST:event_btnsReset1MouseReleased
+
+    private void btnsReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsReset1ActionPerformed
+        boolean valid = true;
+
+        if ( txtNew_Password1.getText().trim().isEmpty()
+            || txtConfirm_Password1.getText().trim().isEmpty()) {
+            JOptionPane:
+            JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }else if (txtNew_Password1.getText().trim().length() < 8) {
+            JOptionPane.showMessageDialog(null, "Password must have 8 characters", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        } else if (!txtNew_Password1.getText().trim().equals(txtConfirm_Password1.getText().trim())) {
+            JOptionPane.showMessageDialog(null, "Password and Cinfirm Password should match", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }else{
+            valid = true;
+            UserAccounts user = new UserAccounts();
+            String Email = txtNewEmail1.getText().trim();
+            String newPassword = txtNew_Password1.getText().trim();
+
+            boolean passwordResetSuccessful = user.resetPassword(Email, newPassword);
+            if (passwordResetSuccessful) {
+                //   System.out.println("Password reset successful.");
+                JOptionPane.showMessageDialog(null, "Password reset successful!", "Reset Password Form", JOptionPane.INFORMATION_MESSAGE);
+
+                btnsReset.setText("Find Account");
+                btnsReset.setVisible(true);
+                txtNewEmail1.setText(null);
+                txtNew_Password1.setText(null);
+                txtConfirm_Password1.setText(null);
+
+                txtNewEmail1.setBorder(BorderFactory.createLineBorder(Color.decode("#0078D7")));
+                txtNew_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0078D7")));
+                txtConfirm_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0078D7")));
+
+                jLabel11.setEnabled(false);
+                txtNew_Password1.setEnabled(false);;
+                jLabel12.setEnabled(false);
+                txtConfirm_Password1.setEnabled(false);
+                jToggleButton3.setEnabled(false);
+                jToggleButton2.setEnabled(false);
+                btnsReset1.setVisible(false);
+                txtNewEmail1.setEditable(true);
+
+                ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
+                Image image2 =(li).getImage().getScaledInstance(Right_Background.getWidth(), Right_Background.getHeight(),Image.SCALE_SMOOTH);
+                li= new ImageIcon(image2);
+                Right_Background.setIcon(li);
+
+                Main.setVisible(true);
+                Reset_password_Panel.setVisible(false);
+                Right_Panel.setVisible(false);
+                Right_Background.setVisible(true);
+                Left_Background.setVisible(false);
+                Left_Panel.setVisible(true);
+
+            } else {
+                //  System.out.println("Password reset failed");
+                JOptionPane.showMessageDialog(null, "Password reset failed", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnsReset1ActionPerformed
+
+    private void jToggleButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseClicked
+        if(jToggleButton1.isSelected())
+        {txtPassword.setEchoChar((char)0);}
+        else
+        {txtPassword.setEchoChar('\u25cf');}
+    }//GEN-LAST:event_jToggleButton1MouseClicked
+
+    private void btnSign_inMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSign_inMouseEntered
+        btnSign_in.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_btnSign_inMouseEntered
+
+    private void btnSign_inMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSign_inMouseExited
+        btnSign_in.setBackground(new Color(255,102,51));
+    }//GEN-LAST:event_btnSign_inMouseExited
+
+    private void btnSign_inMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSign_inMousePressed
+        btnSign_in.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_btnSign_inMousePressed
+
+    private void btnSign_inMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSign_inMouseReleased
+        btnSign_in.setBackground(new Color(255,102,51));
+    }//GEN-LAST:event_btnSign_inMouseReleased
+
+    private void btnSign_inActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSign_inActionPerformed
+        boolean valid = true;
+        UserAccounts user = new UserAccounts();
+        String userid = txtEmail.getText().trim();
+        String pass = txtPassword.getText().trim();
+
+        if (txtEmail.getText().trim().isEmpty() || txtPassword.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Field can't be Empty", "Sign in", JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+
+        if (valid) {
+            if (userid.equals("admin") && pass.equals("1234")) {
+                JOptionPane.showMessageDialog(null, "Sign in as Admin ", "Sign in", JOptionPane.INFORMATION_MESSAGE);
+                Administrator_Panel ap = new Administrator_Panel();
+                ap.setVisible(true);
+                this.dispose();
+            } else if (user.login(userid, pass)) {
+                // Login successful
+                Index home = new Index();
+                home.setVisible(true);
+                JOptionPane.showMessageDialog(null, "Login successful !");
+                this.dispose();
+            } else {
+                // Login failed
+                JOptionPane.showMessageDialog(this, "Invalid Username or Password !");
+            }
+        }
+    }//GEN-LAST:event_btnSign_inActionPerformed
+
+    private void btnCreat_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreat_UserActionPerformed
+        ImageIcon li =new ImageIcon(getClass().getResource("/Images/login(3).jpg"));
+        Image image2 =(li).getImage().getScaledInstance(Left_Background.getWidth(), Left_Background.getHeight(),Image.SCALE_SMOOTH);
+        li= new ImageIcon(image2);
+        Left_Background.setIcon(li);
+
+        Left_Panel.setVisible(false);
+        Right_Panel.setVisible(true);
+        Left_Background.setVisible(true);
+        Right_Background.setVisible(false);
+    }//GEN-LAST:event_btnCreat_UserActionPerformed
+
+    private void btnForgot_PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgot_PasswordActionPerformed
+        ImageIcon li = new ImageIcon(getClass().getResource("/Images/login(2).jpg"));
+        Image image2 = (li).getImage().getScaledInstance(reset_Left_Background1.getWidth(), reset_Left_Background1.getHeight(), Image.SCALE_SMOOTH);
+        li = new ImageIcon(image2);
+        reset_Left_Background1.setIcon(li);
+
+        btnsReset.setText("Find Account");
+        jLabel11.setEnabled(false);
+        txtNew_Password1.setEnabled(false);;
+        jLabel12.setEnabled(false);
+        txtConfirm_Password1.setEnabled(false);
+        jToggleButton3.setEnabled(false);
+        jToggleButton2.setEnabled(false);
+        btnsReset1.setVisible(false);
+
+        Main.setVisible(false);
+        Reset_password_Panel.setVisible(true);
+    }//GEN-LAST:event_btnForgot_PasswordActionPerformed
+
+    private void txtFirst_NameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirst_NameKeyReleased
+        String firstNamePattern = "^[a-zA-Z]+$";
+        String firstName = txtFirst_Name.getText().trim();
+
+        if (!firstName.matches(firstNamePattern)) {
+            txtFirst_Name.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else {
+            txtFirst_Name.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+    }//GEN-LAST:event_txtFirst_NameKeyReleased
+
+    private void txtLast_NameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLast_NameKeyReleased
+        String firstNamePattern = "^[a-zA-Z]+$";
+        String lastName = txtLast_Name.getText().trim();
+
+        if (!lastName.matches(firstNamePattern)) {
+            txtLast_Name.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else {
+            txtLast_Name.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+    }//GEN-LAST:event_txtLast_NameKeyReleased
+
+    private void txtNewEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewEmailKeyReleased
+        String PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
+        Pattern patt = Pattern.compile(PATTERN);
+        Matcher match = patt.matcher(txtNewEmail.getText().trim());
+
+        if (!match.matches()) {
+            txtNewEmail.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else {
+            txtNewEmail.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
     }//GEN-LAST:event_txtNewEmailKeyReleased
+
+    private void txtNew_PasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNew_PasswordKeyReleased
+        if(txtNew_Password.getText().trim().length()<8){
+            txtNew_Password.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            txtNew_Password.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+    }//GEN-LAST:event_txtNew_PasswordKeyReleased
+
+    private void txtConfirm_PasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirm_PasswordKeyReleased
+        if(!txtNew_Password.getText().trim().equals(txtConfirm_Password.getText())){
+            txtConfirm_Password.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            txtConfirm_Password.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
+        }
+
+    }//GEN-LAST:event_txtConfirm_PasswordKeyReleased
 
     private void btnsignupMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsignupMouseEntered
         btnsignup.setBackground(new Color(255,102,0));
@@ -525,10 +839,10 @@ if (!match.matches()) {
         boolean userExists = user.isUserExist(txtNewEmail.getText().trim());
 
         if (txtFirst_Name.getText().trim().isEmpty()
-                || txtLast_Name.getText().trim().isEmpty()
-                || txtNewEmail.getText().trim().isEmpty()
-                || txtNew_Password.getText().trim().isEmpty()
-                || txtConfirm_Password.getText().trim().isEmpty()) {
+            || txtLast_Name.getText().trim().isEmpty()
+            || txtNewEmail.getText().trim().isEmpty()
+            || txtNew_Password.getText().trim().isEmpty()
+            || txtConfirm_Password.getText().trim().isEmpty()) {
             JOptionPane:
             JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Register Form", JOptionPane.ERROR_MESSAGE);
             valid = false;
@@ -536,14 +850,14 @@ if (!match.matches()) {
             JOptionPane.showMessageDialog(null, "User already exists!", "Error", JOptionPane.ERROR_MESSAGE);
             valid = false;
         } else {
-            
+
             String PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
             Pattern patt = Pattern.compile(PATTERN);
             Matcher match = patt.matcher(txtNewEmail.getText().trim());
-            
+
             String firstNamePattern = "^[a-zA-Z]+$";
             String firstName = txtLast_Name.getText().trim();
-            
+
             String lastNamePattern = "^[a-zA-Z]+$";
             String lastName = txtLast_Name.getText().trim();
 
@@ -553,7 +867,7 @@ if (!match.matches()) {
                 valid = false;
             }
             else if (!lastName.matches(lastNamePattern)) {
-            JOptionPane:
+                JOptionPane:
                 JOptionPane.showMessageDialog(null, "Invalid Last Name", "Register Form", JOptionPane.ERROR_MESSAGE);
                 valid = false;
             }else if (!match.matches()) {
@@ -595,352 +909,35 @@ if (!match.matches()) {
     }//GEN-LAST:event_btnsignupActionPerformed
 
     private void Sign_BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Sign_BackMouseClicked
-    ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
-    Image image2 =(li).getImage().getScaledInstance(Right_Background.getWidth(), Right_Background.getHeight(),Image.SCALE_SMOOTH);
-    li= new ImageIcon(image2);
-    Right_Background.setIcon(li);
-    
-      
+        ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
+        Image image2 =(li).getImage().getScaledInstance(Right_Background.getWidth(), Right_Background.getHeight(),Image.SCALE_SMOOTH);
+        li= new ImageIcon(image2);
+        Right_Background.setIcon(li);
+
         Right_Panel.setVisible(false);
         Right_Background.setVisible(true);
         Left_Background.setVisible(false);
         Left_Panel.setVisible(true);
     }//GEN-LAST:event_Sign_BackMouseClicked
 
-    private void jToggleButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseClicked
-        if(jToggleButton1.isSelected())
-        {txtPassword.setEchoChar((char)0);}
-        else
-        {txtPassword.setEchoChar('\u25cf');}
-    }//GEN-LAST:event_jToggleButton1MouseClicked
-
-    private void btnSign_inMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSign_inMouseEntered
-        btnSign_in.setBackground(new Color(255,102,0));
-    }//GEN-LAST:event_btnSign_inMouseEntered
-
-    private void btnSign_inMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSign_inMouseExited
-        btnSign_in.setBackground(new Color(255,102,51));
-    }//GEN-LAST:event_btnSign_inMouseExited
-
-    private void btnSign_inMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSign_inMousePressed
-        btnSign_in.setBackground(new Color(255,102,0));
-    }//GEN-LAST:event_btnSign_inMousePressed
-
-    private void btnSign_inMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSign_inMouseReleased
-        btnSign_in.setBackground(new Color(255,102,51));
-    }//GEN-LAST:event_btnSign_inMouseReleased
-
-    private void btnSign_inActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSign_inActionPerformed
- boolean valid = true;
-UserAccounts user = new UserAccounts();
-String userid = txtEmail.getText().trim();
-String pass = txtPassword.getText().trim();
-
-if (txtEmail.getText().trim().isEmpty() || txtPassword.getText().trim().isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Field can't be Empty", "Sign in", JOptionPane.ERROR_MESSAGE);
-    valid = false;
-}
-
-if (valid) {
-    if (userid.equals("admin") && pass.equals("1234")) {
-        JOptionPane.showMessageDialog(null, "Sign in as Admin ", "Sign in", JOptionPane.INFORMATION_MESSAGE);
-        Administrator_Panel ap = new Administrator_Panel();
-        ap.setVisible(true);
-        this.dispose();
-    } else if (user.login(userid, pass)) {
-        // Login successful
-        Index home = new Index();
-        home.setVisible(true);
-        JOptionPane.showMessageDialog(null, "Login successful !");
-        this.dispose();
-    } else {
-        // Login failed
-        JOptionPane.showMessageDialog(this, "Invalid Username or Password !");
-    }
-}
-
-    }//GEN-LAST:event_btnSign_inActionPerformed
-
-    private void btnCreat_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreat_UserActionPerformed
-ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
-    Image image2 =(li).getImage().getScaledInstance(Left_Background.getWidth(), Left_Background.getHeight(),Image.SCALE_SMOOTH);
-    li= new ImageIcon(image2);
-    Left_Background.setIcon(li);
-    
-         Left_Panel.setVisible(false);
-         Right_Panel.setVisible(true);
-         Left_Background.setVisible(true);
-         Right_Background.setVisible(false);
-    }//GEN-LAST:event_btnCreat_UserActionPerformed
-
-    private void txtFirst_NameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirst_NameKeyReleased
-       String firstNamePattern = "^[a-zA-Z]+$";
-String firstName = txtFirst_Name.getText().trim();
-
-if (!firstName.matches(firstNamePattern)) {
-    txtFirst_Name.setBorder(BorderFactory.createLineBorder(Color.RED));
-} else {
-    txtFirst_Name.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
-}
-
-    }//GEN-LAST:event_txtFirst_NameKeyReleased
-
-    private void txtLast_NameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLast_NameKeyReleased
-              String firstNamePattern = "^[a-zA-Z]+$";
-String lastName = txtLast_Name.getText().trim();
-
-if (!lastName.matches(firstNamePattern)) {
-    txtLast_Name.setBorder(BorderFactory.createLineBorder(Color.RED));
-} else {
-    txtLast_Name.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
-}
-    }//GEN-LAST:event_txtLast_NameKeyReleased
-
-    private void txtNew_PasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNew_PasswordKeyReleased
-     if(txtNew_Password.getText().trim().length()<8){
-      txtNew_Password.setBorder(BorderFactory.createLineBorder(Color.RED));
-     }else{
-     txtNew_Password.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
-     }
-    }//GEN-LAST:event_txtNew_PasswordKeyReleased
-
-    private void txtConfirm_PasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirm_PasswordKeyReleased
-      if(!txtNew_Password.getText().trim().equals(txtConfirm_Password.getText())){
-       txtConfirm_Password.setBorder(BorderFactory.createLineBorder(Color.RED));
-      }else{
-     txtConfirm_Password.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
-     }
-     
-    }//GEN-LAST:event_txtConfirm_PasswordKeyReleased
-
-    private void txtNewEmail1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewEmail1KeyReleased
-       String PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
-Pattern patt = Pattern.compile(PATTERN);
-Matcher match = patt.matcher(txtNewEmail1.getText().trim());
-
-if (!match.matches()) {
-    txtNewEmail1.setBorder(BorderFactory.createLineBorder(Color.RED));
-} else {
-    txtNewEmail1.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));  
-}
-    }//GEN-LAST:event_txtNewEmail1KeyReleased
-
-    private void txtNew_Password1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNew_Password1KeyReleased
-       if(txtNew_Password1.getText().trim().length()<8){
-       txtNew_Password1.setBorder(BorderFactory.createLineBorder(Color.RED));
-      }else{
-     txtNew_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
-     }
-    }//GEN-LAST:event_txtNew_Password1KeyReleased
-
-    private void txtConfirm_Password1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirm_Password1KeyReleased
-         if(!txtNew_Password1.getText().trim().equals(txtConfirm_Password1.getText())){
-       txtConfirm_Password1.setBorder(BorderFactory.createLineBorder(Color.RED));
-      }else{
-     txtConfirm_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0ed145")));
-     }
-    }//GEN-LAST:event_txtConfirm_Password1KeyReleased
-
-    private void btnsResetMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMouseEntered
-        btnsReset.setBackground(new Color(255,102,0));
-    }//GEN-LAST:event_btnsResetMouseEntered
-
-    private void btnsResetMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMouseExited
-         btnsReset.setBackground(new Color(255,102,51));
-    }//GEN-LAST:event_btnsResetMouseExited
-
-    private void btnsResetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMousePressed
-        btnsReset.setBackground(new Color(255,102,0));
-    }//GEN-LAST:event_btnsResetMousePressed
-
-    private void btnsResetMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsResetMouseReleased
-       btnsReset.setBackground(new Color(255,102,51));
-    }//GEN-LAST:event_btnsResetMouseReleased
-
-    private void btnsResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsResetActionPerformed
-       boolean valid = true;
-
-        
-        UserAccounts user = new UserAccounts();
-        boolean userExists = user.isUserExist(txtNewEmail1.getText().trim());
-        
-         String PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
-            Pattern patt = Pattern.compile(PATTERN);
-            Matcher match = patt.matcher(txtNewEmail1.getText().trim());
-        
-       if (txtNewEmail1.getText().trim().isEmpty()) {
-            JOptionPane:
-            JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
-            valid = false;
-        }else if (!match.matches()) {
-                JOptionPane:
-                JOptionPane.showMessageDialog(null, "Invalid Email", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
-                valid = false;  
-        } else if (userExists) {
-            JOptionPane.showMessageDialog(null, "User exists!", "Confirmed", JOptionPane.INFORMATION_MESSAGE);
-            valid = true;
-            
-            txtNewEmail1.setEditable(false);
-            
-        btnsReset.setText("Find Account");
-        jLabel11.setEnabled(true);
-        txtNew_Password1.setEnabled(true);;
-        jLabel12.setEnabled(true);
-        txtConfirm_Password1.setEnabled(true); 
-        jToggleButton3.setEnabled(true);
-        jToggleButton2.setEnabled(true);
-        btnsReset.setVisible(false);
-        btnsReset1.setVisible(true);
-        btnsReset1.setText("Reset Password");
-        }
-    }//GEN-LAST:event_btnsResetActionPerformed
-
-    private void Sign_Back1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Sign_Back1MouseClicked
-      ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
-    Image image2 =(li).getImage().getScaledInstance(Right_Background.getWidth(), Right_Background.getHeight(),Image.SCALE_SMOOTH);
-    li= new ImageIcon(image2);
-    Right_Background.setIcon(li);
-    
-      Main.setVisible(true);
-        Reset_password_Panel.setVisible(false);
-        Right_Panel.setVisible(false);
-        Right_Background.setVisible(true);
-        Left_Background.setVisible(false);
-        Left_Panel.setVisible(true);
-    }//GEN-LAST:event_Sign_Back1MouseClicked
-
-    private void jToggleButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton2MouseClicked
-      if(jToggleButton2.isSelected())
-        {txtConfirm_Password1.setEchoChar((char)0);}
-        else
-        {txtConfirm_Password1.setEchoChar('\u25cf');}
-    }//GEN-LAST:event_jToggleButton2MouseClicked
-
-    private void jToggleButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton3MouseClicked
-      if(jToggleButton3.isSelected())
-        {txtNew_Password1.setEchoChar((char)0);}
-        else
-        {txtNew_Password1.setEchoChar('\u25cf');}
-    }//GEN-LAST:event_jToggleButton3MouseClicked
-
-    private void btnForgot_PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgot_PasswordActionPerformed
-        ImageIcon li = new ImageIcon(getClass().getResource("/Images/image.jpg"));
-        Image image2 = (li).getImage().getScaledInstance(Left_Background1.getWidth(), Left_Background1.getHeight(), Image.SCALE_SMOOTH);
-        li = new ImageIcon(image2);
-        Left_Background1.setIcon(li);
-
-        btnsReset.setText("Find Account");
-        jLabel11.setEnabled(false);
-        txtNew_Password1.setEnabled(false);;
-        jLabel12.setEnabled(false);
-        txtConfirm_Password1.setEnabled(false); 
-        jToggleButton3.setEnabled(false);
-        jToggleButton2.setEnabled(false);
-        btnsReset1.setVisible(false);
-        
-                 
-        Main.setVisible(false);
-        Reset_password_Panel.setVisible(true);
-    }//GEN-LAST:event_btnForgot_PasswordActionPerformed
-
     private void btnForgot_Password2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgot_Password2ActionPerformed
-        ImageIcon li = new ImageIcon(getClass().getResource("/Images/image.jpg"));
-        Image image2 = (li).getImage().getScaledInstance(Left_Background1.getWidth(), Left_Background1.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon li = new ImageIcon(getClass().getResource("/Images/login(2).jpg"));
+        Image image2 = (li).getImage().getScaledInstance(reset_Left_Background1.getWidth(), reset_Left_Background1.getHeight(), Image.SCALE_SMOOTH);
         li = new ImageIcon(image2);
-        
+
         btnsReset.setText("Find Account");
         jLabel11.setEnabled(false);
         txtNew_Password1.setEnabled(false);;
         jLabel12.setEnabled(false);
-        txtConfirm_Password1.setEnabled(false); 
+        txtConfirm_Password1.setEnabled(false);
         jToggleButton3.setEnabled(false);
         jToggleButton2.setEnabled(false);
         btnsReset1.setVisible(false);
-                 
-        Left_Background1.setIcon(li);
+
+        reset_Left_Background1.setIcon(li);
         Main.setVisible(false);
         Reset_password_Panel.setVisible(true);
     }//GEN-LAST:event_btnForgot_Password2ActionPerformed
-
-    private void btnsReset1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MouseEntered
-        btnsReset1.setBackground(new Color(255,102,0));
-    }//GEN-LAST:event_btnsReset1MouseEntered
-
-    private void btnsReset1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MouseExited
-        btnsReset1.setBackground(new Color(255,102,51));
-    }//GEN-LAST:event_btnsReset1MouseExited
-
-    private void btnsReset1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MousePressed
-         btnsReset1.setBackground(new Color(255,102,0));
-    }//GEN-LAST:event_btnsReset1MousePressed
-
-    private void btnsReset1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsReset1MouseReleased
-       btnsReset1.setBackground(new Color(255,102,51));
-    }//GEN-LAST:event_btnsReset1MouseReleased
-
-    private void btnsReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsReset1ActionPerformed
-       boolean valid = true;
-       
-       if ( txtNew_Password1.getText().trim().isEmpty()
-                || txtConfirm_Password1.getText().trim().isEmpty()) {
-            JOptionPane:
-            JOptionPane.showMessageDialog(null, "Feild can't be Empty", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
-            valid = false;
-        }else if (txtNew_Password1.getText().trim().length() < 8) {
-                JOptionPane.showMessageDialog(null, "Password must have 8 characters", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
-                valid = false;
-        } else if (!txtNew_Password1.getText().trim().equals(txtConfirm_Password1.getText().trim())) {
-                JOptionPane.showMessageDialog(null, "Password and Cinfirm Password should match", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
-                valid = false;
-        }else{
-        valid = true;
-        UserAccounts user = new UserAccounts();
-        String Email = txtNewEmail1.getText().trim();
-        String newPassword = txtNew_Password1.getText().trim();
-        
-        boolean passwordResetSuccessful = user.resetPassword(Email, newPassword);
-        if (passwordResetSuccessful) {
-         //   System.out.println("Password reset successful.");
-             JOptionPane.showMessageDialog(null, "Password reset successful!", "Reset Password Form", JOptionPane.INFORMATION_MESSAGE);
-        
-        btnsReset.setText("Find Account");
-        btnsReset.setVisible(true);
-          txtNewEmail1.setText(null);
-          txtNew_Password1.setText(null);
-        txtConfirm_Password1.setText(null);
-        
-        txtNewEmail1.setBorder(BorderFactory.createLineBorder(Color.decode("#0078D7")));  
-        txtNew_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0078D7")));  
-        txtConfirm_Password1.setBorder(BorderFactory.createLineBorder(Color.decode("#0078D7")));  
-        
-        jLabel11.setEnabled(false);
-        txtNew_Password1.setEnabled(false);;
-        jLabel12.setEnabled(false);
-        txtConfirm_Password1.setEnabled(false); 
-        jToggleButton3.setEnabled(false);
-        jToggleButton2.setEnabled(false);
-        btnsReset1.setVisible(false);
-        txtNewEmail1.setEditable(true);
-        
-        ImageIcon li =new ImageIcon(getClass().getResource("/Images/image.jpg"));
-    Image image2 =(li).getImage().getScaledInstance(Right_Background.getWidth(), Right_Background.getHeight(),Image.SCALE_SMOOTH);
-    li= new ImageIcon(image2);
-    Right_Background.setIcon(li);
-    
-      Main.setVisible(true);
-        Reset_password_Panel.setVisible(false);
-        Right_Panel.setVisible(false);
-        Right_Background.setVisible(true);
-        Left_Background.setVisible(false);
-        Left_Panel.setVisible(true);
-        
-
-        } else {
-          //  System.out.println("Password reset failed");
-             JOptionPane.showMessageDialog(null, "Password reset failed", "Reset Password Form", JOptionPane.ERROR_MESSAGE);
-        }
-        }
-    }//GEN-LAST:event_btnsReset1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -979,7 +976,6 @@ if (!match.matches()) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Left_Background;
-    private javax.swing.JLabel Left_Background1;
     private javax.swing.JPanel Left_Panel;
     private javax.swing.JPanel Main;
     private javax.swing.JPanel Reset_password;
@@ -1011,6 +1007,7 @@ if (!match.matches()) {
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JLabel reset_Left_Background1;
     private javax.swing.JPasswordField txtConfirm_Password;
     private javax.swing.JPasswordField txtConfirm_Password1;
     private javax.swing.JTextField txtEmail;

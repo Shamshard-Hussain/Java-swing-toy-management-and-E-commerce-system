@@ -44,14 +44,12 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 /**
  *
  * @author Sham
  */
 public class Administrator_Panel extends javax.swing.JFrame {
-
-    private Category category;
+private Category category;
     Product toy = new Product();
     UserAccounts newuser = new UserAccounts();
 
@@ -64,7 +62,17 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
     public Administrator_Panel() {
         initComponents();
-        
+
+        double totalSum1 = toy.getTotalSum();
+        jLabel2.setText(String.valueOf(totalSum1) + "0/= LKR"); // Convert double to String
+
+        int CustomerCount = newuser.getCustomerCount();
+        jLabel5.setHorizontalAlignment(SwingConstants.RIGHT);
+        jLabel5.setText(String.valueOf(CustomerCount));
+
+        int productCount = toy.getProductCount();
+        jLabel7.setHorizontalAlignment(SwingConstants.RIGHT);
+        jLabel7.setText(String.valueOf(productCount));
 
         category = new Category();
 
@@ -74,16 +82,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (admin_slider.isShowing()) {
                     showNextImage();
-                    
-                    int CustomerCount = newuser.getCustomerCount();
-                    jLabel5.setHorizontalAlignment(SwingConstants.RIGHT);
-                    jLabel5.setText(String.valueOf(CustomerCount));
-                   
-                    int productCount = toy.getProductCount();
-                    jLabel7.setHorizontalAlignment(SwingConstants.RIGHT);
-                    jLabel7.setText(String.valueOf(productCount));
-                   
-
                 }
             }
         });
@@ -125,8 +123,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
             return this;
         }
     }
-
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -401,22 +397,23 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Sold Items");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel2.setFocusable(false);
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 40));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-shopping-cart-30 (1).png"))); // NOI18N
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 30, 40));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 30, 40));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Sold Items");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 80, 20));
+        jLabel11.setText("Total Income");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 90, 20));
 
-        Admin_home_page.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 220, 90));
+        Admin_home_page.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 150, 240, 90));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel4.setText("Administrator Home");
@@ -428,44 +425,46 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("User Count");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel5.setFocusable(false);
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 40));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, 40));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-people-30.png"))); // NOI18N
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 30, 40));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 30, 40));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("User Count");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 80, 20));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 80, 20));
 
-        Admin_home_page.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 220, 90));
+        Admin_home_page.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 230, 90));
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 153));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Count");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel7.setFocusable(false);
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 40));
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, 40));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-packing-30 (1).png"))); // NOI18N
         jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 30, 40));
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 30, 40));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Product Count");
-        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 100, 20));
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 100, 20));
 
-        Admin_home_page.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 220, 90));
+        Admin_home_page.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 230, 90));
         Admin_home_page.add(admin_slider, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 610, 340));
 
         Admin_body_panel.add(Admin_home_page, "card2");
@@ -671,7 +670,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jLabel26.setText("Toy ID:");
         Update_Products_Panel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 104, -1));
 
-        txtToy_ID1.setBackground(null);
         txtToy_ID1.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
         txtToy_ID1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 64)));
         txtToy_ID1.setEnabled(false);
@@ -713,7 +711,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
         jLabel31.setText("Category:");
         Update_Products_Panel.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 104, -1));
 
-        cmbProduct_Category.setBackground(null);
         cmbProduct_Category.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cmbProduct_Category.setBorder(null);
         Update_Products_Panel.add(cmbProduct_Category, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 220, -1));
@@ -899,7 +896,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Main_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 689, Short.MAX_VALUE)
+            .addComponent(Main_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -922,6 +919,24 @@ public class Administrator_Panel extends javax.swing.JFrame {
         btnAdmin_Customers.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_btnAdmin_CustomersMouseReleased
 
+    private void btnAdmin_CustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin_CustomersActionPerformed
+        Admin_body_panel.removeAll();
+        Admin_body_panel.add(View_Customer_details);
+        Admin_body_panel.repaint();
+        Admin_body_panel.revalidate();
+
+        DefaultTableModel model = (DefaultTableModel) UserTable.getModel();
+        model.setRowCount(0);
+        String allUser = newuser.viewAllUser();
+        String[] pro = allUser.split("/");
+
+        for (int i = 0; i < pro.length; i++) {
+            String line = pro[i].toString().trim();
+            String[] dataRow = line.split(" ");
+            model.addRow(dataRow);
+        }
+    }//GEN-LAST:event_btnAdmin_CustomersActionPerformed
+
     private void btnAdmin_CategoriesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdmin_CategoriesMouseEntered
         btnAdmin_Categories.setBackground(new Color(0, 77, 64));
     }//GEN-LAST:event_btnAdmin_CategoriesMouseEntered
@@ -937,6 +952,17 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private void btnAdmin_CategoriesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdmin_CategoriesMouseReleased
         btnAdmin_Categories.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_btnAdmin_CategoriesMouseReleased
+
+    private void btnAdmin_CategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin_CategoriesActionPerformed
+        Admin_body_panel.removeAll();
+        Admin_body_panel.add(Manage_categoryes);
+        Admin_body_panel.repaint();
+        Admin_body_panel.revalidate();
+
+        // Category category = new Category();
+        category.populateCategoryTable(tbl_Category);
+        tbl_Category.getColumnModel().getColumn(1).setCellRenderer(new IconCellRenderer());
+    }//GEN-LAST:event_btnAdmin_CategoriesActionPerformed
 
     private void btnAdmin_productMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdmin_productMouseEntered
         btnAdmin_product.setBackground(new Color(0, 77, 64));
@@ -965,9 +991,12 @@ public class Administrator_Panel extends javax.swing.JFrame {
         toy.displayProductData(Product_Table);
     }//GEN-LAST:event_btnAdmin_productActionPerformed
 
+    private void btnAdmin_HomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdmin_HomeMouseEntered
+        btnAdmin_Home.setBackground(new Color(0, 77, 64));
+    }//GEN-LAST:event_btnAdmin_HomeMouseEntered
+
     private void btnAdmin_HomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdmin_HomeMouseExited
         btnAdmin_Home.setBackground(new Color(102, 102, 102));
-
     }//GEN-LAST:event_btnAdmin_HomeMouseExited
 
     private void btnAdmin_HomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdmin_HomeMousePressed
@@ -976,23 +1005,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
 
     private void btnAdmin_HomeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdmin_HomeMouseReleased
         btnAdmin_Home.setBackground(new Color(102, 102, 102));
-
     }//GEN-LAST:event_btnAdmin_HomeMouseReleased
-
-    private void btnAdmin_HomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdmin_HomeMouseEntered
-        btnAdmin_Home.setBackground(new Color(0, 77, 64));
-    }//GEN-LAST:event_btnAdmin_HomeMouseEntered
-
-    private void btnAdmin_CategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin_CategoriesActionPerformed
-        Admin_body_panel.removeAll();
-        Admin_body_panel.add(Manage_categoryes);
-        Admin_body_panel.repaint();
-        Admin_body_panel.revalidate();
-
-        // Category category = new Category();
-        category.populateCategoryTable(tbl_Category);
-        tbl_Category.getColumnModel().getColumn(1).setCellRenderer(new IconCellRenderer());
-    }//GEN-LAST:event_btnAdmin_CategoriesActionPerformed
 
     private void btnAdmin_HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin_HomeActionPerformed
         Admin_body_panel.removeAll();
@@ -1001,18 +1014,16 @@ public class Administrator_Panel extends javax.swing.JFrame {
         Admin_body_panel.revalidate();
     }//GEN-LAST:event_btnAdmin_HomeActionPerformed
 
-    private void tbl_CategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_CategoryMouseClicked
-
-        int selectedRow = tbl_Category.getSelectedRow();
-        if (selectedRow != -1) {
-            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this category?", "Confirmation", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                String categoryName = (String) tbl_Category.getValueAt(selectedRow, 0);
-                DefaultTableModel tableModel = (DefaultTableModel) tbl_Category.getModel();
-                category.deleteCategory(categoryName, tableModel, selectedRow);
-            }
+    private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
+        int i = JOptionPane.showConfirmDialog(null, "Do you want to logout", "Logout?", JOptionPane.YES_NO_OPTION);
+        if (i == 1) {/* do nothing*/
         }
-    }//GEN-LAST:event_tbl_CategoryMouseClicked
+        if (i == 0) {
+            Sign_Page sp = new Sign_Page();
+            sp.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jLabel35MouseClicked
 
     private void btn_add_categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_categoryActionPerformed
         boolean valid = true;
@@ -1052,6 +1063,19 @@ public class Administrator_Panel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_add_categoryActionPerformed
 
+    private void tbl_CategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_CategoryMouseClicked
+
+        int selectedRow = tbl_Category.getSelectedRow();
+        if (selectedRow != -1) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this category?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                String categoryName = (String) tbl_Category.getValueAt(selectedRow, 0);
+                DefaultTableModel tableModel = (DefaultTableModel) tbl_Category.getModel();
+                category.deleteCategory(categoryName, tableModel, selectedRow);
+            }
+        }
+    }//GEN-LAST:event_tbl_CategoryMouseClicked
+
     private void txt_newCategorynameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_newCategorynameKeyReleased
         String NamePattern = "^[a-zA-Z]+$";
         String CategoryName = txt_newCategoryname.getText().trim();
@@ -1063,44 +1087,18 @@ public class Administrator_Panel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_newCategorynameKeyReleased
 
-    private void btn_add_ProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_ProductsActionPerformed
-        String filePath = "PRODUCTS.txt"; // Set your data file path
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            int generatedId = Product.generateProductId(reader);
-            String formattedId = "C" + String.format("%03d", generatedId); // Format as "C001"
-           // System.out.println("Generated ID: " + formattedId); // Print generated ID for debugging
-
-                txtToy_ID.setText(formattedId);
-                txtToy_ID.revalidate(); // Trigger layout revalidation
-                txtToy_ID.repaint();    // Trigger repaint
-            
-        } catch (IOException e) {
-            System.out.println("Id  Canot be Generate " + e);
-            JOptionPane.showMessageDialog(null, "Sorry! Somthing Went Wrong,Id  Canot be Generate", "Add New Product", JOptionPane.WARNING_MESSAGE);
-        }
-
-        
-        
-        Admin_body_panel.removeAll();
-        Admin_body_panel.add(Add_Products_Panel);
-        Admin_body_panel.repaint();
-        Admin_body_panel.revalidate();
-        category.populateCategoryComboBox(cmbCategory);
-    }//GEN-LAST:event_btn_add_ProductsActionPerformed
-
     private void btn_add_new_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_new_productActionPerformed
         boolean valid = true;
 
         boolean tidExists = toy.isPIDExist(txtToy_ID.getText());
 
         if (txtToy_ID.getText().trim().isEmpty()
-                || txtModel_Name.getText().trim().isEmpty()
-                || txtPrice.getText().trim().isEmpty()
-                || txtAge_Group.getText().trim().isEmpty()
-                || txtQty.getText().trim().isEmpty()
-                || cmbCategory.getSelectedItem().toString().isEmpty()
-                || txtDescription.getText().trim().isEmpty()) {
+            || txtModel_Name.getText().trim().isEmpty()
+            || txtPrice.getText().trim().isEmpty()
+            || txtAge_Group.getText().trim().isEmpty()
+            || txtQty.getText().trim().isEmpty()
+            || cmbCategory.getSelectedItem().toString().isEmpty()
+            || txtDescription.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Field can't be Empty", "Add New Product", JOptionPane.ERROR_MESSAGE);
             valid = false;
         } else if (tidExists) {
@@ -1173,7 +1171,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Sorry! Something Went Wrong", "Add New Products", JOptionPane.WARNING_MESSAGE);
             }
         }
-
     }//GEN-LAST:event_btn_add_new_productActionPerformed
 
     private void imgProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgProductMouseClicked
@@ -1206,83 +1203,47 @@ public class Administrator_Panel extends javax.swing.JFrame {
                 }
                 //   System.out.println("Selected file: " + imageName);
             } catch (IOException e) {
-               // e.printStackTrace();
-               JOptionPane.showMessageDialog(null, "Sorry! Image not Selected", "Add New Product", JOptionPane.WARNING_MESSAGE);
+                // e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Sorry! Image not Selected", "Add New Product", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_imgProductMouseClicked
 
-    private void btnAdmin_CustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin_CustomersActionPerformed
-        Admin_body_panel.removeAll();
-        Admin_body_panel.add(View_Customer_details);
-        Admin_body_panel.repaint();
-        Admin_body_panel.revalidate();
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        String productCodeToDelete = txtToy_ID1.getText();
+        String oldImage = imgProduct1.getText();
 
-        DefaultTableModel model = (DefaultTableModel) UserTable.getModel();
-        model.setRowCount(0);
-        String allUser = newuser.viewAllUser();
-        String[] pro = allUser.split("/");
+        if (productCodeToDelete.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Sorry! Product Id Not Found", "Delete Product", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int i = JOptionPane.showConfirmDialog(null, "Please Confirm!", "Delete?", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                boolean deleted = toy.deleteProduct(productCodeToDelete);
+                if (deleted) {
+                    // Delete the old image file
+                    File oldImageFile = new File("src/Products/" + oldImage);
+                    boolean imageDeleted = oldImageFile.delete();
+                    if (imageDeleted) {
+                        JOptionPane.showMessageDialog(null, "Product deleted successfully", "Delete Product", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Product deleted, but failed to delete the old image", "Delete Product", JOptionPane.WARNING_MESSAGE);
+                    }
 
-        for (int i = 0; i < pro.length; i++) {
-            String line = pro[i].toString().trim();
-            String[] dataRow = line.split(" ");
-            model.addRow(dataRow);
-        }
-    }//GEN-LAST:event_btnAdmin_CustomersActionPerformed
+                    DefaultTableModel model = (DefaultTableModel) Product_Table.getModel();
+                    model.setRowCount(0);
+                    toy.displayProductData(Product_Table);
 
-    private void Product_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Product_TableMouseClicked
-
-        int selectedRow = Product_Table.getSelectedRow();
-        if (selectedRow != -1) {
-            String productId = Product_Table.getValueAt(selectedRow, 0).toString();
-            toy.setId(productId);
-            txtToy_ID1.setText(toy.getId());
-
-            // toy.retrieveToyById(productId);
-            if (toy.searchTOYS(toy.getId())) {
-
-                category.populateCategoryComboBox(cmbProduct_Category);
-
-                // Set the values in the other fields based on the toy object
-                txtModel_Name1.setText(toy.getName().replace("_", " "));
-                txtPrice1.setText(toy.getPrice());
-                txtProduct_Qty.setText(toy.getQty());
-                txtProduct_Age_Group.setText(toy.getAgeGroup());
-                cmbProduct_Category.setSelectedItem(toy.getCategory());
-                txtProduct_Description.setText(toy.getDescription().replace("_", " "));
-                imgProduct1.setText(toy.getImageName());
+                    Admin_body_panel.removeAll();
+                    Admin_body_panel.add(View_Products);
+                    Admin_body_panel.repaint();
+                    Admin_body_panel.revalidate();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Product not found or deletion failed", "Delete Product", JOptionPane.WARNING_MESSAGE);
+                }
             }
-
-            String imagePath = toy.getImageName(); // Get the file path from getImageName()
-
-            if (imagePath != null && !imagePath.isEmpty()) {
-                String filePath = "src/Products/" + imagePath; // Construct the complete file path
-
-                // Create an ImageIcon from the file path
-                ImageIcon imageIcon = new ImageIcon(filePath);
-
-                // Scale the image to fit the label size
-                Image image = imageIcon.getImage().getScaledInstance(imgProduct1.getWidth(), imgProduct1.getHeight(), Image.SCALE_SMOOTH);
-
-                // Create a new ImageIcon with the scaled image
-                ImageIcon scaledImageIcon = new ImageIcon(image);
-
-                // Set the scaled image icon as the label's icon
-                imgProduct1.setIcon(scaledImageIcon);
-            } else {
-                // Set a placeholder or default image if the file path is empty or null
-                imgProduct1.setIcon(new ImageIcon("src/Images/icons8-add-image-48.png"));
-            }
-
-            // Switch to the Update_Products_Panel
-            Admin_body_panel.removeAll();
-            Admin_body_panel.add(Update_Products_Panel);
-            Admin_body_panel.repaint();
-            Admin_body_panel.revalidate();
-
         }
 
-    }//GEN-LAST:event_Product_TableMouseClicked
+    }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void imgProduct1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgProduct1MouseClicked
         JFileChooser fileChooser = new JFileChooser();
@@ -1314,59 +1275,21 @@ public class Administrator_Panel extends javax.swing.JFrame {
                 }
                 //   System.out.println("Selected file: " + imageName);
             } catch (IOException e) {
-              //  e.printStackTrace();
+                //  e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Sorry! Image not Selected", "Manage Product", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_imgProduct1MouseClicked
 
-    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        String productCodeToDelete = txtToy_ID1.getText();
-        String oldImage = imgProduct1.getText();
-
-        if (productCodeToDelete.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Sorry! Product Id Not Found", "Delete Product", JOptionPane.WARNING_MESSAGE);
-        } else {
-            int i = JOptionPane.showConfirmDialog(null, "Please Confirm!", "Delete?", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                boolean deleted = toy.deleteProduct(productCodeToDelete);
-                if (deleted) {
-                    // Delete the old image file
-                    File oldImageFile = new File("src/Products/" + oldImage);
-                    boolean imageDeleted = oldImageFile.delete();
-                    if (imageDeleted) {
-                        JOptionPane.showMessageDialog(null, "Product deleted successfully", "Delete Product", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Product deleted, but failed to delete the old image", "Delete Product", JOptionPane.WARNING_MESSAGE);
-                    }
-
-                    DefaultTableModel model = (DefaultTableModel) Product_Table.getModel();
-                    model.setRowCount(0);
-                    toy.displayProductData(Product_Table);
-                    
-                    
-                    Admin_body_panel.removeAll();
-                    Admin_body_panel.add(View_Products);
-                    Admin_body_panel.repaint();
-                    Admin_body_panel.revalidate();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Product not found or deletion failed", "Delete Product", JOptionPane.WARNING_MESSAGE);
-                }
-            }
-        }
-
-
-    }//GEN-LAST:event_btn_deleteActionPerformed
-
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         boolean valid = true;
 
         if (txtModel_Name1.getText().trim().isEmpty()
-                || txtPrice1.getText().trim().isEmpty()
-                || txtProduct_Age_Group.getText().trim().isEmpty()
-                || txtProduct_Qty.getText().trim().isEmpty()
-                || cmbProduct_Category.getSelectedItem().toString().isEmpty()
-                || txtProduct_Description.getText().trim().isEmpty()) {
+            || txtPrice1.getText().trim().isEmpty()
+            || txtProduct_Age_Group.getText().trim().isEmpty()
+            || txtProduct_Qty.getText().trim().isEmpty()
+            || cmbProduct_Category.getSelectedItem().toString().isEmpty()
+            || txtProduct_Description.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Field can't be Empty", "Update Product", JOptionPane.ERROR_MESSAGE);
             valid = false;
         } else {
@@ -1388,7 +1311,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
             String age = txtProduct_Age_Group.getText().trim();
             String Category = cmbProduct_Category.getSelectedItem().toString();
             String Description = txtProduct_Description.getText().trim().replace(" ", "_");
-            
 
             String imageName = null;
             String newFileName = null;
@@ -1406,7 +1328,7 @@ public class Administrator_Panel extends javax.swing.JFrame {
                         Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
                         newImageFile = destinationPath.toFile();
                     } catch (IOException e) {
-                          System.out.println("Something went wrowng with replacing old image" + e);
+                        System.out.println("Something went wrowng with replacing old image" + e);
                         valid = false;
                     }
                 }
@@ -1419,13 +1341,13 @@ public class Administrator_Panel extends javax.swing.JFrame {
                     Path sourcePath = selectedFile.toPath();
                     Path destinationPath = Path.of("src/Products", newFileName);
 
-                  //  System.out.println("Source Path: " + sourcePath);
-                  //  System.out.println("Destination Path: " + destinationPath);
+                    //  System.out.println("Source Path: " + sourcePath);
+                    //  System.out.println("Destination Path: " + destinationPath);
 
                     try {
                         Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
                         newImageFile = destinationPath.toFile();
-                      //  System.out.println("Image replaced successfully.");
+                        //  System.out.println("Image replaced successfully.");
                     } catch (IOException e) {
                         System.out.println("Something went wrowng with replacing new image" + e);
                         valid = false;
@@ -1457,18 +1379,10 @@ public class Administrator_Panel extends javax.swing.JFrame {
             }
         }
 
-
     }//GEN-LAST:event_btn_updateActionPerformed
 
-    private void btn_search_productsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_search_productsActionPerformed
-        Admin_body_panel.removeAll();
-            Admin_body_panel.add(Search_Product_Panel);
-            Admin_body_panel.repaint();
-            Admin_body_panel.revalidate();
-    }//GEN-LAST:event_btn_search_productsActionPerformed
-
     private void Search_Product_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Search_Product_TableMouseClicked
-       int selectedRow = Search_Product_Table.getSelectedRow();
+        int selectedRow = Search_Product_Table.getSelectedRow();
         if (selectedRow != -1) {
             String productId = Search_Product_Table.getValueAt(selectedRow, 0).toString();
             toy.setId(productId);
@@ -1522,121 +1436,192 @@ public class Administrator_Panel extends javax.swing.JFrame {
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         DefaultTableModel model = (DefaultTableModel) Search_Product_Table.getModel();
         model.setRowCount(0); // Remove all rows from the table
-        
+
         String searchQuery = txt_search_bar.getText().trim().replace(" ", "_");
         boolean productsFound = toy.searchProductData(Search_Product_Table, searchQuery);
         if (!productsFound) {
             JOptionPane.showMessageDialog(this, "No products found.", "Product Search", JOptionPane.INFORMATION_MESSAGE);
-            
+
             model.setRowCount(0); // Remove all rows from the table
         }
     }//GEN-LAST:event_btn_searchActionPerformed
 
-    private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
-      int i = JOptionPane.showConfirmDialog(null, "Do you want to logout", "Logout?", JOptionPane.YES_NO_OPTION);
-        if (i == 1) {/* do nothing*/
+    private void btn_add_ProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_ProductsActionPerformed
+        String filePath = "PRODUCTS.txt"; // Set your data file path
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            int generatedId = Product.generateProductId(reader);
+            String formattedId = "C" + String.format("%03d", generatedId); // Format as "C001"
+            // System.out.println("Generated ID: " + formattedId); // Print generated ID for debugging
+
+            txtToy_ID.setText(formattedId);
+            txtToy_ID.revalidate(); // Trigger layout revalidation
+            txtToy_ID.repaint();    // Trigger repaint
+
+        } catch (IOException e) {
+            System.out.println("Id  Canot be Generate " + e);
+            JOptionPane.showMessageDialog(null, "Sorry! Somthing Went Wrong,Id  Canot be Generate", "Add New Product", JOptionPane.WARNING_MESSAGE);
         }
-        if (i == 0) {
-            Sign_Page sp = new Sign_Page();
-            sp.setVisible(true);
-            this.dispose();
+
+        Admin_body_panel.removeAll();
+        Admin_body_panel.add(Add_Products_Panel);
+        Admin_body_panel.repaint();
+        Admin_body_panel.revalidate();
+        category.populateCategoryComboBox(cmbCategory);
+    }//GEN-LAST:event_btn_add_ProductsActionPerformed
+
+    private void Product_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Product_TableMouseClicked
+
+        int selectedRow = Product_Table.getSelectedRow();
+        if (selectedRow != -1) {
+            String productId = Product_Table.getValueAt(selectedRow, 0).toString();
+            toy.setId(productId);
+            txtToy_ID1.setText(toy.getId());
+
+            // toy.retrieveToyById(productId);
+            if (toy.searchTOYS(toy.getId())) {
+
+                category.populateCategoryComboBox(cmbProduct_Category);
+
+                // Set the values in the other fields based on the toy object
+                txtModel_Name1.setText(toy.getName().replace("_", " "));
+                txtPrice1.setText(toy.getPrice());
+                txtProduct_Qty.setText(toy.getQty());
+                txtProduct_Age_Group.setText(toy.getAgeGroup());
+                cmbProduct_Category.setSelectedItem(toy.getCategory());
+                txtProduct_Description.setText(toy.getDescription().replace("_", " "));
+                imgProduct1.setText(toy.getImageName());
+            }
+
+            String imagePath = toy.getImageName(); // Get the file path from getImageName()
+
+            if (imagePath != null && !imagePath.isEmpty()) {
+                String filePath = "src/Products/" + imagePath; // Construct the complete file path
+
+                // Create an ImageIcon from the file path
+                ImageIcon imageIcon = new ImageIcon(filePath);
+
+                // Scale the image to fit the label size
+                Image image = imageIcon.getImage().getScaledInstance(imgProduct1.getWidth(), imgProduct1.getHeight(), Image.SCALE_SMOOTH);
+
+                // Create a new ImageIcon with the scaled image
+                ImageIcon scaledImageIcon = new ImageIcon(image);
+
+                // Set the scaled image icon as the label's icon
+                imgProduct1.setIcon(scaledImageIcon);
+            } else {
+                // Set a placeholder or default image if the file path is empty or null
+                imgProduct1.setIcon(new ImageIcon("src/Images/icons8-add-image-48.png"));
+            }
+
+            // Switch to the Update_Products_Panel
+            Admin_body_panel.removeAll();
+            Admin_body_panel.add(Update_Products_Panel);
+            Admin_body_panel.repaint();
+            Admin_body_panel.revalidate();
+
         }
-    }//GEN-LAST:event_jLabel35MouseClicked
+    }//GEN-LAST:event_Product_TableMouseClicked
+
+    private void btn_search_productsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_search_productsActionPerformed
+        Admin_body_panel.removeAll();
+        Admin_body_panel.add(Search_Product_Panel);
+        Admin_body_panel.repaint();
+        Admin_body_panel.revalidate();
+    }//GEN-LAST:event_btn_search_productsActionPerformed
 
     private void btn_downloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_downloadActionPerformed
         JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-    int choice = fileChooser.showSaveDialog(this); // Show the save dialog
+        int choice = fileChooser.showSaveDialog(this); // Show the save dialog
 
-    if (choice == JFileChooser.APPROVE_OPTION) {
-        File selectedDirectory = fileChooser.getSelectedFile();
-        String outputFilePath = selectedDirectory.getAbsolutePath() + File.separator + "Product_Output.xlsx";
+        if (choice == JFileChooser.APPROVE_OPTION) {
+            File selectedDirectory = fileChooser.getSelectedFile();
+            String outputFilePath = selectedDirectory.getAbsolutePath() + File.separator + "Product_Output.xlsx";
 
+            try {
+                FileInputStream fis = new FileInputStream("PRODUCTS.txt");
+                Workbook workbook = new XSSFWorkbook(); // Create a new Excel workbook
+                Sheet sheet = workbook.createSheet("Products"); // Create a new sheet
 
-        try {
-        FileInputStream fis = new FileInputStream("PRODUCTS.txt");
-        Workbook workbook = new XSSFWorkbook(); // Create a new Excel workbook
-        Sheet sheet = workbook.createSheet("Products"); // Create a new sheet
+                // Create bold style for header row
+                CellStyle headerStyle = workbook.createCellStyle();
+                Font headerFont = workbook.createFont();
+                headerFont.setBold(true);
+                headerStyle.setFont(headerFont);
 
-        // Create bold style for header row
-        CellStyle headerStyle = workbook.createCellStyle();
-        Font headerFont = workbook.createFont();
-        headerFont.setBold(true);
-        headerStyle.setFont(headerFont);
+                // Create header row with column names and apply bold style
+                Row headerRow = sheet.createRow(0);
+                String[] columnNames = {
+                    "Product ID", "Name", "Price", "Quantity", "Age Group","Category", "Description", "Image Name"
+                };
 
-        // Create header row with column names and apply bold style
-        Row headerRow = sheet.createRow(0);
-        String[] columnNames = {
-            "Product ID", "Name", "Price", "Quantity", "Age Group","Category", "Description", "Image Name"
-        };
-    
-        for (int i = 0; i < columnNames.length; i++) {
-            Cell cell = headerRow.createCell(i);
-            cell.setCellValue(columnNames[i]);
-            cell.setCellStyle(headerStyle);
-            
-        }
+                for (int i = 0; i < columnNames.length; i++) {
+                    Cell cell = headerRow.createCell(i);
+                    cell.setCellValue(columnNames[i]);
+                    cell.setCellStyle(headerStyle);
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-        String line;
-        int rowNumber = 1; // Start from the second row
-
-        while ((line = br.readLine()) != null) {
-            String[] parts = line.split(" ");
-            Row row = sheet.createRow(rowNumber++);
-            
-            for (int i = 0; i < parts.length; i++) {
-                Cell cell = row.createCell(i);
-                if (i == 2 || i == 3 || i == 4) { // Columns Price, Quantity, Age Group
-                    cell.setCellValue(Double.parseDouble(parts[i])); // Convert to numeric value
-                } else {
-                    cell.setCellValue(parts[i]);
                 }
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+                String line;
+                int rowNumber = 1; // Start from the second row
+
+                while ((line = br.readLine()) != null) {
+                    String[] parts = line.split(" ");
+                    Row row = sheet.createRow(rowNumber++);
+
+                    for (int i = 0; i < parts.length; i++) {
+                        Cell cell = row.createCell(i);
+                        if (i == 2 || i == 3 || i == 4) { // Columns Price, Quantity, Age Group
+                            cell.setCellValue(Double.parseDouble(parts[i])); // Convert to numeric value
+                        } else {
+                            cell.setCellValue(parts[i]);
+                        }
+                    }
+                }
+
+                fis.close();
+                br.close();
+
+                // Apply borders to all cells
+                CellStyle borderStyle = workbook.createCellStyle();
+                borderStyle.setBorderTop(BorderStyle.THIN);
+                borderStyle.setBorderBottom(BorderStyle.THIN);
+                borderStyle.setBorderLeft(BorderStyle.THIN);
+                borderStyle.setBorderRight(BorderStyle.THIN);
+
+                for (Row row : sheet) {
+                    for (Cell cell : row) {
+                        cell.setCellStyle(borderStyle);
+                    }
+                }
+
+                // Resize columns for better appearance
+                for (int i = 0; i < columnNames.length; i++) {
+                    sheet.autoSizeColumn(i);
+                }
+
+                // Write the workbook to the output file
+                FileOutputStream fos = new FileOutputStream(outputFilePath);
+                workbook.write(fos);
+                fos.close();
+
+                //  System.out.println("Excel file created successfully.");
+                JOptionPane.showMessageDialog(this, "Excel file created successfully.", "Save Products File", JOptionPane.PLAIN_MESSAGE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                // System.out.println("Error creating Excel file.");
+                JOptionPane.showMessageDialog(this, "Error creating Excel file", "Save Products File", JOptionPane.ERROR_MESSAGE);
             }
         }
-
-        fis.close();
-        br.close();
-
-        // Apply borders to all cells
-        CellStyle borderStyle = workbook.createCellStyle();
-        borderStyle.setBorderTop(BorderStyle.THIN);
-        borderStyle.setBorderBottom(BorderStyle.THIN);
-        borderStyle.setBorderLeft(BorderStyle.THIN);
-        borderStyle.setBorderRight(BorderStyle.THIN);
-        
-        for (Row row : sheet) {
-            for (Cell cell : row) {
-                cell.setCellStyle(borderStyle);
-            }
-        }
-
-        // Resize columns for better appearance
-        for (int i = 0; i < columnNames.length; i++) {
-            sheet.autoSizeColumn(i);
-        }
-
-        // Write the workbook to the output file
-        FileOutputStream fos = new FileOutputStream(outputFilePath);
-        workbook.write(fos);
-        fos.close();
-
-      //  System.out.println("Excel file created successfully.");
-        JOptionPane.showMessageDialog(this, "Excel file created successfully.", "Save Products File", JOptionPane.PLAIN_MESSAGE);
-    } catch (Exception e) {
-        e.printStackTrace();
-       // System.out.println("Error creating Excel file.");
-        JOptionPane.showMessageDialog(this, "Error creating Excel file", "Save Products File", JOptionPane.ERROR_MESSAGE);
-    }
-    }
-
     }//GEN-LAST:event_btn_downloadActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {  
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1666,7 +1651,6 @@ public class Administrator_Panel extends javax.swing.JFrame {
                 new Administrator_Panel().setVisible(true);
             }
         });
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
